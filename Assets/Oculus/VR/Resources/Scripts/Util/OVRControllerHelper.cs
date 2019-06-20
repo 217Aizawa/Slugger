@@ -52,12 +52,14 @@ public class OVRControllerHelper : MonoBehaviour
 	/// </summary>
 	public GameObject m_modelOculusTouchRiftRightController;
 
+    public GameObject m_modelBatL;//’Ç‰Á
+    public GameObject m_modelBatR;
 
 
 	/// <summary>
 	/// The controller that determines whether or not to enable rendering of the controller model.
 	/// </summary>
-	public OVRInput.Controller m_controller;
+	public OVRInput.Controller m_controller;//Type of HMD
 
 	private enum ControllerType
 	{
@@ -114,7 +116,15 @@ public class OVRControllerHelper : MonoBehaviour
 			{
 				m_controller = OVRInput.Controller.RTouch;
 			}
-		}
+            else if (m_controller == OVRInput.Controller.BatL)//’Ç‰Á
+            {
+                m_controller = OVRInput.Controller.BatL;
+            }
+            else if (m_controller == OVRInput.Controller.BatR)
+            {
+                m_controller = OVRInput.Controller.BatR;
+            }
+        }
 		else
 		{
 			if (m_controller == OVRInput.Controller.LTouch)
@@ -125,7 +135,7 @@ public class OVRControllerHelper : MonoBehaviour
 			{
 				m_controller = OVRInput.Controller.RTrackedRemote;
 			}
-		}
+        }
 	}
 
 	void Update()
@@ -142,8 +152,33 @@ public class OVRControllerHelper : MonoBehaviour
 				m_modelOculusTouchQuestAndRiftSRightController.SetActive(false);
 				m_modelOculusTouchRiftLeftController.SetActive(false);
 				m_modelOculusTouchRiftRightController.SetActive(false);
-			}
-			else if (activeControllerType == ControllerType.QuestAndRiftS)
+                m_modelBatL.SetActive(false);//’Ç‰Á
+                m_modelBatR.SetActive(false);
+            }
+            else if (activeControllerType == ControllerType.QuestAndRiftS && m_controller == OVRInput.Controller.BatL)//’Ç‰Á
+            {
+                m_modelOculusGoController.SetActive(false);
+                m_modelGearVrController.SetActive(false);
+                m_modelOculusTouchQuestAndRiftSLeftController.SetActive(false);
+                m_modelOculusTouchQuestAndRiftSRightController.SetActive(false);
+                m_modelOculusTouchRiftLeftController.SetActive(false);
+                m_modelOculusTouchRiftRightController.SetActive(false);
+                m_modelBatL.SetActive(controllerConnected && (m_controller == OVRInput.Controller.BatL));//’Ç‰Á
+                m_modelBatR.SetActive(false);
+
+            }
+            else if (activeControllerType == ControllerType.QuestAndRiftS && m_controller == OVRInput.Controller.BatR)//’Ç‰Á
+            {
+                m_modelOculusGoController.SetActive(false);
+                m_modelGearVrController.SetActive(false);
+                m_modelOculusTouchQuestAndRiftSLeftController.SetActive(false);
+                m_modelOculusTouchQuestAndRiftSRightController.SetActive(false);
+                m_modelOculusTouchRiftLeftController.SetActive(false);
+                m_modelOculusTouchRiftRightController.SetActive(false);
+                m_modelBatL.SetActive(false);//’Ç‰Á
+                m_modelBatR.SetActive(controllerConnected && (m_controller == OVRInput.Controller.BatR));
+            }
+            else if (activeControllerType == ControllerType.QuestAndRiftS)
 			{
 				m_modelOculusGoController.SetActive(false);
 				m_modelGearVrController.SetActive(false);
@@ -151,8 +186,10 @@ public class OVRControllerHelper : MonoBehaviour
 				m_modelOculusTouchQuestAndRiftSRightController.SetActive(controllerConnected && (m_controller == OVRInput.Controller.RTouch));
 				m_modelOculusTouchRiftLeftController.SetActive(false);
 				m_modelOculusTouchRiftRightController.SetActive(false);
-			}
-			else // if (activeControllerType == ControllerType.Rift)
+                m_modelBatL.SetActive(false);//’Ç‰Á
+                m_modelBatR.SetActive(false);
+            }
+            else // if (activeControllerType == ControllerType.Rift)
 			{
 				m_modelOculusGoController.SetActive(false);
 				m_modelGearVrController.SetActive(false);
@@ -160,7 +197,9 @@ public class OVRControllerHelper : MonoBehaviour
 				m_modelOculusTouchQuestAndRiftSRightController.SetActive(false);
 				m_modelOculusTouchRiftLeftController.SetActive(controllerConnected && (m_controller == OVRInput.Controller.LTouch));
 				m_modelOculusTouchRiftRightController.SetActive(controllerConnected && (m_controller == OVRInput.Controller.RTouch));
-			}
+                m_modelBatL.SetActive(false);//’Ç‰Á  
+                m_modelBatR.SetActive(false);
+            }
 
 			m_prevControllerConnected = controllerConnected;
 			m_prevControllerConnectedCached = true;
