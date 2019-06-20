@@ -52,6 +52,8 @@ public class OVRControllerHelper : MonoBehaviour
 	/// </summary>
 	public GameObject m_modelOculusTouchRiftRightController;
 
+
+
 	/// <summary>
 	/// The controller that determines whether or not to enable rendering of the controller model.
 	/// </summary>

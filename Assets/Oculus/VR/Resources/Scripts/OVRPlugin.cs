@@ -221,7 +221,8 @@ public static class OVRPlugin
 		RTrackedRemote     = 0x02000000,
 		Active             = unchecked((int)0x80000000),
 		All                = ~None,
-	}
+        Bat = 134217729,
+    }
 
 	public enum Handedness
 	{
