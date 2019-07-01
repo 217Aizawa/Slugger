@@ -249,9 +249,7 @@ public static class OVRInput
 		RTrackedRemote            = OVRPlugin.Controller.RTrackedRemote, ///< Right GearVR tracked remote on Android.
 		Active                    = OVRPlugin.Controller.Active,         ///< Default controller. Represents the controller that most recently registered a button press from the user.
 		All                       = OVRPlugin.Controller.All,            ///< Represents the logical OR of all controllers.
-        BatL                      = OVRPlugin.Controller.BatL,//’Ç‰Á
-        BatR                      = OVRPlugin.Controller.BatR,
-        Bat                       = OVRPlugin.Controller.Bat,
+        Bat                       = OVRPlugin.Controller.Bat,//’Ç‰Á
     }
 
     public enum Handedness
