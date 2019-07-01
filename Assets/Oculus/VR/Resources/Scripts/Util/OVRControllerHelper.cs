@@ -54,12 +54,12 @@ public class OVRControllerHelper : MonoBehaviour
 
     public GameObject m_modelBatL;//’Ç‰Á
     public GameObject m_modelBatR;
+    public GameObject m_modelBat;
 
-
-	/// <summary>
-	/// The controller that determines whether or not to enable rendering of the controller model.
-	/// </summary>
-	public OVRInput.Controller m_controller;//Type of HMD
+    /// <summary>
+    /// The controller that determines whether or not to enable rendering of the controller model.
+    /// </summary>
+    public OVRInput.Controller m_controller;//Type of HMD
 
 	private enum ControllerType
 	{
@@ -146,6 +146,7 @@ public class OVRControllerHelper : MonoBehaviour
 				m_modelOculusTouchRiftRightController.SetActive(false);
                 m_modelBatL.SetActive(false);//’Ç‰Á
                 m_modelBatR.SetActive(false);
+                m_modelBat.SetActive(false);
             }
             else if (activeControllerType == ControllerType.QuestAndRiftS)//’Ç‰Á && m_controller == OVRInput.Controller.BatL
             {
@@ -157,7 +158,7 @@ public class OVRControllerHelper : MonoBehaviour
                 m_modelOculusTouchRiftRightController.SetActive(false);
                 m_modelBatL.SetActive(controllerConnected && (m_controller == OVRInput.Controller.BatL));//’Ç‰Á
                 m_modelBatR.SetActive(controllerConnected && (m_controller == OVRInput.Controller.BatR));
-
+                m_modelBat.SetActive(controllerConnected && (m_controller == OVRInput.Controller.Bat));
             }
             /*else if (activeControllerType == ControllerType.QuestAndRiftS)
 			{
@@ -180,6 +181,7 @@ public class OVRControllerHelper : MonoBehaviour
 				m_modelOculusTouchRiftRightController.SetActive(controllerConnected && (m_controller == OVRInput.Controller.RTouch));
                 m_modelBatL.SetActive(false);//’Ç‰Á  
                 m_modelBatR.SetActive(false);
+                m_modelBat.SetActive(false);
             }
 
 			m_prevControllerConnected = controllerConnected;

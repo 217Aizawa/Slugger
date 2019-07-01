@@ -42,6 +42,7 @@ public static class OVRHaptics
 			new OVRHapticsOutput((uint)OVRPlugin.Controller.RTouch),*/
             new OVRHapticsOutput((uint)OVRPlugin.Controller.BatL),//’Ç‰Á
             new OVRHapticsOutput((uint)OVRPlugin.Controller.BatR),
+            new OVRHapticsOutput((uint)OVRPlugin.Controller.Bat),
 
         };
 

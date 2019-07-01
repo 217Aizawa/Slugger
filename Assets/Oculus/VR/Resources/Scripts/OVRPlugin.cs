@@ -223,6 +223,7 @@ public static class OVRPlugin
 		All                = ~None,
         BatL               = 0x00000001,//’Ç‰Á
         BatR               = 0x00000002,
+        Bat                = 0x00000002,
         //Bat                = BatL | BatR,
     }
 
