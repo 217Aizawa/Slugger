@@ -108,7 +108,7 @@ public class OVRControllerHelper : MonoBehaviour
 		{
 			if (m_controller == OVRInput.Controller.LTrackedRemote)
 			{
-				m_controller = OVRInput.Controller.Bat;//m_controller = OVRInput.Controller.LTouch;’Ç‰Á
+				m_controller = OVRInput.Controller.Bat;                     //m_controller = OVRInput.Controller.LTouch;’Ç‰Á
             }
 			else if (m_controller == OVRInput.Controller.RTrackedRemote)
 			{
@@ -119,7 +119,7 @@ public class OVRControllerHelper : MonoBehaviour
 		{
 			if (m_controller == OVRInput.Controller.LTouch)
 			{
-				m_controller = OVRInput.Controller.Bat;//m_controller = OVRInput.Controller.LTrackedRemote;’Ç‰Á
+				m_controller = OVRInput.Controller.Bat;             //m_controller = OVRInput.Controller.LTrackedRemote;’Ç‰Á
             }
 			else if (m_controller == OVRInput.Controller.RTouch)
 			{
