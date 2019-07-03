@@ -38,10 +38,10 @@ public static class OVRHaptics
 
 		m_outputs = new OVRHapticsOutput[]
 		{
-			/*new OVRHapticsOutput((uint)OVRPlugin.Controller.LTouch),
-			new OVRHapticsOutput((uint)OVRPlugin.Controller.RTouch),*/
+			new OVRHapticsOutput((uint)OVRPlugin.Controller.LTouch),
+			new OVRHapticsOutput((uint)OVRPlugin.Controller.RTouch),
             //êUìÆçƒê∂
-            new OVRHapticsOutput((uint)OVRPlugin.Controller.Bat),//í«â¡
+            //new OVRHapticsOutput((uint)OVRPlugin.Controller.Bat),//í«â¡
 
         };
 

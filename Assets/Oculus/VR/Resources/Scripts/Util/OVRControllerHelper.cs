@@ -52,7 +52,7 @@ public class OVRControllerHelper : MonoBehaviour
 	/// </summary>
 	public GameObject m_modelOculusTouchRiftRightController;
 
-    public GameObject m_modelBat;
+    public GameObject m_modelBat;//追加
 
     /// <summary>
     /// The controller that determines whether or not to enable rendering of the controller model.
@@ -64,6 +64,8 @@ public class OVRControllerHelper : MonoBehaviour
 		GearVR, Go, QuestAndRiftS, Rift
 	}
 
+    public bool isBat = false;
+
 	private ControllerType activeControllerType = ControllerType.Rift;
 
 	private bool m_prevControllerConnected = false;
@@ -71,6 +73,8 @@ public class OVRControllerHelper : MonoBehaviour
 
 	void Start()
 	{
+        
+
 		OVRPlugin.SystemHeadset headset = OVRPlugin.GetSystemHeadsetType();
 		switch (headset)
 		{
@@ -108,30 +112,49 @@ public class OVRControllerHelper : MonoBehaviour
 		{
 			if (m_controller == OVRInput.Controller.LTrackedRemote)
 			{
-				m_controller = OVRInput.Controller.Bat;                     //m_controller = OVRInput.Controller.LTouch;追加
+				//m_controller = OVRInput.Controller.Bat;//追加
+                m_controller = OVRInput.Controller.LTouch;
             }
 			else if (m_controller == OVRInput.Controller.RTrackedRemote)
 			{
-				m_controller = OVRInput.Controller.Bat;
-			}
+				//m_controller = OVRInput.Controller.Bat;
+                m_controller = OVRInput.Controller.RTouch;
+            }
         }
 		else
 		{
 			if (m_controller == OVRInput.Controller.LTouch)
 			{
-				m_controller = OVRInput.Controller.Bat;             //m_controller = OVRInput.Controller.LTrackedRemote;追加
+				//m_controller = OVRInput.Controller.Bat;             
+                m_controller = OVRInput.Controller.LTrackedRemote;//追加
             }
 			else if (m_controller == OVRInput.Controller.RTouch)
 			{
-				m_controller = OVRInput.Controller.Bat;
-			}
+                //m_controller = OVRInput.Controller.Bat;
+                m_controller = OVRInput.Controller.RTrackedRemote;
+
+            }
         }
 	}
 
-	void Update()
-	{
-		bool controllerConnected = OVRInput.IsControllerConnected(m_controller);
+    void Update()
+    {
+        bool controllerConnected = OVRInput.IsControllerConnected(m_controller);
 
+        if (Input.GetKey(KeyCode.C))//追加
+            isBat = !isBat;//boolを反転させる
+
+        if (isBat == false)
+        { //バットとコントローラーの切り替えを行う
+            m_modelBat.SetActive(false);
+            m_modelOculusTouchQuestAndRiftSRightController.SetActive(controllerConnected && (m_controller == OVRInput.Controller.RTouch));
+        }
+        else
+        {
+            m_modelBat.SetActive(controllerConnected && (m_controller == OVRInput.Controller.RTouch));
+            m_modelOculusTouchQuestAndRiftSRightController.SetActive(false);
+        }
+        
 		if ((controllerConnected != m_prevControllerConnected) || !m_prevControllerConnectedCached)
 		{
 			if (activeControllerType == ControllerType.GearVR || activeControllerType == ControllerType.Go)
@@ -149,10 +172,10 @@ public class OVRControllerHelper : MonoBehaviour
                 m_modelOculusGoController.SetActive(false);
                 m_modelGearVrController.SetActive(false);
                 m_modelOculusTouchQuestAndRiftSLeftController.SetActive(false);
-                m_modelOculusTouchQuestAndRiftSRightController.SetActive(false);
+                m_modelOculusTouchQuestAndRiftSRightController.SetActive(controllerConnected && (m_controller == OVRInput.Controller.RTouch));
                 m_modelOculusTouchRiftLeftController.SetActive(false);
                 m_modelOculusTouchRiftRightController.SetActive(false);
-                m_modelBat.SetActive(controllerConnected && (m_controller == OVRInput.Controller.Bat));//追加
+                m_modelBat.SetActive(false);
             }
             /*else if (activeControllerType == ControllerType.QuestAndRiftS)
 			{
@@ -162,11 +185,11 @@ public class OVRControllerHelper : MonoBehaviour
 				m_modelOculusTouchQuestAndRiftSRightController.SetActive(controllerConnected && (m_controller == OVRInput.Controller.RTouch));
 				m_modelOculusTouchRiftLeftController.SetActive(false);
 				m_modelOculusTouchRiftRightController.SetActive(false);
-                m_modelBatL.SetActive(false);//追加
-                m_modelBatR.SetActive(false);
+                //追加 controllerConnected && (m_controller == OVRInput.Controller.Bat
+                m_modelBat.SetActive(false);// controllerConnected && (m_controller == OVRInput.Controller.RTouch));
             }*/
             else // if (activeControllerType == ControllerType.Rift)
-			{
+            {
 				m_modelOculusGoController.SetActive(false);
 				m_modelGearVrController.SetActive(false);
 				m_modelOculusTouchQuestAndRiftSLeftController.SetActive(false);
