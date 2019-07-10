@@ -147,7 +147,8 @@ public class OVRControllerHelper : MonoBehaviour
         if (isBat == false)
         { //バットとコントローラーの切り替えを行う
             m_modelBat.SetActive(false);
-            m_modelOculusTouchQuestAndRiftSRightController.SetActive(controllerConnected && (m_controller == OVRInput.Controller.RTouch));
+            m_modelOculusTouchQuestAndRiftSRightController
+                .SetActive(controllerConnected && (m_controller == OVRInput.Controller.RTouch));
         }
         else
         {
