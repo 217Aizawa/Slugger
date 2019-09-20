@@ -20,6 +20,7 @@ public class ThrowController : MonoBehaviour
 
     void Update()
     {
+        GameObject balls = GameObject.FindGameObjectWithTag("Ball");
         TimeCounter();
         if (Input.GetKey(KeyCode.Space))
         {
@@ -28,10 +29,14 @@ public class ThrowController : MonoBehaviour
         }
         if(3.0f <= time)
         {
+            //ball.SetActive(false);
             Destroy(ball);
             //既存のボールを投球後にInstantiateでボールを生成し、投げる。を繰り返す。
-            //nextBall = Instantiate(ball, throwPos, Quaternion.identity) as GameObject;
-            ball = Instantiate(ball, throwPos, Quaternion.identity) as GameObject;
+            //nextBall = 
+            ball = Instantiate(ball, throwPos, Quaternion.identity);
+            //Rigidbody prefabRb = nextBall.GetComponent<Rigidbody>();
+            //prefabRb.useGravity = false;
+            //prefabRb.isKinematic = true;
             timeCheck = !timeCheck;
         }
     }
