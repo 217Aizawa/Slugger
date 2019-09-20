@@ -7,27 +7,53 @@ public class ThrowController : MonoBehaviour
     private Vector3 throwPos;//投球位置
     private Vector3 target;//目標
     private Vector3 ballSpeed =Vector3.forward * 5.0f;
+    private int speed = 5;
+    private bool timeCheck = false;
     public GameObject ball;
+    float time = 0;
     GameObject nextBall;//次に生成するボール
-    // Start is called before the first frame update
+
     void Start()
     {
         throwPos = ball.transform.position;//投球位置をボールのある位置に設定する。
     }
 
-    // Update is called once per frame
     void Update()
     {
+        TimeCounter();
         if (Input.GetKey(KeyCode.Space))
         {
+            timeCheck = true;
             throwfnc();
         }
-        //既存のボールを投球後にInstantiateでボールを生成し、投げる。を繰り返す。
-        //nextBall = Instantiate(ball, throwPos, Quaternion.identity) as GameObject;
+        if(3.0f <= time)
+        {
+            Destroy(ball);
+            //既存のボールを投球後にInstantiateでボールを生成し、投げる。を繰り返す。
+            //nextBall = Instantiate(ball, throwPos, Quaternion.identity) as GameObject;
+            ball = Instantiate(ball, throwPos, Quaternion.identity) as GameObject;
+            timeCheck = !timeCheck;
+        }
     }
 
     private void throwfnc()//投球関数
     {
-        ball.GetComponent<Rigidbody>().velocity = ballSpeed;//速度を加算
+        Rigidbody rb = ball.GetComponent<Rigidbody>();
+        rb.useGravity = true;
+        rb.isKinematic = false;
+        rb.velocity = transform.forward * speed;//速度を加算
+    }
+    public void TimeCounter()
+    {
+        Debug.Log("Time" + time);
+        if (timeCheck)
+        {
+            time += Time.deltaTime;
+            //Debug.Log("Time" + time);
+        }
+        else
+        {
+            time = 0;
+        }
     }
 }
