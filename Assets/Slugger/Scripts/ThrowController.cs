@@ -6,12 +6,11 @@ public class ThrowController : MonoBehaviour
 {
     private Vector3 throwPos;//投球位置
     private Vector3 target;//目標
-    private Vector3 ballSpeed =Vector3.forward * 5.0f;
     private int speed = 5;
     private bool timeCheck = false;
     public GameObject ball;
     float time = 0;
-    GameObject nextBall;//次に生成するボール
+    public GameObject nextBall;//次に生成するボール
 
     void Start()
     {
@@ -29,11 +28,10 @@ public class ThrowController : MonoBehaviour
         }
         if(3.0f <= time)
         {
-            //ball.SetActive(false);
+            //ball.SetActive(false); クローンまで非表示なってしまう
             Destroy(ball);
             //既存のボールを投球後にInstantiateでボールを生成し、投げる。を繰り返す。
-            //nextBall = 
-            ball = Instantiate(ball, throwPos, Quaternion.identity);
+            nextBall = Instantiate(ball, throwPos, Quaternion.identity);
             //Rigidbody prefabRb = nextBall.GetComponent<Rigidbody>();
             //prefabRb.useGravity = false;
             //prefabRb.isKinematic = true;
@@ -47,6 +45,9 @@ public class ThrowController : MonoBehaviour
         rb.useGravity = true;
         rb.isKinematic = false;
         rb.velocity = transform.forward * speed;//速度を加算
+
+        //Rigidbody prefabRb = nextBall.GetComponent<Rigidbody>();
+        //prefabRb.velocity = transform.forward * speed;//速度を加算
     }
     public void TimeCounter()
     {
