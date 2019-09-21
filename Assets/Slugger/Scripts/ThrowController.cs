@@ -11,7 +11,7 @@ public class ThrowController : MonoBehaviour
     public GameObject ball;
     float time = 0;
     public GameObject nextBall;//次に生成するボール
-
+    
     void Start()
     {
         throwPos = ball.transform.position;//投球位置をボールのある位置に設定する。
@@ -19,35 +19,25 @@ public class ThrowController : MonoBehaviour
 
     void Update()
     {
-        GameObject balls = GameObject.FindGameObjectWithTag("Ball");
+        //Rigidbody rig = ball.GetComponent<Rigidbody>();
         TimeCounter();
         if (Input.GetKey(KeyCode.Space))
         {
             timeCheck = true;
-            throwfnc();
+            Throw();
         }
         if(3.0f <= time)
         {
             //ball.SetActive(false); クローンまで非表示なってしまう
-            Destroy(ball);
+            //Destroy(ball);
             //既存のボールを投球後にInstantiateでボールを生成し、投げる。を繰り返す。
-            nextBall = Instantiate(ball, throwPos, Quaternion.identity);
-            //Rigidbody prefabRb = nextBall.GetComponent<Rigidbody>();
-            //prefabRb.useGravity = false;
-            //prefabRb.isKinematic = true;
+            //ball = Instantiate(ball, throwPos, Quaternion.identity);
             timeCheck = !timeCheck;
+            /*ball.transform.position = throwPos;//投球位置に戻す
+            rig.useGravity = false;
+            rig.isKinematic = true;*/
+            BallReset();
         }
-    }
-
-    private void throwfnc()//投球関数
-    {
-        Rigidbody rb = ball.GetComponent<Rigidbody>();
-        rb.useGravity = true;
-        rb.isKinematic = false;
-        rb.velocity = transform.forward * speed;//速度を加算
-
-        //Rigidbody prefabRb = nextBall.GetComponent<Rigidbody>();
-        //prefabRb.velocity = transform.forward * speed;//速度を加算
     }
     public void TimeCounter()
     {
@@ -61,5 +51,22 @@ public class ThrowController : MonoBehaviour
         {
             time = 0;
         }
+    }
+
+    public void Throw()//投球関数
+    {
+        Rigidbody rb = ball.GetComponent<Rigidbody>();
+        rb.useGravity = true;
+        rb.isKinematic = false;
+        rb.velocity = transform.forward * speed;//速度を加算
+    }
+
+    private void BallReset()//投球後にボールの情報をリセットする
+    {
+        ball.transform.position = throwPos;
+        Rigidbody rig = ball.GetComponent<Rigidbody>();
+        rig.useGravity = false;
+        rig.isKinematic = true;
+        rig.velocity = Vector3.zero;
     }
 }
