@@ -28,8 +28,13 @@ public class ThrowController : MonoBehaviour
 
         if(3.0f <= time)
         {
-            timeCheck = !timeCheck;
+            time = 0;
+            timeCheck = true;
             BallReset();
+            if (timeCheck)
+            {
+                Throw();
+            }
         }
     }
 
@@ -49,6 +54,7 @@ public class ThrowController : MonoBehaviour
         rb.useGravity = true;
         rb.isKinematic = false;
         rb.velocity = transform.forward * speed;//速度を加算
+        //timeCheck = !timeCheck;
     }
 
     private void BallReset()//ボール情報をリセットする
@@ -58,5 +64,6 @@ public class ThrowController : MonoBehaviour
         rig.useGravity = false;
         rig.isKinematic = true;
         rig.velocity = Vector3.zero;
+        //timeCheck = !timeCheck;
     }
 }
