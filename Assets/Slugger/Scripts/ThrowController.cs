@@ -19,8 +19,7 @@ public class ThrowController : MonoBehaviour
     void Update()
     {
         TimeCounter();
-
-        if (Input.GetKey(KeyCode.Space))    //条件文をGameStateで書く
+        if (Input.GetKey(KeyCode.Space))                                        //条件文をGameStateで書く
         {
             timeCheck = true;
             Throw();
@@ -41,7 +40,6 @@ public class ThrowController : MonoBehaviour
     void TimeCounter()
     {
         Debug.Log("Time" + time);
-
         if (timeCheck)
             time += Time.deltaTime;
         else
@@ -54,7 +52,6 @@ public class ThrowController : MonoBehaviour
         rb.useGravity = true;
         rb.isKinematic = false;
         rb.velocity = transform.forward * speed;//速度を加算
-        //timeCheck = !timeCheck;
     }
 
     private void BallReset()//ボール情報をリセットする
@@ -64,6 +61,20 @@ public class ThrowController : MonoBehaviour
         rig.useGravity = false;
         rig.isKinematic = true;
         rig.velocity = Vector3.zero;
-        //timeCheck = !timeCheck;
     }
+
+    /*void Update()
+    {
+        TimeCounter();
+        if (Input.GetKey(KeyCode.Space))                                        //条件文をGameStateで書く
+        {
+            timeCheck = true;
+            Throw();
+        }
+        if (3.0f <= time)
+        {
+            timeCheck = !timeCheck;
+            BallReset();
+        }
+    }*/
 }
