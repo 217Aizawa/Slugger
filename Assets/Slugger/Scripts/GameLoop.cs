@@ -22,6 +22,10 @@ public class GameLoop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //空振りと打撃時のステートを用意しておいて、
+        //それに応じて投球するプログラムを作成する
+
         switch(gameState)
         {
             case GameState.free:

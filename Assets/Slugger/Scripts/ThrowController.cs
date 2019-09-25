@@ -8,7 +8,7 @@ public class ThrowController : MonoBehaviour
     Vector3 target;//目標
     bool timeCheck = false;
     float time = 0;
-    int speed = 5;
+    int speed = 22;// 5m/s = 18km/h, 22m/s = 79.2km/h
     public GameObject ball;
 
     void Start()
@@ -30,7 +30,8 @@ public class ThrowController : MonoBehaviour
         {
             time = 0;
             timeCheck = true;
-            BallReset();
+            //BallReset();
+            ball = Instantiate(ball, throwPos, Quaternion.identity);
 
             if (timeCheck)
                 Throw();
