@@ -14,6 +14,7 @@ public class ThrowController : MonoBehaviour
     void Start()
     {
         throwPos = ball.transform.position;
+        BallReset();
     }
 
     void Update()
@@ -30,10 +31,9 @@ public class ThrowController : MonoBehaviour
             time = 0;
             timeCheck = true;
             BallReset();
+
             if (timeCheck)
-            {
                 Throw();
-            }
         }
     }
 
