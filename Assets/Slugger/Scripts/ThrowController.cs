@@ -30,7 +30,6 @@ public class ThrowController : MonoBehaviour
         {
             time = 0;
             timeCheck = true;
-            //BallReset();
             ball = Instantiate(ball, throwPos, Quaternion.identity);
 
             if (timeCheck)
@@ -52,7 +51,8 @@ public class ThrowController : MonoBehaviour
         Rigidbody rb = ball.GetComponent<Rigidbody>();
         rb.useGravity = true;
         rb.isKinematic = false;
-        rb.velocity = transform.forward * speed;//速度を加算
+        //rb.velocity = transform.forward * speed;//速度を加算
+        rb.velocity = new Vector3(0, 3, 22);
     }
 
     private void BallReset()//ボール情報をリセットする
