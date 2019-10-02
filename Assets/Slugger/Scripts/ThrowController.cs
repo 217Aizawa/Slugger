@@ -11,7 +11,7 @@ public class ThrowController : MonoBehaviour
     float angle;
     int speed = 22;// 5m/s = 18km/h, 22m/s = 79.2km/h
     public GameObject ball;
-
+    public GameObject ballPrefab;
     void Start()
     {
         throwPos = ball.transform.position;
@@ -35,7 +35,7 @@ public class ThrowController : MonoBehaviour
             time = 0;
             timeCheck = true;
             //ball = Instantiate(ball, throwPos, Quaternion.identity);
-            Instantiate(ball, throwPos, Quaternion.identity);
+            ball = Instantiate(ballPrefab, throwPos, Quaternion.identity);
             if (timeCheck)
                 Throw();
         }
@@ -56,8 +56,7 @@ public class ThrowController : MonoBehaviour
         rb.useGravity = true;
         rb.isKinematic = false;
         rb.velocity = new Vector3(0, speed * Mathf.Sin(angle), speed * Mathf.Cos(angle));
-        //rb.velocity = transform.forward * angle;
-              
+        //rb.velocity = transform.forward * speed;
     }
 
     private void BallReset()//ボール情報をリセットする
