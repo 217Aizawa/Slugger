@@ -36,6 +36,7 @@ public class ThrowController : MonoBehaviour
             timeCheck = true;
             //ball = Instantiate(ball, throwPos, Quaternion.identity);
             ball = Instantiate(ballPrefab, throwPos, Quaternion.identity);
+            Destroy(ball, 5.0f);
             if (timeCheck)
                 Throw();
         }
@@ -68,6 +69,8 @@ public class ThrowController : MonoBehaviour
         rig.velocity = Vector3.zero;
     }
 
+
+    
     /*void Update()
     {
         TimeCounter();
