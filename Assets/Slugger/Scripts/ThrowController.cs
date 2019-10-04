@@ -5,7 +5,7 @@ using UnityEngine;
 public class ThrowController : MonoBehaviour
 {
     Vector3 throwPos;//投球位置
-
+    Vector3 velocoity;
     float ballSpeed;
     float time = 0;
     float angle;//打ち出し角度
@@ -29,7 +29,7 @@ public class ThrowController : MonoBehaviour
     {
 
         Debug.Log("angle" + angle);
-        Debug.Log("ballSpeed" + ballSpeed);
+        Debug.Log("ballSpeed" + ballSpeed + "km");
         TimeCounter();
         if (Input.GetKey(KeyCode.Space))                                        //条件文をGameStateで書く
         {
@@ -37,12 +37,13 @@ public class ThrowController : MonoBehaviour
             Throw();
         }
 
-        if(5.0f <= time)
+        if(3.0f <= time)
         {
             time = 0;
             timeCheck = true;
             ball = Instantiate(ballPrefab, throwPos, Quaternion.identity);
             Destroy(ball, 5.0f);
+
             if (timeCheck)
                 Throw();
         }
@@ -64,6 +65,7 @@ public class ThrowController : MonoBehaviour
         rb.isKinematic = false;
         rb.velocity = new Vector3(0, speed * Mathf.Sin(angle), speed * Mathf.Cos(angle));
         ballSpeed = rb.velocity.magnitude * 3600 / 1000;//速度を秒速から時速に変換する
+        //Debug.Log("ballSpeed" + rb.velocity); Vector3
     }
 
     private void BallReset()//ボール情報をリセットする
