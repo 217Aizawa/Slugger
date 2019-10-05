@@ -5,7 +5,7 @@ using UnityEngine;
 public class ThrowController : MonoBehaviour
 {
     Vector3 throwPos;//投球位置
-    Vector3 velocoity;
+
     float ballSpeed;
     float time = 0;
     float angle;//打ち出し角度
@@ -17,8 +17,10 @@ public class ThrowController : MonoBehaviour
     public GameObject ball;//Sceneにあるボール
     public GameObject ballPrefab;//設計図としてのボール（オリジナル）
 
+    public GameObject point;//重力加速度の差分を示すキューブ
     void Start()
     {
+        Rigidbody rigid = ball.GetComponent<Rigidbody>();
         throwPos = ball.transform.position;
         BallReset();
         //Mathf.Asin(g * 1d / v / v) / 2
@@ -27,7 +29,6 @@ public class ThrowController : MonoBehaviour
 
     void Update()
     {
-
         Debug.Log("angle" + angle);
         Debug.Log("ballSpeed" + ballSpeed + "km");
         TimeCounter();
