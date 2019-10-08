@@ -10,21 +10,29 @@ public class ThrowController : MonoBehaviour
     float time = 0;
     float angle;//打ち出し角度
 
-    int speed = 22;// 5m/s = 18km/h, 22m/s = 79.2km/h
+    int speed = 22;//22m/s = 79.2km/h
 
     bool timeCheck = false;//時間計測のフラグ
 
     public GameObject ball;//Sceneにあるボール
     public GameObject ballPrefab;//設計図としてのボール（オリジナル）
 
-    public GameObject point;//重力加速度の差分を示すキューブ
+
+    //public GameObject point;//重力加速度の差分を示すキューブ
+
     void Start()
     {
         Rigidbody rigid = ball.GetComponent<Rigidbody>();
         throwPos = ball.transform.position;
         BallReset();
         //Mathf.Asin(g * 1d / v / v) / 2
-        angle = Mathf.Asin(9.81f * 0.6f * 18.44f / speed / speed) / 2;
+        //angle = Mathf.Asin(9.81f * 0.6f * 18.44f / speed / speed) / 2;
+
+        //      Mathf.Asin(重力 * 距離 /　ベクトル / ベクトル) / 2;
+        angle = Mathf.Asin(9.81f * 18.44f / speed / speed) / 2;
+
+
+        Debug.Log(Mathf.Asin(0.5F));
     }
 
     void Update()
@@ -79,7 +87,7 @@ public class ThrowController : MonoBehaviour
     }
 
 
-    
+
     /*void Update()
     {
         TimeCounter();
@@ -93,5 +101,6 @@ public class ThrowController : MonoBehaviour
             timeCheck = !timeCheck;
             BallReset();
         }
+        
     }*/
 }
