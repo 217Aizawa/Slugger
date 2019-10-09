@@ -26,12 +26,12 @@ public class ThrowController : MonoBehaviour
         throwPos = ball.transform.position;
         BallReset();
         //Mathf.Asin(g * 1d / v / v) / 2
-        //angle = Mathf.Asin(9.81f * 0.6f * 18.44f / speed / speed) / 2;
+        angle = Mathf.Asin(9.81f * 0.6f * 18.44f / speed / speed) / 2;
 
         //      Mathf.Asin(重力 * 距離 /　ベクトル / ベクトル) / 2;
-        angle = Mathf.Asin(9.81f * 18.44f / speed / speed) / 2;
+        //angle = Mathf.Asin(9.81f * 18.44f / speed / speed) / 2;
 
-
+        Debug.Log(angle);
         Debug.Log(Mathf.Asin(0.5F));
     }
 
