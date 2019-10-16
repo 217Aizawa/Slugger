@@ -51,7 +51,7 @@ public class ThrowController : MonoBehaviour
             time = 0;
             timeCheck = true;
             ball = Instantiate(ballPrefab, throwPos, Quaternion.identity);
-            Destroy(ball, 5.0f);
+            Destroy(ball, 3.0f);
 
             if (timeCheck)
                 Throw();

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.XR;
 using UnityEngine;
+
 
 public class GameLoop : MonoBehaviour
 {
@@ -12,17 +14,37 @@ public class GameLoop : MonoBehaviour
     public CameraController camereController;
     public ThrowController throwController;
     public PhsController phsController;
+    public bool vrMode;//VRモードの切り替え
+
+    
+    void Awake()//Startよりも先に呼び出される
+    {
+        /*if (!vrMode)
+        {
+            XRSettings.enabled = false;
+            Debug.Log("VR is not enable");
+        
+        }
+        else
+            XRSettings.enabled = true;*/
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (!vrMode)
+        {
+            XRSettings.enabled = false;
+            Debug.Log("VR is not enable");
+
+        }
+        else
+            XRSettings.enabled = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-
         //空振りと打撃時のステートを用意しておいて、
         //それに応じて投球するプログラムを作成する
 
