@@ -26,22 +26,23 @@ public class ThrowController : MonoBehaviour
         throwPos = ball.transform.position;
         BallReset();
         //Mathf.Asin(g * 1d / v / v) / 2
-        //      Mathf.Asin(重力 * 割合 * 距離 /　ベクトル / ベクトル) / 2;
+        //      Mathf.Asin(重力加速度 * 割合 * 距離 /　ベクトル / ベクトル) / 2;
         angle = Mathf.Asin(9.81f * 0.6f * 18.44f / speed / speed) / 2;
 
-        //      Mathf.Asin(重力 * 距離 /　ベクトル / ベクトル) / 2;
+        //      Mathf.Asin(重力加速度 * 距離 /　ベクトル / ベクトル) / 2;
         //angle = Mathf.Asin(9.81f * 18.44f / speed / speed) / 2;
 
-        Debug.Log(angle);
-        Debug.Log(Mathf.Asin(0.5F));
+        /*Debug.Log(angle);
+        Debug.Log(Mathf.Asin(0.5F));*/
+        Debug.Log("Cos" + speed * Mathf.Sin(angle));
     }
 
     void Update()
     {
-        Debug.Log("angle" + angle);
-        Debug.Log("ballSpeed" + ballSpeed + "km");
+        //Debug.Log("angle" + angle);
+        //Debug.Log("ballSpeed" + ballSpeed + "km");
         TimeCounter();
-        if (Input.GetKey(KeyCode.Space))                                        //条件文をGameStateで書く
+        if (Input.GetKey(KeyCode.Space))//条件文をGameStateで書く
         {
             timeCheck = true;
             Throw();
