@@ -43,6 +43,7 @@ public class CorrectPhysics : MonoBehaviour
         v0 = v;
         t0 = Time.time;//ゲームスタートからの経過時間
         isEanbled = true;
+
     }
 
     
