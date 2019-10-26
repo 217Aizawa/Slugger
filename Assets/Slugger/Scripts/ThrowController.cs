@@ -34,7 +34,7 @@ public class ThrowController : MonoBehaviour
 
         /*Debug.Log(angle);
         Debug.Log(Mathf.Asin(0.5F));*/
-        Debug.Log("Cos" + speed * Mathf.Sin(angle));
+        //Debug.Log("Cos" + speed * Mathf.Sin(angle));
     }
 
     void Update()
@@ -77,7 +77,7 @@ public class ThrowController : MonoBehaviour
         rb.velocity = new Vector3(0, speed * Mathf.Sin(angle), speed * Mathf.Cos(angle));
         ballSpeed = rb.velocity.magnitude * 3600 / 1000;//速度を秒速から時速に変換する
         //Debug.Log("ballSpeed" + rb.velocity); Vector3
-        ball.GetComponent<CorrectPhysics>().Enable(rb.velocity);//ballコンポーネントから取得   
+        ball.GetComponent<CorrectPhysics>().Enable(rb.velocity);//ballコンポーネントから取得  
     }
 
     private void BallReset()//ボール情報をリセットする

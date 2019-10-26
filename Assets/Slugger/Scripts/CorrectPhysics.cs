@@ -29,9 +29,18 @@ public class CorrectPhysics : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision other)
     {
+        Debug.Log("OnCollisionEnter");
         Disable();
+        Debug.Log("Called Disable");
+        /*if (other.gameObject.tag == "Bat")
+        {
+            Debug.Log("OnCollisionEnter");
+
+            Disable();
+            //Debug.Log("OnCollisionEnter");
+        }*/
     }
 
     public void Disable()//kinemativ無効
@@ -40,7 +49,6 @@ public class CorrectPhysics : MonoBehaviour
         isEanbled = false;
         //バットと衝突した瞬間に新たな方向に速度を加える
         //rb.velocity = new Vector3();
-        Debug.Log("OnCollisionEnter");
     }
 
     //Throw関数ないから呼び出す
