@@ -187,7 +187,7 @@ public class OVRControllerHelper : MonoBehaviour
 				m_modelOculusTouchQuestAndRiftSLeftController.SetActive(false);
 				m_modelOculusTouchQuestAndRiftSRightController.SetActive(false);
 				m_modelOculusTouchRiftLeftController.SetActive(controllerConnected && (m_controller == OVRInput.Controller.LTouch));
-                m_modelOculusTouchRiftRightController.SetActive(isController);//controllerConnected && (m_controller == OVRInput.Controller.RTouch));
+                m_modelOculusTouchRiftRightController.SetActive(false);//(isController);controllerConnected && (m_controller == OVRInput.Controller.RTouch));
                 m_modelBat.SetActive(false);
             }
 

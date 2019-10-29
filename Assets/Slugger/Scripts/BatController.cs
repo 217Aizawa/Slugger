@@ -14,6 +14,6 @@ public class BatController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("BatPos" + Bat.transform.position);
+        //Debug.Log("BatPos" + Bat.transform.position);
     }
 }

@@ -17,7 +17,6 @@ public class ThrowController : MonoBehaviour
     public GameObject ball;//Sceneにあるボール
     public GameObject ballPrefab;//設計図としてのボール（オリジナル）
 
-
     //public GameObject point;//重力加速度の差分を示すキューブ
 
     void Start()
@@ -53,7 +52,7 @@ public class ThrowController : MonoBehaviour
             time = 0;
             timeCheck = true;
             ball = Instantiate(ballPrefab, throwPos, Quaternion.identity);
-            Destroy(ball, 3.0f);
+            //Destroy(ball, 3.0f);
 
             if (timeCheck)
                 Throw();
@@ -62,7 +61,6 @@ public class ThrowController : MonoBehaviour
 
     void TimeCounter()
     {
-        //Debug.Log("Time" + time);
         if (timeCheck)
             time += Time.deltaTime;
         else
@@ -75,9 +73,10 @@ public class ThrowController : MonoBehaviour
         rb.useGravity = true;
         rb.isKinematic = false;
         rb.velocity = new Vector3(0, speed * Mathf.Sin(angle), speed * Mathf.Cos(angle));
-        ballSpeed = rb.velocity.magnitude * 3600 / 1000;//速度を秒速から時速に変換する
+        ball.GetComponent<CorrectPhysics>().Enable(rb.velocity);//ballコンポーネントから取得
+        Destroy(ball, 3.0f);
+        //ballSpeed = rb.velocity.magnitude * 3600 / 1000;//速度を秒速から時速に変換する
         //Debug.Log("ballSpeed" + rb.velocity); Vector3
-        ball.GetComponent<CorrectPhysics>().Enable(rb.velocity);//ballコンポーネントから取得  
     }
 
     private void BallReset()//ボール情報をリセットする
