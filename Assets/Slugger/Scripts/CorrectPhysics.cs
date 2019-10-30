@@ -33,8 +33,9 @@ public class CorrectPhysics : MonoBehaviour
     {
         rb.isKinematic = isKinematic;
         isEanbled = false;
+        rb.velocity = Physics.gravity * 9.8f;
         //バットと衝突した瞬間に新たな方向に速度を加える
-        //rb.velocity = new Vector3();
+        //rb.velocity = ;
     }
 
     //Throw関数内から呼び出す(isKinematicをオンの状態で投球している)
@@ -48,14 +49,6 @@ public class CorrectPhysics : MonoBehaviour
         t0 = Time.time;//ゲームスタートからの経過時間
         isEanbled = true;
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        //Debug.Log("OnCollisionEnter");
-        Disable();
-        Debug.Log("Called Disable");
-    }
-
 }
 //                 開始位置　　　　　　向き　　　　　　　長さ（レイ）
 /*if(Physics.Raycast(transform.position, transform.forward, 2))

@@ -88,8 +88,6 @@ public class ThrowController : MonoBehaviour
         rig.velocity = Vector3.zero;
     }
 
-
-
     /*void Update()
     {
         TimeCounter();

@@ -9,6 +9,7 @@ public class GameLoop : MonoBehaviour
     public enum GameState { free, play, throwing, batting};
 
     public GameState gameState = GameState.free;
+    public GameObject ball;
 
     public BatController batController;
     public CameraController camereController;
