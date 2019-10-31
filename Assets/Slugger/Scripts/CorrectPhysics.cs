@@ -22,7 +22,7 @@ public class CorrectPhysics : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bat = GameObject.Find("red_bat (1)");
+        bat = GameObject.FindGameObjectWithTag("Bat");
         batRb = bat.GetComponent<Rigidbody>();
        
     }

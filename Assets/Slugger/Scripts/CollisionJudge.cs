@@ -24,10 +24,13 @@ public class CollisionJudge : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision other)
     {
-        //Debug.Log("OnCollisionEnter");
-        this.gameObject.GetComponent<CorrectPhysics>().Disable();
-        Debug.Log("Called Disable");
+        if(other.gameObject.tag == "Bat")
+        {
+            //Debug.Log("OnCollisionEnter");
+            this.gameObject.GetComponent<CorrectPhysics>().Disable();
+            Debug.Log("Called Disable");
+        }
     }
 }
