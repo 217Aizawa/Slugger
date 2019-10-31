@@ -16,7 +16,6 @@ public class ThrowController : MonoBehaviour
 
     public GameObject ball;//Sceneにあるボール
     public GameObject ballPrefab;//設計図としてのボール（オリジナル）
-
     //public GameObject point;//重力加速度の差分を示すキューブ
 
     void Start()
@@ -30,10 +29,6 @@ public class ThrowController : MonoBehaviour
 
         //      Mathf.Asin(重力加速度 * 距離 /　ベクトル / ベクトル) / 2;
         //angle = Mathf.Asin(9.81f * 18.44f / speed / speed) / 2;
-
-        /*Debug.Log(angle);
-        Debug.Log(Mathf.Asin(0.5F));*/
-        //Debug.Log("Cos" + speed * Mathf.Sin(angle));
     }
 
     void Update()

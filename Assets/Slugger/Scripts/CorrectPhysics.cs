@@ -4,19 +4,27 @@ using UnityEngine;
 
 public class CorrectPhysics : MonoBehaviour
 {
+    public GameObject bat;
+
     private Rigidbody rb;
+    Rigidbody batRb;
+
     private Vector3 p0;//position
     private Vector3 v0;//vector ThrowController > rb.velocity
     private float t0;//time 
     private bool isKinematic;
     private bool isEanbled = false;
 
+    public float k = 10000;
+
     //RaycastHit hit;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        bat = GameObject.Find("red_bat (1)");
+        batRb = bat.GetComponent<Rigidbody>();
+       
     }
 
     // Update is called once per frame
@@ -27,15 +35,26 @@ public class CorrectPhysics : MonoBehaviour
 
         float dt = Time.time - t0;//経過時間
         transform.position = p0 + v0 * dt - 0.5f * Vector3.up  * 9.8f * dt * dt;//物理演算
+        rb.velocity = v0 - Vector3.up * 9.8f * dt;
+
+
     }
 
-    public void Disable()//kinemativ無効
+    public void Disable()//kinemativ無効　バットと衝突した瞬間に新たな方向に速度を加える
     {
         rb.isKinematic = isKinematic;
-        isEanbled = false;
-        rb.velocity = Physics.gravity * 9.8f;
-        //バットと衝突した瞬間に新たな方向に速度を加える
-        //rb.velocity = ;
+        isEanbled = false;        
+        Vector3 batSpeed = batRb.velocity;
+        //rb.velocity = v0 + k * rb.mass * batSpeed * Mathf.Cos(angle) / batRb.mass;
+        if(batSpeed.sqrMagnitude == 0)
+        {
+            batSpeed = -Vector3.forward;
+        }
+        float cos = Vector3.Dot(rb.velocity.normalized, batSpeed.normalized);
+        
+        Vector3 direction = v0 + k * rb.mass * (batSpeed - v0) * cos / batRb.mass;
+        Debug.Log(direction);
+        rb.AddForce(direction, ForceMode.VelocityChange);
     }
 
     //Throw関数内から呼び出す(isKinematicをオンの状態で投球している)

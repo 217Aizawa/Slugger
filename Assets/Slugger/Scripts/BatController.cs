@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BatController : MonoBehaviour
 {
+
+    Vector3 swingSpeed;
+
     public GameObject Bat;
     // Start is called before the first frame update
     void Start()
@@ -16,4 +19,9 @@ public class BatController : MonoBehaviour
     {
         //Debug.Log("BatPos" + Bat.transform.position);
     }
+
+    /*void OnCollisionEnter(Collision collision)
+    {
+
+    }*/
 }
