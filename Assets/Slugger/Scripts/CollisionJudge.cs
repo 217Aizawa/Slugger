@@ -6,6 +6,7 @@ public class CollisionJudge : MonoBehaviour
 {
     GameObject bat;
     GameObject ball;
+ 
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +17,7 @@ public class CollisionJudge : MonoBehaviour
     // Update is called once per frame
     void FixeedUpdate()
     {
-        /*if (Physics.Raycast(transform.position, transform.forward, 2))
+        /*if (Physics.Raycast(transform.position, transform.forward, 1))
         {
             this.gameObject.GetComponent<CorrectPhysics>().Disable();
             Debug.Log("Ray hit");
