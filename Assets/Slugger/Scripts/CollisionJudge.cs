@@ -16,8 +16,8 @@ public class CollisionJudge : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bat = this.GetComponent<GameObject>();
-        ball = GameObject.Find("ball");
+        bat = GameObject.FindGameObjectWithTag("Bat");
+        ball = this.gameObject;
 
         batRad = 0.0355f;//バットのColliderから参照
         ballDia = 0.0723f;
@@ -25,12 +25,15 @@ public class CollisionJudge : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixeedUpdate()
+    void Update()//FixedUpdate
     {
+        batPos = bat.transform.position;
+        ballPos = ball.transform.position;
+
         dist = Vector3.Distance(batPos, ballPos);
-        Debug.Log("dist" + dist);
+        Debug.Log(ballPos);
         //もしも、バットとボールの距離が batRad + ballDia 以下ならば...
-        if (dist > collisonDist)
+        if (dist < collisonDist)
         {
             this.gameObject.GetComponent<CorrectPhysics>().Disable();
             Debug.Log("collison");
