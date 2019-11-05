@@ -10,10 +10,16 @@ public class CollisionJudge : MonoBehaviour
     float ballDia;//ボールの直径
     float collisonDist;
     float dist;
-    Vector3 batPos;
-    Vector3 ballPos;
-    Vector3 previousBatPos;//過去のバット位置
-    Vector3 previousBallPos;
+
+    Vector3 batPos1;
+    Vector3 ballPos1;
+
+    Vector3 batPos0;
+    Vector3 ballPos0;
+
+    Vector3 batLine;//バットの線分
+    Vector3 ballLine;//ボールの線分
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,25 +34,34 @@ public class CollisionJudge : MonoBehaviour
     // Update is called once per frame
     void Update()//FixedUpdate
     {
-        batPos = bat.transform.position;
-        ballPos = ball.transform.position;
+        batPos1 = bat.transform.position;
+        ballPos1 = ball.transform.position;
 
-        dist = Vector3.Distance(batPos, ballPos);
+        
+        batLine = batPos1 - batPos0;
+        ballLine = ballPos1 - ballPos0;
+
+        Vector3 s = ballPos0 + Vector3.Cross(batLine, ballLine);//S動かし三つの点を求める
+
+        Plane p = new Plane(ballPos0,ballPos1,s);//面を作成
+        Vector3 n = p.normal;//housen
+        float t = Vector3.Dot(ballPos0, n) / Vector3.Dot(batLine, n);
+
+        Vector3 q = ballPos0 + t * ballLine;//衝突する点
+        //HitPoint(); q
+        Debug.Log("batPos" + batPos1);
+
+
+        //dist = Vector3.Distance(batPos1, ballPos1);
         //Debug.Log(ballPos);
-        Debug.Log("batPos" + batPos);
-
-        HitPoint(previousBallPos, ballPos, batPos);
-
-
-
         //もしも、バットとボールの距離が batRad + ballDia 以下ならば...
         /*if (dist < collisonDist)
         {
             this.gameObject.GetComponent<CorrectPhysics>().Disable();
             Debug.Log("collison");
         }*/
-
-        previousBallPos = ballPos;
+        ballPos0 = ballPos1;
+        batPos0 = batPos1;
     }
 
     private void OnCollisionEnter(Collision other)
@@ -59,8 +74,8 @@ public class CollisionJudge : MonoBehaviour
         }
     }
 
-    Vector3 HitPoint(Vector3 a, Vector3 b, Vector3 p)
+    Vector3 HitPoint(Vector3 a, Vector3 b, Vector3 p0, Vector3 p1)//
     {
-        return a + Vector3.Project(p - a, b - a);
+        return a + Vector3.Project(p0 - a, b - a);
     }
 }
