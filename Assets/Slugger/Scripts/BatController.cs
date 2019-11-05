@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class BatController : MonoBehaviour
 {
-
-    Vector3 swingSpeed;
-
+    //Vector3 swingSpeed;
     public GameObject Bat;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Bat = this.gameObject;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //Debug.Log("BatPos" + Bat.transform.position);
     }

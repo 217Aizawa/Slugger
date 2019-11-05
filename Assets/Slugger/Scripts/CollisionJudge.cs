@@ -12,7 +12,8 @@ public class CollisionJudge : MonoBehaviour
     float dist;
     Vector3 batPos;
     Vector3 ballPos;
-
+    Vector3 previousBatPos;//過去のバット位置
+    Vector3 previousBallPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,23 +32,24 @@ public class CollisionJudge : MonoBehaviour
         ballPos = ball.transform.position;
 
         dist = Vector3.Distance(batPos, ballPos);
-        Debug.Log(ballPos);
+        //Debug.Log(ballPos);
+        Debug.Log("batPos" + batPos);
+
+        HitPoint(previousBallPos, ballPos, batPos);
+
+
+
         //もしも、バットとボールの距離が batRad + ballDia 以下ならば...
-        if (dist < collisonDist)
+        /*if (dist < collisonDist)
         {
             this.gameObject.GetComponent<CorrectPhysics>().Disable();
             Debug.Log("collison");
-        }
-
-        /*if (Physics.Raycast(transform.position, transform.forward, 1))
-        {
-            this.gameObject.GetComponent<CorrectPhysics>().Disable();
-            Debug.Log("Ray hit");
         }*/
 
+        previousBallPos = ballPos;
     }
 
-    /*private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.tag == "Bat")
         {
@@ -55,5 +57,10 @@ public class CollisionJudge : MonoBehaviour
             this.gameObject.GetComponent<CorrectPhysics>().Disable();
             Debug.Log("Called Disable");
         }
-    }*/
+    }
+
+    Vector3 HitPoint(Vector3 a, Vector3 b, Vector3 p)
+    {
+        return a + Vector3.Project(p - a, b - a);
+    }
 }

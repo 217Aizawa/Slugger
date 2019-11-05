@@ -51,10 +51,10 @@ public class CorrectPhysics : MonoBehaviour
             batSpeed = -Vector3.forward;
         }
         float cos = Vector3.Dot(rb.velocity.normalized, batSpeed.normalized);
-        
+        // v0 + k * rb.mass * (batSpeed - v0) * cos / batRb.mass
         Vector3 direction = v0 + k * rb.mass * (batSpeed - v0) * cos / batRb.mass;
         Debug.Log(direction);
-        rb.AddForce(direction, ForceMode.VelocityChange);
+        rb.AddForce(direction, ForceMode.VelocityChange);//速度をdirectionに変更させる
     }
 
     //Throw関数内から呼び出す(isKinematicをオンの状態で投球している)
