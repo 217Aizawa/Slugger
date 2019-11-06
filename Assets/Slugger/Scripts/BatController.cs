@@ -10,11 +10,14 @@ public class BatController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Bat = this.gameObject;
+        Vector3 pos = new Vector3(1, 2, 3);
+        Vector3 nlz = pos.normalized;
+        Debug.Log("nlz" + nlz.magnitude);
+        Debug.Log("mgn" + pos.magnitude);
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         //Debug.Log("BatPos" + Bat.transform.position);
     }

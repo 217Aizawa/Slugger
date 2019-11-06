@@ -355,20 +355,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 2
---- !u!64 &336837543
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 336837541}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: fd5c1e8fea8bda14f9cbb98795c2cbe1, type: 3}
 --- !u!1001 &420191234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -382,7 +368,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 147966, guid: 9045a2da25a670d46b4878f27e0d41c6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 147966, guid: 9045a2da25a670d46b4878f27e0d41c6, type: 3}
       propertyPath: m_TagString
@@ -446,7 +432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1818322988, guid: 9045a2da25a670d46b4878f27e0d41c6, type: 3}
       propertyPath: m_Radius
-      value: 0.03554309
+      value: 1.7771544
       objectReference: {fileID: 0}
     - target: {fileID: 1818322988, guid: 9045a2da25a670d46b4878f27e0d41c6, type: 3}
       propertyPath: m_Height
@@ -1900,7 +1886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9e9d3cb3ae27c468b43167a533cef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bat: {fileID: 0}
+  Bat: {fileID: 1818322987}
 --- !u!1 &2086554376
 GameObject:
   m_ObjectHideFlags: 0
