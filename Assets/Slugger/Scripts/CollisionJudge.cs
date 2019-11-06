@@ -58,13 +58,14 @@ public class CollisionJudge : MonoBehaviour
 
         //垂線の足の座標
         Vector3 perpendicularFootPoint = Vector3.Project(q - ballPos0, batPos0 - ballPos1);
-        float flag = Vector3.Dot(ballLine.normalized, perpendicularFootPoint.normalized);
+        float flag = Vector3.Dot(ballLine, perpendicularFootPoint);//-なら通過 +なら先にある
+
 
         ballPos0 = ballPos1;
         batPos0 = batPos1;
     }
 
-    /*private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.tag == "Bat")
         {
@@ -72,7 +73,7 @@ public class CollisionJudge : MonoBehaviour
             this.gameObject.GetComponent<CorrectPhysics>().Disable();
             Debug.Log("Called Disable");
         }
-    }*/
+    }
 
     /*Vector3 HitPoint(Vector3 a, Vector3 b, Vector3 p0, Vector3 p1)//
     {
