@@ -53,17 +53,18 @@ public class CollisionJudge : MonoBehaviour
         Vector3 s = ballPos0 + Vector3.Cross(batLine, ballLine);//S動かし三つの点を求める
         Plane p = new Plane(ballPos0,ballPos1,s);//面を作成
         Vector3 n = p.normal;//面の法線
-        float t = Vector3.Dot(ballPos0, n) / Vector3.Dot(batLine, n);
+        float t = Vector3.Dot(ballPos0 - batPos0, n) / Vector3.Dot(batLine, n);
         Vector3 q = ballPos0 + t * ballLine;//衝突する点
 
         //垂線の足の座標
         Vector3 perpendicularFootPoint = Vector3.Project(q - ballPos0, batPos0 - ballPos1);
+        float flag = Vector3.Dot(ballLine.normalized, perpendicularFootPoint.normalized);
 
         ballPos0 = ballPos1;
         batPos0 = batPos1;
     }
 
-    private void OnCollisionEnter(Collision other)
+    /*private void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.tag == "Bat")
         {
@@ -71,7 +72,7 @@ public class CollisionJudge : MonoBehaviour
             this.gameObject.GetComponent<CorrectPhysics>().Disable();
             Debug.Log("Called Disable");
         }
-    }
+    }*/
 
     /*Vector3 HitPoint(Vector3 a, Vector3 b, Vector3 p0, Vector3 p1)//
     {
@@ -84,7 +85,6 @@ public class CollisionJudge : MonoBehaviour
     }*/
 
     //Debug.Log("batPos" + batPos1);
-
 
         //dist = Vector3.Distance(batPos1, ballPos1);
         //Debug.Log(ballPos);
