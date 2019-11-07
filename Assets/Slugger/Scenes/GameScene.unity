@@ -354,7 +354,20 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 2
+  m_CollisionDetection: 3
+--- !u!114 &336837543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336837541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d9e9d3cb3ae27c468b43167a533cef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bat: {fileID: 336837541}
 --- !u!1001 &420191234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -950,7 +963,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &788746803
 Transform:
   m_ObjectHideFlags: 0
@@ -977,7 +990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9e9d3cb3ae27c468b43167a533cef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bat: {fileID: 1818322987}
+  Bat: {fileID: 336837541}
 --- !u!1 &872380454
 GameObject:
   m_ObjectHideFlags: 0
@@ -1612,11 +1625,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 491406, guid: 9045a2da25a670d46b4878f27e0d41c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5
+      value: -1.675
       objectReference: {fileID: 0}
     - target: {fileID: 491406, guid: 9045a2da25a670d46b4878f27e0d41c6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.821
+      value: 0.053
       objectReference: {fileID: 0}
     - target: {fileID: 491406, guid: 9045a2da25a670d46b4878f27e0d41c6, type: 3}
       propertyPath: m_LocalPosition.z

@@ -44,7 +44,7 @@ public class CorrectPhysics : MonoBehaviour
         rb.isKinematic = isKinematic;
         isEanbled = false;//transformでの移動オフ        
         Vector3 batSpeed = batRb.velocity;
-        Debug.Log(batSpeed);
+        //Debug.Log(batSpeed);
         if (batSpeed.sqrMagnitude == 0)
         {
             batSpeed = -Vector3.forward;
