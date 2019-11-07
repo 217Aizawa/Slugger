@@ -467,6 +467,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Bat
+      value: 
+      objectReference: {fileID: 336837541}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9045a2da25a670d46b4878f27e0d41c6, type: 3}
 --- !u!1 &526914797

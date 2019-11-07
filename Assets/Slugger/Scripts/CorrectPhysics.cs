@@ -15,16 +15,14 @@ public class CorrectPhysics : MonoBehaviour
     private bool isKinematic;
     private bool isEanbled = false;
 
-    public float k = 0.5f;//10000
+    public float k = 10000;//10000
 
-    //RaycastHit hit;
 
     // Start is called before the first frame update
     void Start()
     {
         bat = GameObject.FindGameObjectWithTag("Bat");
         batRb = bat.GetComponent<Rigidbody>();
-       
     }
 
     // Update is called once per frame
@@ -53,8 +51,8 @@ public class CorrectPhysics : MonoBehaviour
         //Vector3 direction = v0 + k * rb.mass * (batSpeed - v0) * cos / batRb.mass;
         Vector3 direction = v0 + k * batRb.mass * (batSpeed - v0) * cos / rb.mass;
         rb.AddForce(direction, ForceMode.VelocityChange);
+        Debug.Log("direction" + direction);//zの値が-で打者から見て前方に飛ぶ
     }
-    // v0 + k * rb.mass * (batSpeed - v0) * cos / batRb.mass
 
 
 
