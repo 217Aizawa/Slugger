@@ -31,7 +31,7 @@ public class CollisionJudge : MonoBehaviour
         bat = GameObject.FindGameObjectWithTag("Bat");
         ball = this.gameObject;
 
-        batRad = 0.0355f;//バットのColliderから参照
+        batRad = 0.0355f * 10f;//バットのColliderから参照
         ballDia = 0.0723f;
         collisonDist = batRad + ballDia;
     }

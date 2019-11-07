@@ -15,7 +15,7 @@ public class CorrectPhysics : MonoBehaviour
     private bool isKinematic;
     private bool isEanbled = false;
 
-    public float k = 10000;
+    public float k = 0.5f;//10000
 
     //RaycastHit hit;
 
@@ -52,7 +52,6 @@ public class CorrectPhysics : MonoBehaviour
         float cos = Vector3.Dot(rb.velocity.normalized, batSpeed.normalized);
         //Vector3 direction = v0 + k * rb.mass * (batSpeed - v0) * cos / batRb.mass;
         Vector3 direction = v0 + k * batRb.mass * (batSpeed - v0) * cos / rb.mass;
-        
         rb.AddForce(direction, ForceMode.VelocityChange);
     }
     // v0 + k * rb.mass * (batSpeed - v0) * cos / batRb.mass

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3362236}
   - component: {fileID: 2372568}
   - component: {fileID: 1818322988}
+  - component: {fileID: 6217116490308273861}
   m_Layer: 0
   m_Name: red_bat
   m_TagString: Untagged
@@ -92,3 +93,16 @@ CapsuleCollider:
   m_Height: 1.083224
   m_Direction: 1
   m_Center: {x: 0.0000000018626451, y: 0.29529592, z: -0.00000011920929}
+--- !u!114 &6217116490308273861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d9e9d3cb3ae27c468b43167a533cef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bat: {fileID: 0}
