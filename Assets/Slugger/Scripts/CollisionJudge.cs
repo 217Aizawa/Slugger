@@ -34,7 +34,7 @@ public class CollisionJudge : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()//FixedUpdate
+    void FixedUpdate()//FixedUpdate
     {
         //本番用
         if (Input.GetKey(KeyCode.C))
@@ -50,6 +50,7 @@ public class CollisionJudge : MonoBehaviour
         batLine = batPos1 - batPos0;
         ballLine = ballPos1 - ballPos0;
 
+        dist = Vector3.Distance(ballPos1, batPos1);
         Vector3 s = ballPos0 + Vector3.Cross(batLine, ballLine);//S動かし三つの点を求める
         Plane p = new Plane(ballPos0,ballPos1,s);//面を作成
         Vector3 n = p.normal;//面の法線
@@ -63,6 +64,18 @@ public class CollisionJudge : MonoBehaviour
 
         ballPos0 = ballPos1;
         batPos0 = batPos1;
+
+        if (flag >= 0)
+        {
+            Debug.Log("Flag1 On");
+
+            if (collisonDist >= dist)//1 >= flag
+            {
+                this.gameObject.GetComponent<CorrectPhysics>().Disable();
+                Debug.Log("Called Disable");
+            }
+        }
+
     }
 
     private void OnCollisionEnter(Collision other)
