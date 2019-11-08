@@ -49,7 +49,6 @@ public class GameLoop : MonoBehaviour
         if (Input.GetKey(KeyCode.Escape))
         {
             UnityEngine.Application.Quit();
-            UnityEditor.EditorApplication.isPlaying = false;
         }
         //空振りと打撃時のステートを用意しておいて、
         //それに応じて投球するプログラムを作成する
