@@ -142,7 +142,6 @@ public class OVRControllerHelper : MonoBehaviour
         bool controllerConnected = OVRInput.IsControllerConnected(m_controller);
 
         DetectRightTouch();
-
         if (Input.GetKey(KeyCode.C))//’Ç‰Á
             isBat = !isBat;//bool‚ð”½“]‚³‚¹‚é
 

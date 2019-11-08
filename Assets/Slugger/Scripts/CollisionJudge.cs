@@ -23,9 +23,6 @@ public class CollisionJudge : MonoBehaviour
     Vector3 ballRelLine;//バットがbatPos0の時のボールの相対運動
     Vector3 ballRelLine1;//バットがbatPos0の時のボールの相対運動
 
-    //Vector3 batDirLocal = new Vector3(0, 0.9f ,0);//バットの向き90cm
-    //Vector3 batGripLocal = new Vector3(0, -0.45f,0);//グリップ位置
-
     RaycastHit hit;
     // Start is called before the first frame update
     void Start()
@@ -37,6 +34,7 @@ public class CollisionJudge : MonoBehaviour
         batRad = 0.0355f;//バットのColliderから参照
         ballDia = 0.0723f;
         collisonDist = batRad + ballDia / 2;
+
     }
 
     // Update is called once per frame
@@ -52,6 +50,13 @@ public class CollisionJudge : MonoBehaviour
             bat = GameObject.FindGameObjectWithTag("Bat");
             ball = this.gameObject;
         }
+
+        if (GameObject.FindGameObjectWithTag("Bat"))
+        {
+            bat = GameObject.FindGameObjectWithTag("Bat");
+            ball = this.gameObject;
+        }
+
 
         batPos1 = bat.transform.position;
         ballPos1 = ball.transform.position;
@@ -135,7 +140,10 @@ public class CollisionJudge : MonoBehaviour
                     //Debug.Log("hit");
                     //Debug.Log("hitPoint" + hit.point);//衝突地点
                     Vector3 P = Vector3.Project(hit.point - BatController.batGrip, BatController.batDir);
-                    gameObject.GetComponent<Rigidbody>().AddForce((P - transform.position) * 5, ForceMode.Impulse);
+                    gameObject.GetComponent<Rigidbody>().AddForce((P - transform.position) * 5, ForceMode.Impulse);//.normalized * 5
+                    /*Debug.Log("P" + P);
+                    Debug.Log("ballPos" + transform.position);
+                    Debug.Log("Impulse " + (P - transform.position));*/
                 }
             }
 

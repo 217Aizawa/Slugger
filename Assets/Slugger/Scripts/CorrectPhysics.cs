@@ -48,8 +48,10 @@ public class CorrectPhysics : MonoBehaviour
             batSpeed = -Vector3.forward;
         }
         //Debug.Log("batSpeed" + batSpeed);
-        float cos = Vector3.Dot(rb.velocity.normalized, batSpeed.normalized);
-        //Debug.Log("cos" + cos);
+        float cos = Vector3.Dot(-rb.velocity.normalized, batSpeed.normalized);
+        Debug.Log("rb.velocity.normalized" + rb.velocity.normalized);
+        Debug.Log("batSpeed.normalized" + batSpeed.normalized);
+        Debug.Log("cos" + cos);
         //Vector3 direction = v0 + k * rb.mass * (batSpeed - v0) * cos / batRb.mass;
         Vector3 direction = v0 + k * batRb.mass * (batSpeed - v0) * cos / rb.mass;
         rb.AddForce(direction, ForceMode.VelocityChange);
