@@ -22,7 +22,7 @@ public class BatController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         batDir = transform.TransformDirection(batDirLocal);//向きだけ変換する
         batGrip = transform.TransformPoint(batGripLocal);

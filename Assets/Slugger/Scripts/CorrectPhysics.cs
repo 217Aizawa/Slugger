@@ -47,10 +47,13 @@ public class CorrectPhysics : MonoBehaviour
         {
             batSpeed = -Vector3.forward;
         }
+        //Debug.Log("batSpeed" + batSpeed);
         float cos = Vector3.Dot(rb.velocity.normalized, batSpeed.normalized);
+        //Debug.Log("cos" + cos);
         //Vector3 direction = v0 + k * rb.mass * (batSpeed - v0) * cos / batRb.mass;
         Vector3 direction = v0 + k * batRb.mass * (batSpeed - v0) * cos / rb.mass;
         rb.AddForce(direction, ForceMode.VelocityChange);
+        //rb.AddForce(direction, ForceMode.Impulse);
         Debug.Log("direction" + direction);//zの値が-で打者から見て前方に飛ぶ
     }
 

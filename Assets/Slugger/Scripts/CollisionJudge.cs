@@ -20,10 +20,13 @@ public class CollisionJudge : MonoBehaviour
     Vector3 batLine;//バットの線分
     Vector3 ballLine;
 
-    Vector3 ballRelLine;//ボールの相対運動
-    Vector3 batDirLocal = new Vector3(0, 0.9f ,0);//バットの向き90cm
-    Vector3 batGripLocal = new Vector3(0, -0.45f,0);//グリップ位置
-    
+    Vector3 ballRelLine;//バットがbatPos0の時のボールの相対運動
+    Vector3 ballRelLine1;//バットがbatPos0の時のボールの相対運動
+
+    //Vector3 batDirLocal = new Vector3(0, 0.9f ,0);//バットの向き90cm
+    //Vector3 batGripLocal = new Vector3(0, -0.45f,0);//グリップ位置
+
+    RaycastHit hit;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,9 +34,9 @@ public class CollisionJudge : MonoBehaviour
         bat = GameObject.FindGameObjectWithTag("Bat");
         ball = this.gameObject;
 
-        batRad = 0.0355f * 10f;//バットのColliderから参照
+        batRad = 0.0355f;//バットのColliderから参照
         ballDia = 0.0723f;
-        collisonDist = batRad + ballDia;
+        collisonDist = batRad + ballDia / 2;
     }
 
     // Update is called once per frame
@@ -57,8 +60,9 @@ public class CollisionJudge : MonoBehaviour
         ballLine = ballPos1 - ballPos0;
 
         ballRelLine = ballLine - batLine;
-        //Debug.Log("batPos" + batPos1);
+        ballRelLine1 = ballLine + batLine;
 
+        //Debug.Log("batPos" + batPos1);
 
         //dist = Vector3.Distance(ballPos1, batPos1);
         Vector3 s = ballPos0 + Vector3.Cross(BatController.batDir, ballRelLine);//S動かし三つの点を求める
@@ -75,13 +79,16 @@ public class CollisionJudge : MonoBehaviour
         
         //垂線の足の座標
         Vector3 perpendicularFootPoint = Vector3.Project(q - ballPos0, ballRelLine);
+        //Vector3 perpendicularFootPoint = Vector3.Project(q - ballPos0, ballRelLine);
         float flag = Vector3.Dot(ballRelLine, perpendicularFootPoint);//-なら通過 +なら先にある
-
         Vector3 nearBallPoint;
-        Vector3 nearBatPoint; 
+        Vector3 nearBatPoint;
+
+        //Debug.Log("p" + perpendicularFootPoint);
 
 
-        if(flag < 0)//ballの最近点を求める
+
+        if (flag < 0)//ballの最近点を求める
         {
             nearBallPoint = ballPos0;
         }
@@ -106,7 +113,7 @@ public class CollisionJudge : MonoBehaviour
         {
             nearBatPoint = q;
         }
-
+        
         //Debug.Log("nearPoint" + (nearBatPoint - nearBallPoint).magnitude);
         //Debug.Log("nearBatPoint" + nearBatPoint);
         //Debug.Log("nearBallPoint" + nearBallPoint);
@@ -114,12 +121,31 @@ public class CollisionJudge : MonoBehaviour
 
         if (collisonDist > (nearBatPoint - nearBallPoint).magnitude)//1 >= flag collisonDist
          {
+            /*Debug.Log("hit dist" + (nearBatPoint - nearBallPoint).magnitude);
+            Debug.Log("bat" + batPos1);
+            Debug.Log("ball" + ballPos0 + ballPos1);
+            */
+            if (Physics.Raycast(ballPos0, ballRelLine1, out hit, ballRelLine1.magnitude + 3))//ballRelLine1
+            {
+                Debug.Log("hit =" + hit.collider.tag);
+                if (hit.collider.tag == "Bat")
+                {
+                    this.gameObject.GetComponent<CorrectPhysics>().Disable();
+                    Debug.Log("Called Disable");
+                    //Debug.Log("hit");
+                    //Debug.Log("hitPoint" + hit.point);//衝突地点
+                    Vector3 P = Vector3.Project(hit.point - BatController.batGrip, BatController.batDir);
+                    gameObject.GetComponent<Rigidbody>().AddForce((P - transform.position) * 5, ForceMode.Impulse);
+                }
+            }
+
+
+            
             /*Debug.Log("collisonDist" + collisonDist);
             Debug.Log("nearPoint" + (nearBatPoint - nearBallPoint).magnitude);
             Debug.Log("nearBatPoint" + nearBatPoint);
             Debug.Log("nearBallPoint" + nearBallPoint); */
-            this.gameObject.GetComponent<CorrectPhysics>().Disable();
-            Debug.Log("Called Disable");
+            
          }
 
         ballPos0 = ballPos1;
