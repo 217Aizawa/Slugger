@@ -107,13 +107,10 @@ public class CollisionJudge : MonoBehaviour
             nearBatPoint = q;
         }
 
-
         //Debug.Log("nearPoint" + (nearBatPoint - nearBallPoint).magnitude);
         //Debug.Log("nearBatPoint" + nearBatPoint);
         //Debug.Log("nearBallPoint" + nearBallPoint);
         //Debug.Log("nearPoint" + (nearBatPoint - nearBallPoint).magnitude);
-
-
 
         if (collisonDist > (nearBatPoint - nearBallPoint).magnitude)//1 >= flag collisonDist
          {
