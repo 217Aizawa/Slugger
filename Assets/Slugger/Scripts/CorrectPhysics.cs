@@ -41,7 +41,7 @@ public class CorrectPhysics : MonoBehaviour
     {
         rb.isKinematic = isKinematic;
         isEanbled = false;//transformでの移動オフ        
-        Vector3 batSpeed = batRb.velocity;
+        Vector3 batSpeed = BatController.rb.velocity;//batRb.velocity;
         //Debug.Log(batSpeed);
         if (batSpeed.sqrMagnitude == 0)
         {
@@ -49,14 +49,14 @@ public class CorrectPhysics : MonoBehaviour
         }
         //Debug.Log("batSpeed" + batSpeed);
         float cos = Vector3.Dot(-rb.velocity.normalized, batSpeed.normalized);
-        Debug.Log("rb.velocity.normalized" + rb.velocity.normalized);
+        //Debug.Log("rb.velocity.normalized" + rb.velocity.normalized);
         Debug.Log("batSpeed.normalized" + batSpeed.normalized);
-        Debug.Log("cos" + cos);
+        //Debug.Log("cos" + cos);
         //Vector3 direction = v0 + k * rb.mass * (batSpeed - v0) * cos / batRb.mass;
         Vector3 direction = v0 + k * batRb.mass * (batSpeed - v0) * cos / rb.mass;
         rb.AddForce(direction, ForceMode.VelocityChange);
         //rb.AddForce(direction, ForceMode.Impulse);
-        Debug.Log("direction" + direction);//zの値が-で打者から見て前方に飛ぶ
+        //Debug.Log("direction" + direction);//zの値が-で打者から見て前方に飛ぶ
     }
 
 

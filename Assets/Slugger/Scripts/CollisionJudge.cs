@@ -140,7 +140,7 @@ public class CollisionJudge : MonoBehaviour
                     //Debug.Log("hit");
                     //Debug.Log("hitPoint" + hit.point);//衝突地点
                     Vector3 P = Vector3.Project(hit.point - BatController.batGrip, BatController.batDir);
-                    gameObject.GetComponent<Rigidbody>().AddForce((P - transform.position) * 5, ForceMode.Impulse);//.normalized * 5
+                    gameObject.GetComponent<Rigidbody>().AddForce((P - transform.position) * 2, ForceMode.Impulse);//.normalized * 5
                     /*Debug.Log("P" + P);
                     Debug.Log("ballPos" + transform.position);
                     Debug.Log("Impulse " + (P - transform.position));*/
