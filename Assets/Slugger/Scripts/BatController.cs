@@ -10,7 +10,6 @@ public class BatController : MonoBehaviour
     Vector3 batDirLocal;
     public static Vector3 batGrip;
     public static Vector3 batDir;
-    public static Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +19,6 @@ public class BatController : MonoBehaviour
         Debug.Log("mgn" + pos.magnitude);*/
         batDirLocal = new Vector3(0, 0.9f, 0);//バットの向き90cm
         batGripLocal = new Vector3(0, -0.45f, 0);
-        rb = this.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame

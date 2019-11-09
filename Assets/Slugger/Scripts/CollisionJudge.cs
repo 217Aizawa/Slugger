@@ -22,7 +22,7 @@ public class CollisionJudge : MonoBehaviour
 
     Vector3 ballRelLine;//バットがbatPos0の時のボールの相対運動
     Vector3 ballRelLine1;//バットがbatPos0の時のボールの相対運動
-
+    Vector3 forExhibition = new Vector3(0,15,-80);
     RaycastHit hit;
     // Start is called before the first frame update
     void Start()
@@ -33,7 +33,7 @@ public class CollisionJudge : MonoBehaviour
 
         batRad = 0.0355f;//バットのColliderから参照
         ballDia = 0.0723f;
-        collisonDist = batRad + ballDia / 2 * 10;
+        collisonDist = batRad + ballDia / 2 * 25;
 
     }
 
@@ -132,18 +132,19 @@ public class CollisionJudge : MonoBehaviour
             */
             if (Physics.Raycast(ballPos0, ballRelLine1, out hit, ballRelLine1.magnitude + 3))//ballRelLine1
             {
-                Debug.Log("hit =" + hit.collider.tag);
+                //Debug.Log("hit =" + hit.collider.tag);
                 if (hit.collider.tag == "Bat")
                 {
                     this.gameObject.GetComponent<CorrectPhysics>().Disable();
-                    Debug.Log("Called Disable");
+                    //Debug.Log("Called Disable");
                     //Debug.Log("hit");
                     //Debug.Log("hitPoint" + hit.point);//衝突地点
                     Vector3 P = Vector3.Project(hit.point - BatController.batGrip, BatController.batDir);
-                    gameObject.GetComponent<Rigidbody>().AddForce((P - transform.position) * 2, ForceMode.Impulse);//.normalized * 5
+                    //gameObject.GetComponent<Rigidbody>().AddForce((P - transform.position) * 2, ForceMode.Impulse);//.normalized * 5
+                    gameObject.GetComponent<Rigidbody>().AddForce(forExhibition, ForceMode.Impulse);//展示用
                     /*Debug.Log("P" + P);
-                    Debug.Log("ballPos" + transform.position);
-                    Debug.Log("Impulse " + (P - transform.position));*/
+                    Debug.Log("ballPos" + transform.position);*/
+                    //Debug.Log("Impulse " + (P - transform.position));
                 }
             }
 
