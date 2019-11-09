@@ -33,7 +33,7 @@ public class CollisionJudge : MonoBehaviour
 
         batRad = 0.0355f;//バットのColliderから参照
         ballDia = 0.0723f;
-        collisonDist = batRad + ballDia / 2;
+        collisonDist = batRad + ballDia / 2 * 10;
 
     }
 
