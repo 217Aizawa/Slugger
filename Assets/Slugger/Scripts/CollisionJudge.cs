@@ -68,23 +68,23 @@ public class CollisionJudge : MonoBehaviour
         ballRelLine = ballLine - batLine;
         ballRelLine1 = ballLine + batLine;
 
-        Vector3 s = ballPos0 + Vector3.Cross(BatController.batDir, ballRelLine);//S動かし三つの点を求める（外積）
+        Vector3 s = ballPos0 + Vector3.Cross(BatController.batDir, ballRelLine1);//S動かし三つの点を求める（外積）
         Plane p = new Plane(ballPos0, ballPos1 - batLine, s);//面を作成
         Vector3 n = p.normal;//面の法線
         float t = Vector3.Dot(ballPos0 - BatController.batGrip, n) / Vector3.Dot(BatController.batDir, n);
         Vector3 q = BatController.batGrip + t * BatController.batDir;//球の平面に対し、バットが一番近くなる点
 
         //垂線の足の座標
-        Vector3 perpendicularFootPoint = Vector3.Project(q - ballPos0, ballRelLine);
-        float flag = Vector3.Dot(ballRelLine, perpendicularFootPoint);//-なら通過 +なら先にある
+        Vector3 perpendicularFootPoint = Vector3.Project(q - ballPos0, ballRelLine1);
+        float flag = Vector3.Dot(ballRelLine1, perpendicularFootPoint);//-なら通過 +なら先にある
 
         if (flag < 0)//ballの最近点を求める
         {
             nearBallPoint = ballPos0;
         }
-        else if ((perpendicularFootPoint - ballPos0).sqrMagnitude > ballRelLine.sqrMagnitude)
+        else if ((perpendicularFootPoint - ballPos0).sqrMagnitude > ballRelLine1.sqrMagnitude)
         {
-            nearBallPoint = ballPos0 + ballRelLine;
+            nearBallPoint = ballPos0 + ballRelLine1;
         }
         else
         {
@@ -113,29 +113,27 @@ public class CollisionJudge : MonoBehaviour
         {
             if (Physics.Raycast(ballPos0, ballRelLine1, out hit, ballRelLine1.magnitude + 3))//ballRelLine1
             {
-                //Debug.Log("hit =" + hit.collider.tag);
                 if (hit.collider.tag == "Bat")
                 {
                     this.gameObject.GetComponent<CorrectPhysics>().Disable();
-                    //Debug.Log("hitPoint" + hit.point);//衝突地点
                     Vector3 P = Vector3.Project(hit.point - BatController.batGrip, BatController.batDir);
-                    //gameObject.GetComponent<Rigidbody>().AddForce((P - transform.position) * 2, ForceMode.Impulse);//.normalized * 5
-                    gameObject.GetComponent<Rigidbody>().AddForce(forExhibition, ForceMode.Impulse);//展示用
+                    gameObject.GetComponent<Rigidbody>().AddForce((transform.position - P) * 2, ForceMode.Impulse);//.normalized * 5
                 }
             }
-
-            ballPos0 = ballPos1;
-            batPos0 = batPos1;
         }
+        //gameObject.GetComponent<Rigidbody>().AddForce(forExhibition, ForceMode.Impulse);//展示用
 
-            /*private void OnCollisionEnter(Collision other)
+        ballPos0 = ballPos1;
+        batPos0 = batPos1;
+
+        /*private void OnCollisionEnter(Collision other)
+        {
+            if(other.gameObject.tag == "Bat")
             {
-                if(other.gameObject.tag == "Bat")
-                {
-                    //Debug.Log("OnCollisionEnter");
-                    this.gameObject.GetComponent<CorrectPhysics>().Disable();
-                    Debug.Log("Called Disable");
-                }
-            }*/
+                //Debug.Log("OnCollisionEnter");
+                this.gameObject.GetComponent<CorrectPhysics>().Disable();
+                Debug.Log("Called Disable");
+            }
+        }*/
     }
 }
