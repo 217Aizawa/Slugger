@@ -29,6 +29,10 @@ public class CollisionJudge : MonoBehaviour
     Vector3 nearBallPoint;
     Vector3 nearBatPoint;
 
+    Vector3 P;
+    Vector3 globalP;
+    Vector3 conversion = new Vector3(-1,1,-1);//座標変換用
+
     RaycastHit hit;
 
     void Start()
@@ -75,7 +79,7 @@ public class CollisionJudge : MonoBehaviour
         Vector3 q = BatController.batGrip + t * BatController.batDir;//球の平面に対し、バットが一番近くなる点
 
         //垂線の足の座標
-        Vector3 perpendicularFootPoint = Vector3.Project(q - ballPos0, ballRelLine1);
+        Vector3 perpendicularFootPoint = Vector3.Project(q - ballPos0, ballRelLine1);//qからballRelLine1に下した
         float flag = Vector3.Dot(ballRelLine1, perpendicularFootPoint);//-なら通過 +なら先にある
 
         if (flag < 0)//ballの最近点を求める
@@ -88,7 +92,7 @@ public class CollisionJudge : MonoBehaviour
         }
         else
         {
-            nearBallPoint = perpendicularFootPoint;
+            nearBallPoint = ballPos0 + perpendicularFootPoint;
         }
 
         if (t < 0)//batの最近点を求める
@@ -97,7 +101,7 @@ public class CollisionJudge : MonoBehaviour
         }
         else if (t > 1)
         {
-            nearBatPoint = BatController.batDir;
+            nearBatPoint = BatController.batGrip +  BatController.batDir;//バットの根本からbatDirまで行った座標
         }
         else
         {
@@ -116,12 +120,16 @@ public class CollisionJudge : MonoBehaviour
                 if (hit.collider.tag == "Bat")
                 {
                     this.gameObject.GetComponent<CorrectPhysics>().Disable();
-                    Vector3 P = Vector3.Project(hit.point - BatController.batGrip, BatController.batDir);
-                    gameObject.GetComponent<Rigidbody>().AddForce((transform.position - P) * 2, ForceMode.Impulse);//.normalized * 5
+                    P = Vector3.Project(hit.point - BatController.batGrip, BatController.batDir);//hit.pointからbatDirに下した
+                    //batのスピードをかけて飛距離を調節する　 * batSpeed
+                    gameObject.GetComponent<Rigidbody>().AddForce((nearBallPoint - nearBatPoint) * 100, ForceMode.Impulse);
+                    //Debug.Log("bPos:" + transform.position + " P:" + P);//transform.position - hit.point);
+                    Debug.Log("transform.position - P" + (nearBallPoint - nearBatPoint));
+                    //Debug.Log("transform.position - P" + (P - transform.position));
+                    //gameObject.GetComponent<Rigidbody>().AddForce(forExhibition, ForceMode.Impulse);//展示用
                 }
             }
         }
-        //gameObject.GetComponent<Rigidbody>().AddForce(forExhibition, ForceMode.Impulse);//展示用
 
         ballPos0 = ballPos1;
         batPos0 = batPos1;
