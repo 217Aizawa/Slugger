@@ -7,8 +7,11 @@ public class BatController : MonoBehaviour
     /*Vector3 latestPos;//過去位置
     Vector3 speed;*/
 
-    public GameObject bat;
+    public static GameObject bat;
     Rigidbody batRb;
+
+    Vector3 latestPos;
+    public static Vector3 swingSpeed;
     Vector3 batGripLocal;
     Vector3 batDirLocal;
     public static Vector3 batGrip;
@@ -28,8 +31,8 @@ public class BatController : MonoBehaviour
         //Debug.Log("World :" + batDir + " Local :" + batDirLocal);
         //Debug.Log("World :" + batGrip + " Local :" + batGripLocal);
 
-        /*speed = ((bat.transform.position - latestPos) / Time.deltaTime);
-        latestPos = bat.transform.position;
-        Debug.Log("batSpeed" + speed);*/
+        swingSpeed = ((transform.position - latestPos) / Time.deltaTime);
+        latestPos = transform.position;
+        //Debug.Log("batSpeed" + swingSpeed);
     }
 }

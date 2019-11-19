@@ -10,8 +10,6 @@ public class CollisionJudge : MonoBehaviour
     float batRad;//バット半径
     float ballDia;//ボールの直径
     float collisonDist;
-    float dist;
-    float testDist = 0.2f;
 
     Vector3 batPos1;//現在位置
     Vector3 ballPos1;
@@ -22,8 +20,8 @@ public class CollisionJudge : MonoBehaviour
     Vector3 batLine;//バットの線分
     Vector3 ballLine;//ボールの線分
 
-    Vector3 ballRelLine;//バットがbatPos0の時のボールの相対運動
-    Vector3 ballRelLine1;//バットがbatPos0の時のボールの相対運動
+    //Vector3 ballRelLine;//バットがbatPos0の時のボールの相対運動
+    Vector3 ballRelLine1;//バットがbatPos1の時のボールの相対運動
     Vector3 forExhibition = new Vector3(0,15,-80);//展示用
 
     Vector3 nearBallPoint;
@@ -49,7 +47,7 @@ public class CollisionJudge : MonoBehaviour
         //collisonDist = bat.GetComponent<CapsuleCollider>().radius;//Colliderの半径を取得
         //Debug用
         //bat = GameObject.FindGameObjectWithTag("Bat");
-        //ball = this.gameObject;
+        ball = this.gameObject;
     }
 
     void FixedUpdate()//FixedUpdate
@@ -58,13 +56,13 @@ public class CollisionJudge : MonoBehaviour
         if (Input.GetKey(KeyCode.C))//要修正
         {
             bat = GameObject.FindGameObjectWithTag("Bat");
-            ball = this.gameObject;
+            //ball = this.gameObject;
         }
 
         if (GameObject.FindGameObjectWithTag("Bat"))
         {
             bat = GameObject.FindGameObjectWithTag("Bat");
-            ball = this.gameObject;
+            //ball = this.gameObject;
         }
 
         batPos1 = bat.transform.position;//現在位置
@@ -73,7 +71,7 @@ public class CollisionJudge : MonoBehaviour
         batLine = batPos1 - batPos0;
         ballLine = ballPos1 - ballPos0;
         
-        ballRelLine = ballLine - batLine;
+        //ballRelLine = ballLine - batLine;
         ballRelLine1 = ballLine + batLine;
 
         Vector3 s = ballPos0 + Vector3.Cross(BatController.batDir, ballRelLine1);//S（外積）
@@ -122,7 +120,9 @@ public class CollisionJudge : MonoBehaviour
                     P = Vector3.Project(hit.point - BatController.batGrip, BatController.batDir);                               //hit.pointからbatDirに下した
                     //batのスピードをかけて飛距離を調節する　 * batSpeed
                     gameObject.GetComponent<Rigidbody>().AddForce((nearBallPoint - nearBatPoint) * 100, ForceMode.Impulse);
+
                     //gameObject.GetComponent<Rigidbody>().AddForce((nearBallPoint - nearBatPoint) * CorrectPhysics.batSpeed.magnitude, ForceMode.Impulse);
+                    //Debug.Log("magnitude" + CorrectPhysics.batSpeed.magnitude);
                     //gameObject.GetComponent<Rigidbody>().AddForce(forExhibition, ForceMode.Impulse);//展示用
                     //Debug.Log("nearBallPoint - nearBatPoint" + (nearBallPoint - nearBatPoint) * 100);
                     audioSource.PlayOneShot(sound);//一度再生する

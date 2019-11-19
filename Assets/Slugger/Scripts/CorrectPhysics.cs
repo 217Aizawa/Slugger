@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CorrectPhysics : MonoBehaviour
 {
-    public GameObject bat;
+    GameObject bat;
 
     private Rigidbody rb;
     Rigidbody batRb;
@@ -20,12 +20,13 @@ public class CorrectPhysics : MonoBehaviour
 
     public float k = 10000;//10000
 
-
     // Start is called before the first frame update
     void Start()
     {
         bat = GameObject.FindGameObjectWithTag("Bat");
+        //bat = BatController.bat;
         batRb = bat.GetComponent<Rigidbody>();
+        //batRb = bat.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -37,33 +38,27 @@ public class CorrectPhysics : MonoBehaviour
         float dt = Time.time - t0;//経過時間
         transform.position = p0 + v0 * dt - 0.5f * Vector3.up  * 9.8f * dt * dt;//物理演算
         rb.velocity = v0 - Vector3.up * 9.8f * dt;
-
-        speed = ((bat.transform.position - latestPos) / Time.deltaTime);
-        latestPos = bat.transform.position;//過去位置
-       　Debug.Log("bat speed" + speed);
+        /*speed = ((bat.transform.position - latestPos) / Time.deltaTime);
+        latestPos = bat.transform.position;//過去位置*/
+       　//Debug.Log("bat speed" + speed);
     }
+
     //rb.velocity = v0 + k * rb.mass * batSpeed * Mathf.Cos(angle) / batRb.mass;
     //kinemativ無効　バットと衝突した瞬間に新たな方向に速度を加える
     public void Disable()
     {
         rb.isKinematic = isKinematic;
         isEanbled = false;//transformでの移動オフ        
-        batSpeed = speed;
         if (batSpeed.sqrMagnitude == 0)
         {
             batSpeed = -Vector3.forward;
         }
         //Debug.Log("batSpeed" + batSpeed);
         float cos = Vector3.Dot(-rb.velocity.normalized, batSpeed.normalized);
-        //Debug.Log("batSpeed.normalized" + batSpeed.normalized);   
-        //Vector3 direction = v0 + k * rb.mass * (batSpeed - v0) * cos / batRb.mass;
         Vector3 direction = v0 + k * batRb.mass * (batSpeed - v0) * cos / rb.mass;
         rb.AddForce(direction, ForceMode.VelocityChange);
-        //rb.AddForce(direction, ForceMode.Impulse);
         //Debug.Log("direction" + direction);//zの値が-で打者から見て前方に飛ぶ
     }
-
-
 
     //Throw関数内から呼び出す(isKinematicをオンの状態で投球している)
     public void Enable(Vector3 v)
