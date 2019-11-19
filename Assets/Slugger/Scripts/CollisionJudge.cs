@@ -76,8 +76,8 @@ public class CollisionJudge : MonoBehaviour
         ballRelLine = ballLine - batLine;
         ballRelLine1 = ballLine + batLine;
 
-        Vector3 s = ballPos0 + Vector3.Cross(BatController.batDir, ballRelLine1);//S動かし三つの点を求める（外積）
-        Plane p = new Plane(ballPos0, ballPos1 - batLine, s);//面を作成
+        Vector3 s = ballPos0 + Vector3.Cross(BatController.batDir, ballRelLine1);//S（外積）
+        Plane p = new Plane(ballPos0, ballPos1 - batLine, s);//三つの点から面を作成
         Vector3 n = p.normal;//面の法線
         float t = Vector3.Dot(ballPos0 - BatController.batGrip, n) / Vector3.Dot(BatController.batDir, n);
         Vector3 q = BatController.batGrip + t * BatController.batDir;//球の平面に対し、バットが一番近くなる点
@@ -112,11 +112,6 @@ public class CollisionJudge : MonoBehaviour
             nearBatPoint = q;
         }
 
-        //Debug.Log("nearPoint" + (nearBatPoint - nearBallPoint).magnitude);
-        //Debug.Log("nearBatPoint" + nearBatPoint);
-        //Debug.Log("nearBallPoint" + nearBallPoint);
-        //Debug.Log("nearPoint" + (nearBatPoint - nearBallPoint).magnitude);
-
         if (collisonDist > (nearBatPoint - nearBallPoint).magnitude)//1 >= flag collisonDist
         {
             if (Physics.Raycast(ballPos0, ballRelLine1, out hit, ballRelLine1.magnitude + 3))//ballRelLine1
@@ -137,15 +132,15 @@ public class CollisionJudge : MonoBehaviour
 
         ballPos0 = ballPos1;
         batPos0 = batPos1;
-
-        /*private void OnCollisionEnter(Collision other)
-        {
-            if(other.gameObject.tag == "Bat")
-            {
-                //Debug.Log("OnCollisionEnter");
-                this.gameObject.GetComponent<CorrectPhysics>().Disable();
-                Debug.Log("Called Disable");
-            }
-        }*/
     }
 }
+/*private void OnCollisionEnter(Collision other)
+{
+    if(other.gameObject.tag == "Bat")
+    {
+        //Debug.Log("OnCollisionEnter");
+        this.gameObject.GetComponent<CorrectPhysics>().Disable();
+        Debug.Log("Called Disable");
+    }
+}*/
+

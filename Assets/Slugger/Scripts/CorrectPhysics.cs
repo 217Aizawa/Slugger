@@ -49,16 +49,13 @@ public class CorrectPhysics : MonoBehaviour
         rb.isKinematic = isKinematic;
         isEanbled = false;//transformでの移動オフ        
         batSpeed = speed;
-        //Debug.Log("batSpeed" + batSpeed);
         if (batSpeed.sqrMagnitude == 0)
         {
             batSpeed = -Vector3.forward;
         }
         //Debug.Log("batSpeed" + batSpeed);
         float cos = Vector3.Dot(-rb.velocity.normalized, batSpeed.normalized);
-        //Debug.Log("rb.velocity.normalized" + rb.velocity.normalized);
         //Debug.Log("batSpeed.normalized" + batSpeed.normalized);   
-        //Debug.Log("cos" + cos);
         //Vector3 direction = v0 + k * rb.mass * (batSpeed - v0) * cos / batRb.mass;
         Vector3 direction = v0 + k * batRb.mass * (batSpeed - v0) * cos / rb.mass;
         rb.AddForce(direction, ForceMode.VelocityChange);
@@ -80,9 +77,3 @@ public class CorrectPhysics : MonoBehaviour
         isEanbled = true;
     }
 }
-//                 開始位置　　　　　　向き　　　　　　　長さ（レイ）
-/*if(Physics.Raycast(transform.position, transform.forward, 2))
-{
-    Disable();
-    Debug.Log("Ray hit");
-}*/
