@@ -24,7 +24,7 @@ public class CollisionJudge : MonoBehaviour
 
     Vector3 ballRelLine;//バットがbatPos0の時のボールの相対運動
     Vector3 ballRelLine1;//バットがbatPos0の時のボールの相対運動
-    Vector3 forExhibition = new Vector3(0,15,-80);
+    Vector3 forExhibition = new Vector3(0,15,-80);//展示用
 
     Vector3 nearBallPoint;
     Vector3 nearBatPoint;
@@ -35,17 +35,21 @@ public class CollisionJudge : MonoBehaviour
 
     RaycastHit hit;
 
+    public AudioClip sound;//効果音を指定
+    AudioSource audioSource;
+
     void Start()
     {
-        //Debug用
-        //bat = GameObject.FindGameObjectWithTag("Bat");
-        //ball = this.gameObject;
+        audioSource = GetComponent<AudioSource>();
 
         batRad = 0.0355f;//バットのColliderから参照
         ballDia = 0.0723f;
         // 0.07165 = バット半径＋ボール半径
         collisonDist = batRad + ballDia / 2 * 25;
         //collisonDist = bat.GetComponent<CapsuleCollider>().radius;//Colliderの半径を取得
+        //Debug用
+        //bat = GameObject.FindGameObjectWithTag("Bat");
+        //ball = this.gameObject;
     }
 
     void FixedUpdate()//FixedUpdate
@@ -68,7 +72,7 @@ public class CollisionJudge : MonoBehaviour
 
         batLine = batPos1 - batPos0;
         ballLine = ballPos1 - ballPos0;
-
+        
         ballRelLine = ballLine - batLine;
         ballRelLine1 = ballLine + batLine;
 
@@ -120,13 +124,13 @@ public class CollisionJudge : MonoBehaviour
                 if (hit.collider.tag == "Bat")
                 {
                     this.gameObject.GetComponent<CorrectPhysics>().Disable();
-                    P = Vector3.Project(hit.point - BatController.batGrip, BatController.batDir);//hit.pointからbatDirに下した
+                    P = Vector3.Project(hit.point - BatController.batGrip, BatController.batDir);                               //hit.pointからbatDirに下した
                     //batのスピードをかけて飛距離を調節する　 * batSpeed
                     gameObject.GetComponent<Rigidbody>().AddForce((nearBallPoint - nearBatPoint) * 100, ForceMode.Impulse);
-                    //Debug.Log("bPos:" + transform.position + " P:" + P);//transform.position - hit.point);
-                    Debug.Log("transform.position - P" + (nearBallPoint - nearBatPoint));
-                    //Debug.Log("transform.position - P" + (P - transform.position));
+                    //gameObject.GetComponent<Rigidbody>().AddForce((nearBallPoint - nearBatPoint) * CorrectPhysics.batSpeed.magnitude, ForceMode.Impulse);
                     //gameObject.GetComponent<Rigidbody>().AddForce(forExhibition, ForceMode.Impulse);//展示用
+                    //Debug.Log("nearBallPoint - nearBatPoint" + (nearBallPoint - nearBatPoint) * 100);
+                    audioSource.PlayOneShot(sound);//一度再生する
                 }
             }
         }

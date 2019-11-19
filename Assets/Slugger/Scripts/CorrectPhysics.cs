@@ -9,6 +9,9 @@ public class CorrectPhysics : MonoBehaviour
     private Rigidbody rb;
     Rigidbody batRb;
 
+    Vector3 speed;
+    Vector3 latestPos;
+    public static Vector3 batSpeed;
     private Vector3 p0;//position
     private Vector3 v0;//vector ThrowController > rb.velocity
     private float t0;//time 
@@ -34,6 +37,10 @@ public class CorrectPhysics : MonoBehaviour
         float dt = Time.time - t0;//経過時間
         transform.position = p0 + v0 * dt - 0.5f * Vector3.up  * 9.8f * dt * dt;//物理演算
         rb.velocity = v0 - Vector3.up * 9.8f * dt;
+
+        speed = ((bat.transform.position - latestPos) / Time.deltaTime);
+        latestPos = bat.transform.position;//過去位置
+       　Debug.Log("bat speed" + speed);
     }
     //rb.velocity = v0 + k * rb.mass * batSpeed * Mathf.Cos(angle) / batRb.mass;
     //kinemativ無効　バットと衝突した瞬間に新たな方向に速度を加える
@@ -41,8 +48,8 @@ public class CorrectPhysics : MonoBehaviour
     {
         rb.isKinematic = isKinematic;
         isEanbled = false;//transformでの移動オフ        
-        Vector3 batSpeed = batRb.velocity;
-        //Debug.Log(batSpeed);
+        batSpeed = speed;
+        //Debug.Log("batSpeed" + batSpeed);
         if (batSpeed.sqrMagnitude == 0)
         {
             batSpeed = -Vector3.forward;
@@ -50,7 +57,7 @@ public class CorrectPhysics : MonoBehaviour
         //Debug.Log("batSpeed" + batSpeed);
         float cos = Vector3.Dot(-rb.velocity.normalized, batSpeed.normalized);
         //Debug.Log("rb.velocity.normalized" + rb.velocity.normalized);
-        Debug.Log("batSpeed.normalized" + batSpeed.normalized);
+        //Debug.Log("batSpeed.normalized" + batSpeed.normalized);   
         //Debug.Log("cos" + cos);
         //Vector3 direction = v0 + k * rb.mass * (batSpeed - v0) * cos / batRb.mass;
         Vector3 direction = v0 + k * batRb.mass * (batSpeed - v0) * cos / rb.mass;
