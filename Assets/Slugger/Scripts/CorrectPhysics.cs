@@ -10,7 +10,7 @@ public class CorrectPhysics : MonoBehaviour
     Rigidbody batRb;
 
     Vector3 speed;
-    Vector3 latestPos;
+    Vector3 latestPos = Vector3.zero;
     public static Vector3 batSpeed;
     private Vector3 p0;//position
     private Vector3 v0;//vector ThrowController > rb.velocity
@@ -38,8 +38,8 @@ public class CorrectPhysics : MonoBehaviour
         float dt = Time.time - t0;//経過時間
         transform.position = p0 + v0 * dt - 0.5f * Vector3.up  * 9.8f * dt * dt;//物理演算
         rb.velocity = v0 - Vector3.up * 9.8f * dt;
-        /*speed = ((bat.transform.position - latestPos) / Time.deltaTime);
-        latestPos = bat.transform.position;//過去位置*/
+        speed = ((bat.transform.position - latestPos) / Time.fixedDeltaTime);//FixedUpdate内では、fixedDeltaTimeを使用する
+        latestPos = bat.transform.position;//過去位置
        　//Debug.Log("bat speed" + speed);
     }
 

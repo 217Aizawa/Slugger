@@ -41,8 +41,7 @@ public class CollisionJudge : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         batRad = 0.0355f;//バットのColliderから参照
-        ballDia = 0.0723f;
-        // 0.07165 = バット半径＋ボール半径
+        ballDia = 0.0723f;// 0.07165 = バット半径＋ボール半径
         collisonDist = batRad + ballDia / 2 * 25;
         //collisonDist = bat.GetComponent<CapsuleCollider>().radius;//Colliderの半径を取得
         //Debug用
@@ -117,14 +116,16 @@ public class CollisionJudge : MonoBehaviour
                 if (hit.collider.tag == "Bat")
                 {
                     this.gameObject.GetComponent<CorrectPhysics>().Disable();
-                    P = Vector3.Project(hit.point - BatController.batGrip, BatController.batDir);                               //hit.pointからbatDirに下した
+                    P = Vector3.Project(hit.point - BatController.batGrip, BatController.batDir) + BatController.batGrip;                               //hit.pointからbatDirに下した
                     //batのスピードをかけて飛距離を調節する　 * batSpeed
-                    gameObject.GetComponent<Rigidbody>().AddForce((nearBallPoint - nearBatPoint) * 100, ForceMode.Impulse);
-
+                    gameObject.GetComponent<Rigidbody>().AddForce((transform.position - P).normalized * 100 * CorrectPhysics.batSpeed.magnitude, ForceMode.Impulse);
+                    //gameObject.GetComponent<Rigidbody>().AddForce((nearBallPoint - nearBatPoint) * 100, ForceMode.Impulse);
+                    Debug.Log("ballPos:" + transform.position + "P:" + P);
                     //gameObject.GetComponent<Rigidbody>().AddForce((nearBallPoint - nearBatPoint) * CorrectPhysics.batSpeed.magnitude, ForceMode.Impulse);
                     //Debug.Log("magnitude" + CorrectPhysics.batSpeed.magnitude);
                     //gameObject.GetComponent<Rigidbody>().AddForce(forExhibition, ForceMode.Impulse);//展示用
-                    //Debug.Log("nearBallPoint - nearBatPoint" + (nearBallPoint - nearBatPoint) * 100);
+                    //Debug.Log("nearBallPoint - nearBatPoint" + (nearBallPoint - nearBatPoint));
+                    Debug.Log("ballPos - P" + (transform.position - P));
                     audioSource.PlayOneShot(sound);//一度再生する
                 }
             }
