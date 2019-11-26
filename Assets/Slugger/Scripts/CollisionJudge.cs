@@ -119,17 +119,19 @@ public class CollisionJudge : MonoBehaviour
                     P = Vector3.Project(hit.point - BatController.batGrip, BatController.batDir) + BatController.batGrip;                               //hit.pointからbatDirに下した
                     //batのスピードをかけて飛距離を調節する　 * batSpeed
                     gameObject.GetComponent<Rigidbody>().AddForce((transform.position - P).normalized * 100 * CorrectPhysics.batSpeed.magnitude, ForceMode.Impulse);
-                    //gameObject.GetComponent<Rigidbody>().AddForce((nearBallPoint - nearBatPoint) * 100, ForceMode.Impulse);
                     Debug.Log("ballPos:" + transform.position + "P:" + P);
-                    //gameObject.GetComponent<Rigidbody>().AddForce((nearBallPoint - nearBatPoint) * CorrectPhysics.batSpeed.magnitude, ForceMode.Impulse);
-                    //Debug.Log("magnitude" + CorrectPhysics.batSpeed.magnitude);
-                    //gameObject.GetComponent<Rigidbody>().AddForce(forExhibition, ForceMode.Impulse);//展示用
-                    //Debug.Log("nearBallPoint - nearBatPoint" + (nearBallPoint - nearBatPoint));
                     Debug.Log("ballPos - P" + (transform.position - P));
                     audioSource.PlayOneShot(sound);//一度再生する
                 }
             }
         }
+        //.normalized * 100 * CorrectPhysics.batSpeed.magnitude
+
+        //gameObject.GetComponent<Rigidbody>().AddForce((nearBallPoint - nearBatPoint) * 100, ForceMode.Impulse);
+        //gameObject.GetComponent<Rigidbody>().AddForce((nearBallPoint - nearBatPoint) * CorrectPhysics.batSpeed.magnitude, ForceMode.Impulse);
+        //Debug.Log("magnitude" + CorrectPhysics.batSpeed.magnitude);
+        //gameObject.GetComponent<Rigidbody>().AddForce(forExhibition, ForceMode.Impulse);//展示用
+        //Debug.Log("nearBallPoint - nearBatPoint" + (nearBallPoint - nearBatPoint));
 
         ballPos0 = ballPos1;
         batPos0 = batPos1;
