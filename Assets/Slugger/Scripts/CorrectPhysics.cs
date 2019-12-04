@@ -48,7 +48,8 @@ public class CorrectPhysics : MonoBehaviour
     public void Disable()
     {
         rb.isKinematic = isKinematic;
-        isEanbled = false;//transformでの移動オフ        
+        isEanbled = false;//transformでの移動オフ       
+        //batSpeed = speed;
         if (batSpeed.sqrMagnitude == 0)
         {
             batSpeed = -Vector3.forward;

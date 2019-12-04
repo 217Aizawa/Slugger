@@ -47,6 +47,7 @@ public class CollisionJudge : MonoBehaviour
         //Debug用
         //bat = GameObject.FindGameObjectWithTag("Bat");
         ball = this.gameObject;
+        Debug.Log("Collisiondist" + collisonDist);
     }
 
     void FixedUpdate()//FixedUpdate
@@ -111,17 +112,18 @@ public class CollisionJudge : MonoBehaviour
 
         if (collisonDist > (nearBatPoint - nearBallPoint).magnitude)//1 >= flag collisonDist
         {
-            if (Physics.Raycast(ballPos0, ballRelLine1, out hit, ballRelLine1.magnitude + 3))//ballRelLine1
+            if (Physics.Raycast(ballPos0, ballRelLine1, out hit, ballRelLine1.magnitude))//ballRelLine1
             {
                 if (hit.collider.tag == "Bat")
                 {
                     this.gameObject.GetComponent<CorrectPhysics>().Disable();
                     P = Vector3.Project(hit.point - BatController.batGrip, BatController.batDir) + BatController.batGrip;                               //hit.pointからbatDirに下した
                     //batのスピードをかけて飛距離を調節する　 * batSpeed
-                    gameObject.GetComponent<Rigidbody>().AddForce((transform.position - P).normalized * 100 * CorrectPhysics.batSpeed.magnitude, ForceMode.Impulse);
-                    Debug.Log("ballPos:" + transform.position + "P:" + P);
-                    Debug.Log("ballPos - P" + (transform.position - P));
+                    gameObject.GetComponent<Rigidbody>().AddForce((hit.point - P).normalized * 100 * CorrectPhysics.batSpeed.magnitude, ForceMode.Impulse);
+                    Debug.Log("hitPoint:" + hit.point + "P:" + P);
+                    //Debug.Log("ballPos - P" + (transform.position - P));
                     audioSource.PlayOneShot(sound);//一度再生する
+                    Debug.Log("P :" + P + " nearBatPos :" + nearBatPoint);
                 }
             }
         }
