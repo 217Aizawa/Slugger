@@ -36,7 +36,8 @@ public class CollisionJudge : MonoBehaviour
     public AudioClip sound;//効果音を指定
     AudioSource audioSource;
 
-    [SerializeField] bool isHit = false;//二度打ちを防ぐためのbool
+    //[SerializeField] bool isHit = false;//二度打ちを防ぐためのbool
+    Rigidbody rb;
 
     void Start()
     {
@@ -50,6 +51,7 @@ public class CollisionJudge : MonoBehaviour
         //bat = GameObject.FindGameObjectWithTag("Bat");
         ball = this.gameObject;
         Debug.Log("Collisiondist" + collisonDist);
+        rb = this.gameObject.GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()//FixedUpdate
@@ -116,9 +118,8 @@ public class CollisionJudge : MonoBehaviour
         {
             if (Physics.Raycast(ballPos0, ballRelLine1, out hit, ballRelLine1.magnitude))                                                               //ballRelLine1
             {
-                if (hit.collider.tag == "Bat" && !isHit)
+                if (hit.collider.tag == "Bat" && rb.isKinematic)
                 {
-                    isHit = true;
                     this.gameObject.GetComponent<CorrectPhysics>().Disable();
                     P = Vector3.Project(hit.point - BatController.batGrip, BatController.batDir) + BatController.batGrip;                               //hit.pointからbatDirに下した
                     //batのスピードをかけて飛距離を調節する　 * batSpeed
