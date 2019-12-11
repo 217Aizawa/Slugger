@@ -15,8 +15,8 @@ public class CorrectPhysics : MonoBehaviour
     private Vector3 p0;//position
     private Vector3 v0;//vector ThrowController > rb.velocity
     private float t0;//time 
-    private bool isKinematic;
-    private bool isEanbled = false;
+    [SerializeField] private bool isKinematic;
+    public static bool isEanbled = false;
 
     public float k = 10000;//10000
 
@@ -48,6 +48,7 @@ public class CorrectPhysics : MonoBehaviour
     public void Disable()
     {
         rb.isKinematic = isKinematic;
+        //CollisionJudge.isHit = true;//二度打ち防止
         isEanbled = false;//transformでの移動オフ       
         //batSpeed = speed;
         if (batSpeed.sqrMagnitude == 0)
