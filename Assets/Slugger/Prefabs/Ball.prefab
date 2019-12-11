@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 666463893}
   - component: {fileID: -5671965670900511097}
   - component: {fileID: 2056392883889825069}
-  - component: {fileID: -4784279518252632768}
+  - component: {fileID: 976953537044537405}
   m_Layer: 9
   m_Name: Ball
   m_TagString: Ball
@@ -228,7 +228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a42800f8a5f40f64087a2d8e18128ba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bat: {fileID: 0}
   k: 1
 --- !u!114 &2056392883889825069
 MonoBehaviour:
@@ -242,8 +241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 272f0bd344255374fafa0c5f8cec6053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: be0f8cca1b7dea046a1593bfbabf8e57, type: 3}
---- !u!82 &-4784279518252632768
+  sound: {fileID: 8300000, guid: 8fa08157521c0114fa5a92ad2251d503, type: 3}
+--- !u!82 &976953537044537405
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -254,7 +253,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
