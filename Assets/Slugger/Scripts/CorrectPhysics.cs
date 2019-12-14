@@ -47,19 +47,19 @@ public class CorrectPhysics : MonoBehaviour
     //kinemativ無効　バットと衝突した瞬間に新たな方向に速度を加える
     public void Disable()
     {
-        batSpeed = BatController.swingSpeed;
+        //batSpeed = BatController.swingSpeed;
         rb.isKinematic = isKinematic;
         isEanbled = false;//transformでの移動オフ       
         //batSpeed = speed;
-        if (batSpeed.magnitude < 0.5f)// batSpeed.sqrMagnitude == 0
+        /*if (batSpeed.magnitude < 0.5f)// batSpeed.sqrMagnitude == 0
         {
             //batSpeed = -Vector3.forward;
             batSpeed = new Vector3(0, 0, -2.25f);
-        }
+        }*/
         //Debug.Log("batSpeed" + batSpeed);
-        float cos = Vector3.Dot(-rb.velocity.normalized, batSpeed.normalized);
+        /*float cos = Vector3.Dot(-rb.velocity.normalized, batSpeed.normalized);
         Vector3 direction = v0 + k * batRb.mass * (batSpeed - v0) * cos / rb.mass;
-        rb.AddForce(direction, ForceMode.VelocityChange);
+        rb.AddForce(direction, ForceMode.VelocityChange);*/
         //Debug.Log("direction" + direction);//zの値が-で打者から見て前方に飛ぶ
     }
 

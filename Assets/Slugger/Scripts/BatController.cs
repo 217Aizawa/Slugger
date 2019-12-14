@@ -7,7 +7,7 @@ public class BatController : MonoBehaviour
     /*Vector3 latestPos;//過去位置
     Vector3 speed;*/
 
-    public static GameObject bat;
+    public GameObject bat;
     public GameObject emptyBat;//バットの軌道表示専用
     Rigidbody batRb;
 
@@ -36,6 +36,7 @@ public class BatController : MonoBehaviour
         //Debug.Log("World :" + batDir + " Local :" + batDirLocal);
         //Debug.Log("World :" + batGrip + " Local :" + batGripLocal);
         Debug.Log("magnitude" + swingSpeed.magnitude);
+
         if (5 < swingSpeed.magnitude)
         {
             Instantiate(emptyBat, transform.position, transform.rotation);
