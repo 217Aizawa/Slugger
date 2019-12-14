@@ -7,6 +7,7 @@ public class BatController : MonoBehaviour
     /*Vector3 latestPos;//過去位置
     Vector3 speed;*/
     public GameObject emptyBat;
+    GameObject model;
     public static GameObject bat;
     Rigidbody batRb;
 
@@ -39,6 +40,7 @@ public class BatController : MonoBehaviour
             Instantiate(emptyBat, transform.position, transform.rotation);
         }
 
+        Destroy(model, 2f);
         latestPos = transform.position;
         //Debug.Log("batSpeed" + swingSpeed);
     }

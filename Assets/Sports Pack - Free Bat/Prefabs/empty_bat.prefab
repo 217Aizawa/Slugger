@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1818322988}
   m_Layer: 0
   m_Name: empty_bat
-  m_TagString: Untagged
+  m_TagString: emptyBat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
