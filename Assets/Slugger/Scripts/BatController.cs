@@ -37,7 +37,7 @@ public class BatController : MonoBehaviour
 
         if(5 < swingSpeed.magnitude)
         {
-            Instantiate(emptyBat, transform.position, transform.rotation);
+            model = Instantiate(emptyBat, transform.position,transform.rotation);
         }
 
         Destroy(model, 2f);
