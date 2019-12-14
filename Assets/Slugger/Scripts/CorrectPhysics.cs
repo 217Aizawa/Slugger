@@ -53,7 +53,7 @@ public class CorrectPhysics : MonoBehaviour
         //batSpeed = speed;
         if (batSpeed.magnitude < 0.5f)// batSpeed.sqrMagnitude == 0
         {
-            //batSpeed = -Vector3.forward;
+            //batSpeed = -Vector3.forward; //batSpeed = new Vector3(0, 0, -2.25f);
             batSpeed = new Vector3(0, 0, -2.25f);
         }
         //Debug.Log("batSpeed" + batSpeed);

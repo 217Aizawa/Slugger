@@ -6,7 +6,7 @@ public class BatController : MonoBehaviour
 {
     /*Vector3 latestPos;//過去位置
     Vector3 speed;*/
-
+    public GameObject emptyBat;
     public static GameObject bat;
     Rigidbody batRb;
 
@@ -33,6 +33,12 @@ public class BatController : MonoBehaviour
         //Debug.Log("World :" + batGrip + " Local :" + batGripLocal);
 
         swingSpeed = ((transform.position - latestPos) / Time.deltaTime);
+
+        if(5 < swingSpeed.magnitude)
+        {
+            Instantiate(emptyBat, transform.position, transform.rotation);
+        }
+
         latestPos = transform.position;
         //Debug.Log("batSpeed" + swingSpeed);
     }
