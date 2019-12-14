@@ -23,23 +23,23 @@ public class BatController : MonoBehaviour
         batRb = GetComponent<Rigidbody>();
         batDirLocal = new Vector3(0, 0.9f, 0);//バットの長さ=90cm
         batGripLocal = new Vector3(0, -0.45f, 0);
+        swingSpeed = new Vector3(0, 0, 0);
     }
 
     void FixedUpdate()
     {
+        swingSpeed = ((transform.position - latestPos) / Time.deltaTime);
+
         batDir = transform.TransformDirection(batDirLocal);//向きだけ変換する
         batGrip = transform.TransformPoint(batGripLocal);
         //Debug.Log("World :" + batDir + " Local :" + batDirLocal);
         //Debug.Log("World :" + batGrip + " Local :" + batGripLocal);
 
-        swingSpeed = ((transform.position - latestPos) / Time.deltaTime);
-
-        if(5 < swingSpeed.magnitude)
+        Debug.Log("magnitude" + swingSpeed.magnitude);
+        if (5 < swingSpeed.magnitude)
         {
             Instantiate(emptyBat, transform.position, transform.rotation);
         }
-
         latestPos = transform.position;
-        //Debug.Log("batSpeed" + swingSpeed);
     }
 }

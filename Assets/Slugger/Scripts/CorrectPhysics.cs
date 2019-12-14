@@ -38,16 +38,16 @@ public class CorrectPhysics : MonoBehaviour
         float dt = Time.time - t0;//経過時間
         transform.position = p0 + v0 * dt - 0.5f * Vector3.up  * 9.8f * dt * dt;//物理演算
         rb.velocity = v0 - Vector3.up * 9.8f * dt;
-        speed = ((bat.transform.position - latestPos) / Time.fixedDeltaTime);//FixedUpdate内では、fixedDeltaTimeを使用する
-        latestPos = bat.transform.position;//過去位置
+        
        　//Debug.Log("bat speed" + speed);
-        batSpeed = speed;
+        //batSpeed = ;
     }
 
     //rb.velocity = v0 + k * rb.mass * batSpeed * Mathf.Cos(angle) / batRb.mass;
     //kinemativ無効　バットと衝突した瞬間に新たな方向に速度を加える
     public void Disable()
     {
+        batSpeed = BatController.swingSpeed;
         rb.isKinematic = isKinematic;
         isEanbled = false;//transformでの移動オフ       
         //batSpeed = speed;
