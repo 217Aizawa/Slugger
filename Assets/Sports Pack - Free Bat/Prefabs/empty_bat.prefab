@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 491406}
   - component: {fileID: 3362236}
   - component: {fileID: 2372568}
-  - component: {fileID: 1818322988}
   m_Layer: 0
-  m_Name: red_bat
+  m_Name: empty_bat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,17 +77,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &1818322988
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 147966}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.035543084
-  m_Height: 1.083224
-  m_Direction: 1
-  m_Center: {x: 0.0000000018626451, y: 0.29529592, z: -0.00000011920929}
