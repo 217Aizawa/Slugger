@@ -550,6 +550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9e9d3cb3ae27c468b43167a533cef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bat: {fileID: 0}
   emptyBat: {fileID: 147966, guid: f8d1d9ae11ea4de4d8fd343157a796cf, type: 3}
 --- !u!54 &192755940
 Rigidbody:
@@ -918,6 +919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9e9d3cb3ae27c468b43167a533cef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bat: {fileID: 0}
   emptyBat: {fileID: 0}
 --- !u!1001 &349200977
 PrefabInstance:
@@ -3425,6 +3427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9e9d3cb3ae27c468b43167a533cef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bat: {fileID: 0}
   emptyBat: {fileID: 0}
 --- !u!1 &818271118
 GameObject:
@@ -6833,6 +6836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9e9d3cb3ae27c468b43167a533cef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bat: {fileID: 0}
   emptyBat: {fileID: 0}
 --- !u!54 &1567969854
 Rigidbody:
@@ -7499,6 +7503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9e9d3cb3ae27c468b43167a533cef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bat: {fileID: 0}
   emptyBat: {fileID: 147966, guid: f8d1d9ae11ea4de4d8fd343157a796cf, type: 3}
 --- !u!1 &1826399443
 GameObject:
