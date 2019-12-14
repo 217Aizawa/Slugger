@@ -37,6 +37,7 @@ public class BatController : MonoBehaviour
         //Debug.Log("World :" + batGrip + " Local :" + batGripLocal);
 
         Debug.Log("magnitude" + swingSpeed.magnitude);
+
         if (5 < swingSpeed.magnitude)
         {
             model = Instantiate(emptyBat, transform.position,transform.rotation);
