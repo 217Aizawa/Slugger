@@ -11,11 +11,12 @@ public class BatController : MonoBehaviour
     Rigidbody batRb;
 
     Vector3 latestPos;
-    public static Vector3 swingSpeed;
     Vector3 batGripLocal;
     Vector3 batDirLocal;
+
     public static Vector3 batGrip;
     public static Vector3 batDir;
+    public static Vector3 swingSpeed;
 
     void Start()
     {

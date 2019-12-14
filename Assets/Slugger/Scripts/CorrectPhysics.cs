@@ -41,6 +41,7 @@ public class CorrectPhysics : MonoBehaviour
         speed = ((bat.transform.position - latestPos) / Time.fixedDeltaTime);//FixedUpdate内では、fixedDeltaTimeを使用する
         latestPos = bat.transform.position;//過去位置
        　//Debug.Log("bat speed" + speed);
+        batSpeed = speed;
     }
 
     //rb.velocity = v0 + k * rb.mass * batSpeed * Mathf.Cos(angle) / batRb.mass;
@@ -48,12 +49,12 @@ public class CorrectPhysics : MonoBehaviour
     public void Disable()
     {
         rb.isKinematic = isKinematic;
-        //CollisionJudge.isHit = true;//二度打ち防止
         isEanbled = false;//transformでの移動オフ       
         //batSpeed = speed;
-        if (batSpeed.sqrMagnitude == 0)
+        if (batSpeed.magnitude < 0.5f)// batSpeed.sqrMagnitude == 0
         {
-            batSpeed = -Vector3.forward;
+            //batSpeed = -Vector3.forward;
+            batSpeed = new Vector3(0, 0, -2.25f);
         }
         //Debug.Log("batSpeed" + batSpeed);
         float cos = Vector3.Dot(-rb.velocity.normalized, batSpeed.normalized);
