@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CollisionJudge : MonoBehaviour
 {
+    //public BatController batController;
+
     GameObject bat;
     GameObject ball;
 
@@ -30,6 +32,9 @@ public class CollisionJudge : MonoBehaviour
     Vector3 P;
     Vector3 globalP;
     Vector3 conversion = new Vector3(-1,1,-1);//座標変換用
+    
+    Vector3 prevGrip;//過去位置
+    Vector3 prevHead;
 
     RaycastHit hit;
 
@@ -57,11 +62,11 @@ public class CollisionJudge : MonoBehaviour
     void FixedUpdate()//FixedUpdate
     {
         //本番用
-        if (Input.GetKey(KeyCode.C))//要修正
+        /*if (Input.GetKey(KeyCode.C))//要修正
         {
             bat = GameObject.FindGameObjectWithTag("Bat");
             //ball = this.gameObject;
-        }
+        }*/
 
         if (GameObject.FindGameObjectWithTag("Bat"))
         {
@@ -114,6 +119,19 @@ public class CollisionJudge : MonoBehaviour
             nearBatPoint = q;
         }
 
+        /*********************************************************************************************************/
+        //スイングに対応した当たり判定パート
+        //バットの４点から三角形を二つ作成し、ボールとの交点を求める
+        Plane g1 = new Plane(BatController.batHead, prevHead, BatController.batGrip);//h1,h0,g1の三角形
+        prevGrip.y = BatController.batGrip.y;//g0の**高さ**をg1に合わせる
+        Plane go = new Plane(BatController.batHead, prevHead, prevGrip);//h1,h0,g0の三角形
+
+
+
+
+        /*********************************************************************************************************/
+
+
         if (collisonDist > (nearBatPoint - nearBallPoint).magnitude)                                                                                    //1 >= flag collisonDist
         {
             if (Physics.Raycast(ballPos0, ballRelLine1, out hit, ballRelLine1.magnitude))                                                               //ballRelLine1
@@ -123,7 +141,8 @@ public class CollisionJudge : MonoBehaviour
                     this.gameObject.GetComponent<CorrectPhysics>().Disable();
                     P = Vector3.Project(hit.point - BatController.batGrip, BatController.batDir) + BatController.batGrip;                               //hit.pointからbatDirに下した
                     //batのスピードをかけて飛距離を調節する　 * batSpeed
-                    gameObject.GetComponent<Rigidbody>().AddForce( (hit.point - P).normalized * 1.6f * (BatController.swingSpeed - ball.GetComponent<Rigidbody>().velocity ).magnitude, ForceMode.Impulse);
+                    gameObject.GetComponent<Rigidbody>().AddForce( (hit.point - P).normalized * 1.6f * 
+                        (BatController.swingSpeed - ball.GetComponent<Rigidbody>().velocity ).magnitude, ForceMode.Impulse);
                     //Debug.Log("hitPoint:" + hit.point + "P:" + P);
                     //Debug.Log("ballPos - P" + (transform.position - P));
                     audioSource.PlayOneShot(sound);//一度再生する
@@ -135,6 +154,9 @@ public class CollisionJudge : MonoBehaviour
             }
         }
 
+        /*過去位置*/
+        prevGrip = BatController.batGrip;
+        prevHead = BatController.batHead;
         ballPos0 = ballPos1;
         batPos0 = batPos1;
     }

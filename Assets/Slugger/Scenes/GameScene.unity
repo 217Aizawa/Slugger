@@ -550,8 +550,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9e9d3cb3ae27c468b43167a533cef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bat: {fileID: 0}
   emptyBat: {fileID: 147966, guid: f8d1d9ae11ea4de4d8fd343157a796cf, type: 3}
+  batHead: {x: 0, y: 0, z: 0}
+  prevBatGrip: {x: 0, y: 0, z: 0}
+  prevBatDir: {x: 0, y: 0, z: 0}
+  prevBatHead: {x: 0, y: 0, z: 0}
 --- !u!54 &192755940
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -919,8 +922,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9e9d3cb3ae27c468b43167a533cef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bat: {fileID: 0}
   emptyBat: {fileID: 0}
+  batHead: {x: 0, y: 0, z: 0}
+  prevBatGrip: {x: 0, y: 0, z: 0}
+  prevBatDir: {x: 0, y: 0, z: 0}
+  prevBatHead: {x: 0, y: 0, z: 0}
 --- !u!1001 &349200977
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2646,6 +2652,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 61dd3e4486097ea4b91db71067ed93ab, type: 2}
+    - target: {fileID: 2056392883889825069, guid: 069f49ccf9e966e40a64214368c6c881,
+        type: 3}
+      propertyPath: batController
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 069f49ccf9e966e40a64214368c6c881, type: 3}
 --- !u!1001 &624171295
@@ -3227,7 +3238,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17346
+  m_Name: pb_Mesh38834
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3427,8 +3438,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9e9d3cb3ae27c468b43167a533cef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bat: {fileID: 0}
   emptyBat: {fileID: 0}
+  batHead: {x: 0, y: 0, z: 0}
+  prevBatGrip: {x: 0, y: 0, z: 0}
+  prevBatDir: {x: 0, y: 0, z: 0}
+  prevBatHead: {x: 0, y: 0, z: 0}
 --- !u!1 &818271118
 GameObject:
   m_ObjectHideFlags: 0
@@ -4087,7 +4101,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17004
+  m_Name: pb_Mesh38492
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4424,7 +4438,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17190
+  m_Name: pb_Mesh38678
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6836,8 +6850,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9e9d3cb3ae27c468b43167a533cef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bat: {fileID: 0}
   emptyBat: {fileID: 0}
+  batHead: {x: 0, y: 0, z: 0}
+  prevBatGrip: {x: 0, y: 0, z: 0}
+  prevBatDir: {x: 0, y: 0, z: 0}
+  prevBatHead: {x: 0, y: 0, z: 0}
 --- !u!54 &1567969854
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6926,7 +6943,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17226
+  m_Name: pb_Mesh38714
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7503,8 +7520,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9e9d3cb3ae27c468b43167a533cef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bat: {fileID: 0}
   emptyBat: {fileID: 147966, guid: f8d1d9ae11ea4de4d8fd343157a796cf, type: 3}
+  batHead: {x: 0, y: 0, z: 0}
+  prevBatGrip: {x: 0, y: 0, z: 0}
+  prevBatDir: {x: 0, y: 0, z: 0}
+  prevBatHead: {x: 0, y: 0, z: 0}
 --- !u!1 &1826399443
 GameObject:
   m_ObjectHideFlags: 0
