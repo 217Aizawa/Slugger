@@ -124,7 +124,7 @@ public class CollisionJudge : MonoBehaviour
         //バットの４点から三角形を二つ作成し、ボールとの交点を求める
         Plane g1 = new Plane(BatController.batHead, prevHead, BatController.batGrip);//h1,h0,g1の三角形
         prevGrip.y = BatController.batGrip.y;//g0の**高さ**をg1に合わせる
-        Plane go = new Plane(BatController.batHead, prevHead, prevGrip);//h1,h0,g0の三角形
+        Plane g0 = new Plane(BatController.batHead, prevHead, prevGrip);//h1,h0,g0の三角形
 
 
 
@@ -132,24 +132,20 @@ public class CollisionJudge : MonoBehaviour
         /*********************************************************************************************************/
 
 
-        if (collisonDist > (nearBatPoint - nearBallPoint).magnitude)                                                                                    //1 >= flag collisonDist
+        if (collisonDist > (nearBatPoint - nearBallPoint).magnitude && rb.isKinematic)                                                                                    //1 >= flag collisonDist
         {
             if (Physics.Raycast(ballPos0, ballRelLine1, out hit, ballRelLine1.magnitude))                                                               //ballRelLine1
             {
-                if (hit.collider.tag == "Bat" && rb.isKinematic)
+                if (hit.collider.tag == "Bat")
                 {
                     this.gameObject.GetComponent<CorrectPhysics>().Disable();
                     P = Vector3.Project(hit.point - BatController.batGrip, BatController.batDir) + BatController.batGrip;                               //hit.pointからbatDirに下した
-                    //batのスピードをかけて飛距離を調節する　 * batSpeed
                     gameObject.GetComponent<Rigidbody>().AddForce( (hit.point - P).normalized * 1.6f * 
                         (BatController.swingSpeed - ball.GetComponent<Rigidbody>().velocity ).magnitude, ForceMode.Impulse);
                     //Debug.Log("hitPoint:" + hit.point + "P:" + P);
-                    //Debug.Log("ballPos - P" + (transform.position - P));
                     audioSource.PlayOneShot(sound);//一度再生する
-                    //Debug.Log("P :" + P + " nearBatPos :" + nearBatPoint);
                     Debug.Log("batSpeed magnitude " + BatController.swingSpeed.magnitude);
                     //Debug.Log("batSpeed magnitude " + CorrectPhysics.batSpeed.magnitude);
-                    //BatController.swingSpeed.magnitude
                 }
             }
         }
