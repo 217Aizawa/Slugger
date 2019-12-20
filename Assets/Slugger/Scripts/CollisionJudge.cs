@@ -125,15 +125,23 @@ public class CollisionJudge : MonoBehaviour
         Plane g1 = new Plane(BatController.batHead, prevHead, BatController.batGrip);//h1,h0,g1の三角形
         prevGrip.y = BatController.batGrip.y;//g0の**高さ**をg1に合わせる
         Plane g0 = new Plane(BatController.batHead, prevHead, prevGrip);//h1,h0,g0の三角形
+        /*Vector3 d1 = Vector3.Cross(BatController.batHead - BatController.batGrip, prevHead - BatController.batGrip);
+        Vector3 d0 = Vector3.Cross(BatController.batHead - prevGrip, prevHead - prevGrip);
 
-
-
+        float s1 = d1.magnitude / 2;
+        float s0 = d0.magnitude / 2;
+        */
 
         /*********************************************************************************************************/
 
 
         if (collisonDist > (nearBatPoint - nearBallPoint).magnitude && rb.isKinematic)                                                                                    //1 >= flag collisonDist
         {
+            //Debug.Log("Plane1" + g1);
+            //Debug.Log("Plane0" + g0);
+            //Debug.Log("s1" + s1);
+            //Debug.Log("s0" + s0);
+
             if (Physics.Raycast(ballPos0, ballRelLine1, out hit, ballRelLine1.magnitude))                                                               //ballRelLine1
             {
                 if (hit.collider.tag == "Bat")

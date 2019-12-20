@@ -19,6 +19,7 @@ public class BatController : MonoBehaviour
     Vector3 prevBatGrip;
     Vector3 prevBatDir;
     Vector3 prevBatHead;
+    public bool isBat = false;//バットの軌道表示
 
     public static Vector3 batHead;
     public static Vector3 batGrip;
@@ -47,7 +48,7 @@ public class BatController : MonoBehaviour
 
         //Debug.Log("magnitude" + swingSpeed.magnitude);
 
-        if (5 < swingSpeed.magnitude)
+        if (5 < swingSpeed.magnitude && isBat)
         {
             model = Instantiate(emptyBat, transform.position,transform.rotation);
         }

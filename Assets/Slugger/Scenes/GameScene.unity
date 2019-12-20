@@ -551,10 +551,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyBat: {fileID: 147966, guid: f8d1d9ae11ea4de4d8fd343157a796cf, type: 3}
-  batHead: {x: 0, y: 0, z: 0}
-  prevBatGrip: {x: 0, y: 0, z: 0}
-  prevBatDir: {x: 0, y: 0, z: 0}
-  prevBatHead: {x: 0, y: 0, z: 0}
 --- !u!54 &192755940
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -923,10 +919,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyBat: {fileID: 0}
-  batHead: {x: 0, y: 0, z: 0}
-  prevBatGrip: {x: 0, y: 0, z: 0}
-  prevBatDir: {x: 0, y: 0, z: 0}
-  prevBatHead: {x: 0, y: 0, z: 0}
 --- !u!1001 &349200977
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3439,10 +3431,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyBat: {fileID: 0}
-  batHead: {x: 0, y: 0, z: 0}
-  prevBatGrip: {x: 0, y: 0, z: 0}
-  prevBatDir: {x: 0, y: 0, z: 0}
-  prevBatHead: {x: 0, y: 0, z: 0}
 --- !u!1 &818271118
 GameObject:
   m_ObjectHideFlags: 0
@@ -3748,7 +3736,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 147966, guid: 9045a2da25a670d46b4878f27e0d41c6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 147966, guid: 9045a2da25a670d46b4878f27e0d41c6, type: 3}
       propertyPath: m_TagString
@@ -6851,10 +6839,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyBat: {fileID: 0}
-  batHead: {x: 0, y: 0, z: 0}
-  prevBatGrip: {x: 0, y: 0, z: 0}
-  prevBatDir: {x: 0, y: 0, z: 0}
-  prevBatHead: {x: 0, y: 0, z: 0}
 --- !u!54 &1567969854
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7295,7 +7279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 112276, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 488160, guid: d9809c5e8418bb047bf2c8ba1d1a2cec, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7521,10 +7505,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyBat: {fileID: 147966, guid: f8d1d9ae11ea4de4d8fd343157a796cf, type: 3}
-  batHead: {x: 0, y: 0, z: 0}
-  prevBatGrip: {x: 0, y: 0, z: 0}
-  prevBatDir: {x: 0, y: 0, z: 0}
-  prevBatHead: {x: 0, y: 0, z: 0}
 --- !u!1 &1826399443
 GameObject:
   m_ObjectHideFlags: 0
