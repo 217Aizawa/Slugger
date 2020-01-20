@@ -55,9 +55,9 @@ public class BatController : MonoBehaviour
         Destroy(model, 2f);
         
         /**********************過去位置**************************/
-        prevBatDir = batDir;
-        prevBatGrip = batGrip;
-        prevBatHead = batHead;
+        //prevBatDir = batDir;
+        //prevBatGrip = batGrip;
+        //prevBatHead = batHead;
         latestPos = transform.position;
         /********************************************************/
     }

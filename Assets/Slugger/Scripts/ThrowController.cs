@@ -42,7 +42,7 @@ public class ThrowController : MonoBehaviour
             Throw();
         }
 
-        if(3.0f <= time)
+        if(3.0f <= time)//(3.0f <= time)
         {
             time = 0;
             timeCheck = true;
@@ -67,11 +67,11 @@ public class ThrowController : MonoBehaviour
         Rigidbody rb = ball.GetComponent<Rigidbody>();
         rb.useGravity = true;
         rb.isKinematic = false;
-        rb.velocity = new Vector3(0, speed * Mathf.Sin(angle), speed * Mathf.Cos(angle));
+        rb.velocity = new Vector3(0, speed * Mathf.Sin(angle), speed * Mathf.Cos(angle));//1.5fを除く
         ball.GetComponent<CorrectPhysics>().Enable(rb.velocity);//ballコンポーネントから取得
         Destroy(ball, 3.0f);
         //ballSpeed = rb.velocity.magnitude * 3600 / 1000;//速度を秒速から時速に変換する
-        //Debug.Log("ballSpeed" + rb.velocity); Vector3
+        //Debug.Log("ballSpeed" + ballSpeed);
     }
 
     private void BallReset()//ボール情報をリセットする

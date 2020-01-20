@@ -50,12 +50,12 @@ public class CollisionJudge : MonoBehaviour
 
         batRad = 0.0355f;//バットのColliderから参照
         ballDia = 0.0723f;// 0.07165 = バット半径＋ボール半径
-        collisonDist = batRad + ballDia / 2 * 25;
+        collisonDist = batRad + ballDia / 2 * 25f; //collisonDist = batRad + ballDia / 2 * 25;
         //collisonDist = bat.GetComponent<CapsuleCollider>().radius;//Colliderの半径を取得
         //Debug用
         //bat = GameObject.FindGameObjectWithTag("Bat");
         ball = this.gameObject;
-        Debug.Log("Collisiondist" + collisonDist);
+        //Debug.Log("Collisiondist" + collisonDist);
         rb = this.gameObject.GetComponent<Rigidbody>();
     }
 
@@ -123,26 +123,46 @@ public class CollisionJudge : MonoBehaviour
         //スイングに対応した当たり判定パート
         //バットの４点から三角形を二つ作成し、ボールとの交点を求める
         Plane g1 = new Plane(BatController.batHead, prevHead, BatController.batGrip);//h1,h0,g1の三角形
-        prevGrip.y = BatController.batGrip.y;//g0の**高さ**をg1に合わせる
         Plane g0 = new Plane(BatController.batHead, prevHead, prevGrip);//h1,h0,g0の三角形
-        /*Vector3 d1 = Vector3.Cross(BatController.batHead - BatController.batGrip, prevHead - BatController.batGrip);
+
+        Vector3 d1 = Vector3.Cross(BatController.batHead - BatController.batGrip, prevHead - BatController.batGrip);
         Vector3 d0 = Vector3.Cross(BatController.batHead - prevGrip, prevHead - prevGrip);
 
-        float s1 = d1.magnitude / 2;
-        float s0 = d0.magnitude / 2;
-        */
+        //float s1 = d1.magnitude / 2;//面積
+        //float s0 = d0.magnitude / 2;
+        /*Vector3 spd = ((BatController.batHead - prevHead) / Time.fixedDeltaTime);//移動速度
+        Vector3 weidth = spd * Time.fixedDeltaTime;//距離（底辺）*/
+        Vector3 weidth = BatController.batHead - prevHead;//h0 - h1までのベクトル（長さ）
+        //Vector3 height = 
+        Ray ray = new Ray(ballPos0, ballRelLine1);//rayの設定
 
+        //Debug.DrawRay(ray.origin, ray.direction, Color.red, 3f, false);
+        //Debug.Log("Line" + ballRelLine1);
+        Debug.DrawLine(BatController.batHead, prevHead);
+        Debug.DrawLine(prevHead, BatController.batGrip);
+        Debug.DrawLine(BatController.batGrip, BatController.batHead);
         /*********************************************************************************************************/
 
+        float dist = ray.direction.magnitude;//ballRelLine1.magnitude;
+
+        if(g1.Raycast(ray, out dist))
+        {
+            //Debug.Log("hit at g1.plane");
+            //Debug.Log(dist);
+            if(dist < ballRelLine1.magnitude)//ボールの線分が平面までの距離（dist）より長い場合
+            {
+                Debug.Log("Crossed");//一回の接触で6回呼び出された
+            }
+        }
 
         if (collisonDist > (nearBatPoint - nearBallPoint).magnitude && rb.isKinematic)                                                                                    //1 >= flag collisonDist
         {
             //Debug.Log("Plane1" + g1);
             //Debug.Log("Plane0" + g0);
-            //Debug.Log("s1" + s1);
+            //Debug.Log("s1" + s1);//面積
             //Debug.Log("s0" + s0);
-
-            if (Physics.Raycast(ballPos0, ballRelLine1, out hit, ballRelLine1.magnitude))                                                               //ballRelLine1
+            //Debug.Log("W" + weidth);//.magnitude
+            if (Physics.Raycast(ray, out hit, ballRelLine1.magnitude))//ballPos0, ballRelLine1                                                         //ballRelLine1
             {
                 if (hit.collider.tag == "Bat")
                 {
@@ -150,9 +170,14 @@ public class CollisionJudge : MonoBehaviour
                     P = Vector3.Project(hit.point - BatController.batGrip, BatController.batDir) + BatController.batGrip;                               //hit.pointからbatDirに下した
                     gameObject.GetComponent<Rigidbody>().AddForce( (hit.point - P).normalized * 1.6f * 
                         (BatController.swingSpeed - ball.GetComponent<Rigidbody>().velocity ).magnitude, ForceMode.Impulse);
-                    //Debug.Log("hitPoint:" + hit.point + "P:" + P);
+                    
+                    //動画用
+                    //gameObject.GetComponent<Rigidbody>().AddForce((hit.point - P).normalized * 100 * CorrectPhysics.batSpeed.magnitude, ForceMode.Impulse);
+
+
                     audioSource.PlayOneShot(sound);//一度再生する
-                    Debug.Log("batSpeed magnitude " + BatController.swingSpeed.magnitude);
+                    //Debug.Log("hitPoint:" + hit.point + "P:" + P);
+                    //Debug.Log("batSpeed magnitude " + BatController.swingSpeed.magnitude);
                     //Debug.Log("batSpeed magnitude " + CorrectPhysics.batSpeed.magnitude);
                 }
             }

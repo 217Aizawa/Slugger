@@ -51,10 +51,12 @@ public class CorrectPhysics : MonoBehaviour
         rb.isKinematic = isKinematic;
         isEanbled = false;//transformでの移動オフ       
         //batSpeed = speed;
-        /*if (batSpeed.magnitude < 0.5f)// batSpeed.sqrMagnitude == 0
+
+        /* バットスピード付加
+        if (batSpeed.magnitude < 0.5f)// batSpeed.sqrMagnitude == 0
         {
             //batSpeed = -Vector3.forward; //batSpeed = new Vector3(0, 0, -2.25f);
-            batSpeed = new Vector3(0, 0, -2.25f);
+            batSpeed = new Vector3(0, 0,-0.75f);//-2.25f
         }*/
         //Debug.Log("batSpeed" + batSpeed);
         /*float cos = Vector3.Dot(-rb.velocity.normalized, batSpeed.normalized);
