@@ -143,17 +143,26 @@ public class CollisionJudge : MonoBehaviour
         Debug.DrawLine(BatController.batGrip, BatController.batHead);
         /*********************************************************************************************************/
 
+
+
+
+        //スイングに対応した当たり判定
+        /*****************************************************************************************************/
         float dist = ray.direction.magnitude;//ballRelLine1.magnitude;
 
-        if(g1.Raycast(ray, out dist))
+        /*①*/
+        if(g1.Raycast(ray, out dist))//作成した平面までの距離を返す
         {
             //Debug.Log("hit at g1.plane");
             //Debug.Log(dist);
-            if(dist < ballRelLine1.magnitude)//ボールの線分が平面までの距離（dist）より長い場合
+            if(dist < ballRelLine1.magnitude)//ボールが平面を横切るか？
             {
                 Debug.Log("Crossed");//一回の接触で6回呼び出された
             }
         }
+
+        /*****************************************************************************************************/
+
 
         if (collisonDist > (nearBatPoint - nearBallPoint).magnitude && rb.isKinematic)                                                                                    //1 >= flag collisonDist
         {

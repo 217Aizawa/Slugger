@@ -58,6 +58,7 @@ public class CorrectPhysics : MonoBehaviour
             //batSpeed = -Vector3.forward; //batSpeed = new Vector3(0, 0, -2.25f);
             batSpeed = new Vector3(0, 0,-0.75f);//-2.25f
         }*/
+
         //Debug.Log("batSpeed" + batSpeed);
         /*float cos = Vector3.Dot(-rb.velocity.normalized, batSpeed.normalized);
         Vector3 direction = v0 + k * batRb.mass * (batSpeed - v0) * cos / rb.mass;
