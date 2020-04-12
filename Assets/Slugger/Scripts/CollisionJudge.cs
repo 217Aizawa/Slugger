@@ -121,7 +121,7 @@ public class CollisionJudge : MonoBehaviour
 
         /*********************************************************************************************************/
         //スイングに対応した当たり判定パート
-        //バットの４点から三角形を二つ作成し、ボールとの交点を求める
+        //バットの４点から三角平面を二つ作成し、ボールとの交点を求める
         Plane g1 = new Plane(BatController.batHead, prevHead, BatController.batGrip);//h1,h0,g1の三角形
         Plane g0 = new Plane(BatController.batHead, prevHead, prevGrip);//h1,h0,g0の三角形
 
@@ -136,11 +136,11 @@ public class CollisionJudge : MonoBehaviour
         //Vector3 height = 
         Ray ray = new Ray(ballPos0, ballRelLine1);//rayの設定
 
-        //Debug.DrawRay(ray.origin, ray.direction, Color.red, 3f, false);
+        Debug.DrawRay(ray.origin, ray.direction, Color.red, 3f, false);
         //Debug.Log("Line" + ballRelLine1);
-        Debug.DrawLine(BatController.batHead, prevHead);
-        Debug.DrawLine(prevHead, BatController.batGrip);
-        Debug.DrawLine(BatController.batGrip, BatController.batHead);
+        //Debug.DrawLine(BatController.batHead, prevHead);
+        //Debug.DrawLine(prevHead, BatController.batGrip);
+        //Debug.DrawLine(BatController.batGrip, BatController.batHead);
         /*********************************************************************************************************/
 
 
@@ -148,16 +148,21 @@ public class CollisionJudge : MonoBehaviour
 
         //スイングに対応した当たり判定
         /*****************************************************************************************************/
-        float dist = ray.direction.magnitude;//ballRelLine1.magnitude;
+
+        float dist = 0.0f;                                                             //ray.direction.magnitude;//ballRelLine1.magnitude;
+
+        if (g1.Raycast(ray, out dist))//作成した平面までの距離を返す
+        {
+            Debug.Log(dist);
+        }
 
         /*①*/
-        if(g1.Raycast(ray, out dist))//作成した平面までの距離を返す
+        if (g1.Raycast(ray, out dist))//作成した平面までの距離を返す
         {
-            //Debug.Log("hit at g1.plane");
-            //Debug.Log(dist);
+            Debug.Log(dist);
             if(dist < ballRelLine1.magnitude)//ボールが平面を横切るか？
             {
-                Debug.Log("Crossed");//一回の接触で6回呼び出された
+                Debug.Log("Crossed");
             }
         }
 

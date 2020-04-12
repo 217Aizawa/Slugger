@@ -16,6 +16,7 @@ public class GameLoop : MonoBehaviour
     public ThrowController throwController;
     public PhsController phsController;
     public bool vrMode;//VRモードの切り替え
+    public bool leftBatter;
 
     
     void Awake()//Startよりも先に呼び出される
@@ -41,6 +42,16 @@ public class GameLoop : MonoBehaviour
         }
         else
             XRSettings.enabled = true;
+
+
+        if (leftBatter)
+        {
+            Debug.Log("left");
+        }
+        else
+        {
+            Debug.Log("right");
+        }
     }
 
     // Update is called once per frame
