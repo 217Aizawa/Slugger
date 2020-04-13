@@ -64,7 +64,7 @@ public class OVRControllerHelper : MonoBehaviour
 		GearVR, Go, QuestAndRiftS, Rift
 	}
 
-    public bool isBat = false;
+    public bool isBat = false;//•\Ž¦on/off
     public bool isController = false;//true;//
 
     private ControllerType activeControllerType = ControllerType.Rift;

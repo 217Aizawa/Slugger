@@ -10,7 +10,6 @@ public class ControlCameraPos : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Transform camTransform = this.transform;
         cam = Camera.main.gameObject;
         camPos = cam.transform.position;
     }
