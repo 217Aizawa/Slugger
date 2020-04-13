@@ -16,12 +16,14 @@ public class ChangeUserPos : MonoBehaviour
     void Update()
     {
         //右座席用座標
-        if (Input.GetKey(KeyCode.L) || OVRInput.GetDown(OVRInput.Button.Three)) //Three = Xボタン
+        if (Input.GetKey(KeyCode.L) ||
+            OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.LTouch)) //Xボタン
         {
             user.transform.position = new Vector3(0.5f, userPos.y, userPos.z);
         }
         //左座席用座標
-        if (Input.GetKey(KeyCode.R) || OVRInput.GetDown(OVRInput.Button.Four)) //Four = Yボタン
+        if (Input.GetKey(KeyCode.R) || 
+            OVRInput.GetDown(OVRInput.Button.Two, OVRInput.Controller.LTouch)) //Yボタン
         {
             user.transform.position = new Vector3(-0.5f, userPos.y, userPos.z);
         }
