@@ -22,7 +22,7 @@ public class ChangeUserPos : MonoBehaviour
             user.transform.position = new Vector3(0.5f, userPos.y, userPos.z);
         }
         //左座席用座標
-        if (Input.GetKey(KeyCode.R) || 
+        if (Input.GetKey(KeyCode.R) ||
             OVRInput.GetDown(OVRInput.Button.Two, OVRInput.Controller.LTouch)) //Yボタン
         {
             user.transform.position = new Vector3(-0.5f, userPos.y, userPos.z);
