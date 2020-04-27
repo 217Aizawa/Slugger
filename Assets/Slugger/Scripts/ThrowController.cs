@@ -42,7 +42,7 @@ public class ThrowController : MonoBehaviour
             Throw();
         }
 
-        if(3.0f <= time)//(3.0f <= time)
+        if(7.0f <= time)//投球間隔
         {
             time = 0;
             timeCheck = true;
