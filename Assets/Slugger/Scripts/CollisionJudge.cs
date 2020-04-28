@@ -153,7 +153,7 @@ public class CollisionJudge : MonoBehaviour
 
         if (g1.Raycast(ray, out dist))//作成した平面までの距離を返す
         {
-            Debug.Log(dist);
+            //Debug.Log(dist);
         }
 
         /*①*/

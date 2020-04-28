@@ -14,11 +14,12 @@ public class AnimController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         //animator.SetTrigger("Idle");
-
         if (Input.GetKey(KeyCode.Space))
         {
             animator.SetTrigger("Throw");
+            Debug.Log("Play anim");
         }
     }
 

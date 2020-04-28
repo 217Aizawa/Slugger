@@ -46,11 +46,11 @@ public class GameLoop : MonoBehaviour
 
         if (leftBatter)
         {
-            Debug.Log("left");
+            Debug.Log("left batter");
         }
         else
         {
-            Debug.Log("right");
+            Debug.Log("right batter");
         }
     }
 
