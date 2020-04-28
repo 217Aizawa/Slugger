@@ -159,7 +159,7 @@ public class CollisionJudge : MonoBehaviour
         /*①*/
         if (g1.Raycast(ray, out dist))//作成した平面までの距離を返す
         {
-            Debug.Log(dist);
+            //Debug.Log(dist);
             if(dist < ballRelLine1.magnitude)//ボールが平面を横切るか？
             {
                 Debug.Log("Crossed");
