@@ -136,7 +136,8 @@ public class CollisionJudge : MonoBehaviour
         //Vector3 height = 
         Ray ray = new Ray(ballPos0, ballRelLine1);//rayの設定
 
-        Debug.DrawRay(ray.origin, ray.direction, Color.red, 3f, false);
+        //Debug.DrawRay(ray.origin, ray.direction, Color.red, 3f, false);
+
         //Debug.Log("Line" + ballRelLine1);
         //Debug.DrawLine(BatController.batHead, prevHead);
         //Debug.DrawLine(prevHead, BatController.batGrip);
