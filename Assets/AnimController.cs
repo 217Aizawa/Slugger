@@ -4,15 +4,10 @@ using UnityEngine;[RequireComponent(typeof(Rigidbody))]
 
 public class AnimController : MonoBehaviour
 {
-    
-    ///////////////////////////////////////////////////////////////////
     public static readonly string throwTmp = "Throw";// トリガー名
     //public static readonly string idleTmp = "Idle";
     private static int thrTrigger = Animator.StringToHash(throwTmp);
     //private static int idleTrigger = Animator.StringToHash(idleTmp);
-    //[SerializeField, Header("Animator")]
-    /// ///////////////////////////////////////////////////////////////
-
 
     public GameObject ethan;
     //[SerializeField, Header("Animator")]
@@ -24,8 +19,7 @@ public class AnimController : MonoBehaviour
     float playTiming = 7.0f - 53.0f / 30.0f; //（投球間 - フレーム / フレームレート）投球に合わせたアニメーションの再生タイミング
     float roopTime = 7.0f;//アニメーションのループ間隔
     bool timeCount;//カウントフラグ
-    bool firstBall = true;//初球のフラグ　初球以外はループ用の秒数で回す
-    bool nextBall = false;//初球以降のフラグ
+    bool firstBall = true;//初球のフラグ
 
     int ballCnt;//球数
     private int idle;
@@ -45,55 +39,39 @@ public class AnimController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        //Debug.Log(throwTrigger);//ハッシュ値
         Counter();
         Debug.Log("time" + time);
 
         if (Input.GetKey(KeyCode.Space))
         {
             timeCount = true;
-            //animator.SetTrigger(thrTrigger);//test
         }
         
         //初球の再生タイミング
         if(playTiming <= time && firstBall)
         {
             time = 0;
-            nextBall = true;
             animator.SetTrigger(thrTrigger);
             Debug.Log("Play anim");
             firstBall = false;//フラグオフ
         }
 
-        
         //ループ用スクリプト
         if(animator.GetCurrentAnimatorStateInfo(0).fullPathHash == idle)//idle状態ならば
         {
-            //イーサンの座標リセット
+            //Idle状態のアニメーションが動かないことが前提に位置をリセット
             ethan.transform.position = offsetPos;
         }
-
+            
         //初球以降の再生タイミング
-        if (roopTime <= time && nextBall)
+        if (roopTime <= time && !firstBall)
         {
             time = 0;
             animator.SetTrigger(thrTrigger);
         }
         
-        /*
-       if(7.0f - 68.0f / 30.0f <= time &&
-            animator.GetCurrentAnimatorStateInfo(0).fullPathHash == waitState　)//wait状態ならば
-        {
-            //イーサンの座標リセット
-            ethan.transform.position = offsetPos;
-            //Idleステートからの再開
-            animator.Play("Idle");//Idleアニメーションの再生
-        }
-         */
 
         /*
-        //throwTrifggerではアニメ0ションが再生されない
         if (animator.GetCurrentAnimatorStateInfo(0).fullPathHash == throwTrigger)
         {
             animator.Play("Idle", 0 , 0.0f);//Idleアニメーションの再生
@@ -113,7 +91,6 @@ public class AnimController : MonoBehaviour
         if (playTiming <= time && firstBall)//投球に合わせたアニメーションの再生タイミング
         {
             time = 0;
-            nextBall = true;
             //timeCount = false;//リセット
             animator.SetTrigger("Throw");
             Debug.Log("Play anim");
@@ -130,7 +107,7 @@ public class AnimController : MonoBehaviour
             ethan.transform.position = offsetPos;
 
         }
-        if (7.0f <= time && nextBall)//7.0f - 68.0f / 30.0f <= time && nextBall
+        if (7.0f <= time && !firstBall)//7.0f - 68.0f / 30.0f <= time && nextBall
         {
             time = 0;
             //Idleステートからの再開
