@@ -16,7 +16,7 @@ public class AnimController : MonoBehaviour
     Vector3 offsetPos; //new Vector3(-0.1f, -0.13f, 0.954f);
 
     float time;
-    float playTiming = 7.0f - 53.0f / 30.0f; //（投球間 - フレーム / フレームレート）投球に合わせたアニメーションの再生タイミング
+    float playTiming = 7.0f - 53.0f / 30.0f; //53.0f（投球間 - フレーム / フレームレート）投球に合わせたアニメーションの再生タイミング
     float roopTime = 7.0f;//アニメーションのループ間隔
     bool timeCount;//カウントフラグ
     bool firstBall = true;//初球のフラグ
@@ -40,7 +40,7 @@ public class AnimController : MonoBehaviour
     void Update()
     {
         Counter();
-        Debug.Log("time" + time);
+        //Debug.Log("time" + time);
 
         if (Input.GetKey(KeyCode.Space))
         {
@@ -60,7 +60,9 @@ public class AnimController : MonoBehaviour
         if(animator.GetCurrentAnimatorStateInfo(0).fullPathHash == idle)//idle状態ならば
         {
             //Idle状態のアニメーションが動かないことが前提に位置をリセット
-            ethan.transform.position = offsetPos;
+            //ethan.transform.position = offsetPos;
+            //位置のリセットをAnimationEventでできないか確認する
+            ResetPos();
         }
             
         //初球以降の再生タイミング
@@ -121,5 +123,11 @@ public class AnimController : MonoBehaviour
             time += Time.deltaTime;
         else
             time = 0;
+    }
+
+    public void ResetPos()
+    {
+        ethan.transform.position = offsetPos;//オフセットは取れてる
+        Debug.Log("reset pos" + ethan.transform.position);
     }
 }
