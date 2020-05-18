@@ -73,7 +73,7 @@ public class BatController : MonoBehaviour
 
         if (swing)
         {
-            pos = new Vector3(pos.x, pos.y, pos.z + 2);
+            transform.position -= new Vector3(0, 0, 0.02f);
         }
         /**********************過去位置**************************/
         //prevBatDir = batDir;
