@@ -64,7 +64,7 @@ public class BatController : MonoBehaviour
             model = Instantiate(emptyBat, transform.position,transform.rotation);
         }
         Destroy(model, 2f);
-
+        /*
         if (Input.GetKey(KeyCode.S))
         {
             swing = true;
@@ -75,6 +75,8 @@ public class BatController : MonoBehaviour
         {
             transform.position -= new Vector3(0, 0, 0.02f);
         }
+        */
+
         /**********************過去位置**************************/
         //prevBatDir = batDir;
         //prevBatGrip = batGrip;
