@@ -11,14 +11,21 @@ public class BatController : MonoBehaviour
     public static GameObject bat;
     Rigidbody batRb;
 
-    Vector3 latestPos;
+    Vector3 latestPos;//過去位置
+    //現在位置
     Vector3 batGripLocal;
     Vector3 batDirLocal;
     Vector3 batHeadLocal;
-
+    //過去位置
     Vector3 prevBatGrip;
     Vector3 prevBatDir;
     Vector3 prevBatHead;
+
+    //自動スイング用
+    Vector3 startPos;
+    Vector3 endPos;
+
+
     public bool isBat = false;//バットの軌道表示
 
     public static Vector3 batHead;
