@@ -62,7 +62,7 @@ public class AnimController : MonoBehaviour
             //Idle状態のアニメーションが動かないことが前提に位置をリセット
             //ethan.transform.position = offsetPos;
             //位置のリセットをAnimationEventでできないか確認する
-            //ResetPos();
+            ResetPos();
         }
             
         //初球以降の再生タイミング

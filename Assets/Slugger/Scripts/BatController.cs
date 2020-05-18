@@ -11,7 +11,9 @@ public class BatController : MonoBehaviour
     public static GameObject bat;
     Rigidbody batRb;
 
+    Vector3 pos;
     Vector3 latestPos;//過去位置
+
     //現在位置
     Vector3 batGripLocal;
     Vector3 batDirLocal;
@@ -22,9 +24,8 @@ public class BatController : MonoBehaviour
     Vector3 prevBatHead;
 
     //自動スイング用
-    Vector3 startPos;
+    Vector3 startPos = new Vector3(-0.4f ,0.8f ,19.8f);
     Vector3 endPos;
-
 
     public bool isBat = false;//バットの軌道表示
 
@@ -33,8 +34,11 @@ public class BatController : MonoBehaviour
     public static Vector3 batDir;
     public static Vector3 swingSpeed;
 
+    bool swing = false;
+
     void Start()
     {
+        pos = this.gameObject.transform.position;
         batRb = GetComponent<Rigidbody>();
         batDirLocal = new Vector3(0, 0.9f, 0);//バットの長さ=90cm
         batGripLocal = new Vector3(0, -0.45f, 0);
@@ -60,7 +64,17 @@ public class BatController : MonoBehaviour
             model = Instantiate(emptyBat, transform.position,transform.rotation);
         }
         Destroy(model, 2f);
-        
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            swing = true;
+            Debug.Log("swing start");
+        }
+
+        if (swing)
+        {
+            pos = new Vector3(pos.x, pos.y, pos.z + 2);
+        }
         /**********************過去位置**************************/
         //prevBatDir = batDir;
         //prevBatGrip = batGrip;
