@@ -34,12 +34,20 @@ public class PivotController : MonoBehaviour
         //angleY = Mathf.Clamp(180, minAngle, maxAngle);
 
         //時間経過でisSwingのオンオフを制御
+        if (Input.GetKey(KeyCode.A))
+            isSwing = true;
 
         if (Input.GetKey(KeyCode.S) || isSwing)//一度スイングしたら回転をリセット  || isSwing
         {
             Debug.Log("swing");
-            rb.angularVelocity = new Vector3(angleX, angleY, 0);
-            if(0.9f <= curretRotate)//
+            rb.angularVelocity = new Vector3(angleX, angleY, 0);//(15,180,0)
+            /*if(0.8f <= curretRotate)//
+            {
+                Debug.Log("angle over");
+                rb.angularVelocity = Vector3.zero;
+                isSwing = false;
+            }*/
+            if (-0.9f >= curretRotate)//
             {
                 Debug.Log("angle over");
                 rb.angularVelocity = Vector3.zero;
@@ -47,8 +55,8 @@ public class PivotController : MonoBehaviour
             }
         }
         ////////////////////////////////////////////////////////////////////////
-        if (Input.GetKey(KeyCode.S) || isSwing)//一度スイングしたら回転をリセット
-        {
+        //if (Input.GetKey(KeyCode.S) || isSwing)//一度スイングしたら回転をリセット
+        //{
             //Debug.Log("swing");
             //this.transform.Rotate(0, 120, 0);//speed
             //transform.rotation = Quaternion.Euler(0, angleY, 0);
@@ -56,7 +64,7 @@ public class PivotController : MonoBehaviour
             //this.transform.Rotate(0, rotationSpd, 0);
             //this.transform.Rotate(0, 0, 0);//リセット
             //transform.eulerAngles = new Vector3(0, yRoatate, 0);
-        }
+        //}
         /////////////////////////////////////////////////////////////////////////////////
     }
 
