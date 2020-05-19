@@ -5,7 +5,7 @@ using UnityEngine;
 public class PivotController : MonoBehaviour
 {
     Rigidbody rb;
-
+    Vector3 batOffset;
     float startRotate = 0;
     float curretRotate;
     float speed = 30f;
@@ -25,6 +25,8 @@ public class PivotController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        batOffset = this.transform.eulerAngles;//角度取得
+
     }
 
     void Update()
@@ -51,6 +53,7 @@ public class PivotController : MonoBehaviour
             {
                 Debug.Log("angle over");
                 rb.angularVelocity = Vector3.zero;
+                this.transform.eulerAngles = batOffset;
                 isSwing = false;
             }
         }
