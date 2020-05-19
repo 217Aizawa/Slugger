@@ -4,33 +4,55 @@ using UnityEngine;
 
 public class PivotController : MonoBehaviour
 {
+    Rigidbody rb;
+
     float startRotate = 0;
     float curretRotate;
     float speed = 30f;
     float minAngle = 0;
     float maxAngle = 120;
     float yRoatate = 0;
-    float angleY;
-    public GameObject childBat;
+    float angleY = 80;
+    float angleX = 15;
+    float a;
+
+    public bool isSwing = false;//スイングのオンオフ
 
     /****Gizmo表示用******/
     public bool isGizmo;
     public float gizmoSize = 0.3f;
     public Color gizmoColor = Color.red;
 
-    public bool isSwing = false;//スイングのオンオフ
-
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
         curretRotate = this.transform.rotation.y;
-        angleY = Mathf.Clamp(curretRotate + speed, minAngle, maxAngle);
+        Debug.Log("angle" + curretRotate);
+        //angleY = Mathf.Clamp(curretRotate += speed, minAngle, maxAngle);
 
         //時間経過でisSwingのオンオフを制御
+        
+
+        if (Input.GetKey(KeyCode.S) || isSwing)//一度スイングしたら回転をリセット  || isSwing
+        {
+            Debug.Log("swing");
+            //transform.rotation = Quaternion.Euler(0, angleY, 0);
+            //this.transform.Rotate(0, 120, 0);//speed
+            //transform.eulerAngles = new Vector3(0,angleY,0);
+            rb.angularVelocity = new Vector3(15, angleY, 0);
+            if(maxAngle <= curretRotate)
+            {
+                Debug.Log("angle over");
+                isSwing = false;
+            }
+        }
+
+    }
+
         /*
         if (Input.GetKey(KeyCode.S) || isSwing)//一度スイングしたら回転をリセット
         {
@@ -40,21 +62,6 @@ public class PivotController : MonoBehaviour
             //this.transform.Rotate(0, 0, 0);//リセット
             transform.eulerAngles = new Vector3(0, yRoatate, 0);
         }*/
-
-        if (Input.GetKey(KeyCode.R) || isSwing)//一度スイングしたら回転をリセット
-        {
-            Debug.Log("swing");
-            //transform.rotation = Quaternion.Euler(0, angleY, 0);
-            this.transform.Rotate(0, angleY, 0);//speed
-            if(maxAngle <= curretRotate)
-            {
-                Debug.Log("angle over");
-                speed = 0;
-            }
-            //this.transform.Rotate(0, 0, 0);//リセット
-        }
-
-    }
 
     void OnDrawGizmos()
     {

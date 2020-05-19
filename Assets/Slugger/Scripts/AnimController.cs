@@ -128,6 +128,6 @@ public class AnimController : MonoBehaviour
     void ResetPos()
     {
         ethan.transform.position = offsetPos;
-        Debug.Log("reset pos" + ethan.transform.position);
+        //Debug.Log("reset pos" + ethan.transform.position);
     }
 }
