@@ -12,9 +12,8 @@ public class PivotController : MonoBehaviour
     float minAngle = 0;
     float maxAngle = 120;
     float yRoatate = 0;
-    float angleY = 80;
+    float angleY = 180;
     float angleX = 15;
-    float a;
 
     public bool isSwing = false;//スイングのオンオフ
 
@@ -31,37 +30,36 @@ public class PivotController : MonoBehaviour
     void Update()
     {
         curretRotate = this.transform.rotation.y;
-        Debug.Log("angle" + curretRotate);
-        //angleY = Mathf.Clamp(curretRotate += speed, minAngle, maxAngle);
+        Debug.Log("angle" + this.transform.rotation.y);
+        //angleY = Mathf.Clamp(180, minAngle, maxAngle);
 
         //時間経過でisSwingのオンオフを制御
-        
 
         if (Input.GetKey(KeyCode.S) || isSwing)//一度スイングしたら回転をリセット  || isSwing
         {
             Debug.Log("swing");
-            //transform.rotation = Quaternion.Euler(0, angleY, 0);
-            //this.transform.Rotate(0, 120, 0);//speed
-            //transform.eulerAngles = new Vector3(0,angleY,0);
-            rb.angularVelocity = new Vector3(15, angleY, 0);
-            if(maxAngle <= curretRotate)
+            rb.angularVelocity = new Vector3(angleX, angleY, 0);
+            if(0.9f <= curretRotate)//
             {
                 Debug.Log("angle over");
+                rb.angularVelocity = Vector3.zero;
                 isSwing = false;
             }
         }
-
-    }
-
-        /*
+        ////////////////////////////////////////////////////////////////////////
         if (Input.GetKey(KeyCode.S) || isSwing)//一度スイングしたら回転をリセット
         {
-            Debug.Log("swing");
-            yRoatate = Mathf.Clamp(rotationSpd * Time.deltaTime, 0, maxRotate);
+            //Debug.Log("swing");
+            //this.transform.Rotate(0, 120, 0);//speed
+            //transform.rotation = Quaternion.Euler(0, angleY, 0);
+            //transform.eulerAngles = new Vector3(0,angleY,0);
             //this.transform.Rotate(0, rotationSpd, 0);
             //this.transform.Rotate(0, 0, 0);//リセット
-            transform.eulerAngles = new Vector3(0, yRoatate, 0);
-        }*/
+            //transform.eulerAngles = new Vector3(0, yRoatate, 0);
+        }
+        /////////////////////////////////////////////////////////////////////////////////
+    }
+
 
     void OnDrawGizmos()
     {
