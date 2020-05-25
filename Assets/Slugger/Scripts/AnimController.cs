@@ -21,7 +21,7 @@ public class AnimController : MonoBehaviour
     bool timeCount;//カウントフラグ
     bool firstBall = true;//初球のフラグ
 
-    int ballCnt;//球数
+    int ballCnt;//球数制限用変数
     private int idle;
     //private int waitState;//ハッシュ値格納変数
 
@@ -120,9 +120,13 @@ public class AnimController : MonoBehaviour
     void Counter()
     {
         if (timeCount)
+        {
             time += Time.deltaTime;
+        }
         else
+        {
             time = 0;
+        }
     }
 
     void ResetPos()
