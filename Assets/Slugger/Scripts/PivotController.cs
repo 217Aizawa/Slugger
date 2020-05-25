@@ -6,13 +6,9 @@ public class PivotController : MonoBehaviour
 {
     Rigidbody rb;
     Vector3 batOffset;
-    float startRotate = 0;
     float curretRotate;
-    float speed = 30f;
-    float minAngle = 0;
-    float maxAngle = 120;
-    float yRoatate = 0;
-    float angleY = 180;
+    float maxAngle = -0.9f;
+    float angleY = 360;//角速度 before180
     float angleX = 45;
     float tm;
     bool isCount;
@@ -33,7 +29,7 @@ public class PivotController : MonoBehaviour
     void Update()
     {
         curretRotate = this.transform.rotation.y;
-        Debug.Log("angle" + this.transform.rotation.y);
+        Debug.Log("angle" + curretRotate);
         //angleY = Mathf.Clamp(180, minAngle, maxAngle);
 
         //時間経過でisSwingのオンオフを制御
@@ -43,7 +39,7 @@ public class PivotController : MonoBehaviour
         if (Input.GetKey(KeyCode.S) || isSwing)//一度スイングしたら回転をリセット  || isSwing
         {
             Debug.Log("swing");
-            //isSwing = true;
+            isSwing = true;
             rb.angularVelocity = new Vector3(angleX, angleY, 0);//(15,180,0)
             //transform.eulerAngles = new Vector3(angleX, angleY, 0);
             /*if(0.8f <= curretRotate)//
@@ -57,7 +53,7 @@ public class PivotController : MonoBehaviour
                 Debug.Log("angle over");
                 rb.angularVelocity = Vector3.zero;
                 this.transform.eulerAngles = batOffset;
-                //isSwing = false;
+                isSwing = false;
             }
         }
         ////////////////////////////////////////////////////////////////////////
