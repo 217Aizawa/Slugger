@@ -11,9 +11,14 @@ public class PivotController : MonoBehaviour
     float angleY = 180;//角速度180 360は貫通した
     float angleX = 45;
     float tm;
-    //投球間隔 + マウンド間(m)　- 投球位置(m) / 80km/h  * 時間(h) - スイング時間（角速度）
-    float swingTiming = 7.0f + (18.44f - 2.46f) / 80000 * 3600f -0.46f;
-    float roopTimeSw =7.0f;
+    float toMound = 18.44f;
+    float releasePoint = 2.46f;
+    float ballspeed = 80000;// 80km/hを秒速へ変換
+    float timeSec = 3600;//
+    float swingTime = 0.46f;
+    //投球間隔 + マウンド間(m)　- 投球位置(m) / 80km/h  * 時間(h) - スイング時間（ミートまで）
+    float swingTiming;// = 7.0f + (18.44f - 2.46f) / 80000 * 3600f -0.46f;
+    float roopTime =7.0f;
     bool isCount;
     bool firstSwing = true;//初球用のbool
     public bool isSwing = false;//スイングのオンオフ
@@ -29,6 +34,7 @@ public class PivotController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         batOffset = this.transform.eulerAngles;//角度取得
         Debug.Log("SwingTime" + swingTiming);
+        swingTiming = roopTime + (toMound - releasePoint) /ballspeed * timeSec - swingTime;
     }
 
     void Update()
@@ -50,7 +56,7 @@ public class PivotController : MonoBehaviour
             rb.angularVelocity = new Vector3(angleX, angleY, 0);//(15,180,0)
         }
 
-        if(roopTimeSw <= tm && !firstSwing)
+        if(roopTime <= tm && !firstSwing)
         {
             tm = 0;
             isSwing = true;
@@ -59,7 +65,7 @@ public class PivotController : MonoBehaviour
 
         if (isSwing)//回転制限＆リセット
         {
-            if (-0.9f >= curretRotate)//this.transfrom.rotation.y
+            if (curretRotate <= maxAngle)//maxAngle =-0.9f
             {
                 Debug.Log("angle over");
                 rb.angularVelocity = Vector3.zero;
