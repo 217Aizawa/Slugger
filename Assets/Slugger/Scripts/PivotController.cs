@@ -33,7 +33,7 @@ public class PivotController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         batOffset = this.transform.eulerAngles;//角度取得
-        Debug.Log("SwingTime" + swingTiming);
+        //Debug.Log("SwingTime" + swingTiming);
         swingTiming = roopTime + (toMound - releasePoint) /ballspeed * timeSec - swingTime;
     }
 
@@ -111,7 +111,7 @@ public class PivotController : MonoBehaviour
         {
             tm = 0;
         }
-        Debug.Log("Time Count" + tm);
+        //Debug.Log("Time Count" + tm);
     }
 }
 ;

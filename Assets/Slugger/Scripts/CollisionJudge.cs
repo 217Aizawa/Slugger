@@ -9,9 +9,13 @@ public class CollisionJudge : MonoBehaviour
     GameObject bat;
     GameObject ball;
 
+    //SphereCollider ballCollider;
+    float radius;
     float batRad;//バット半径
     float ballDia;//ボールの直径
     float collisonDist;
+    float dist = 0;
+    float enter = 0;
 
     Vector3 batPos1;//現在位置
     Vector3 ballPos1;
@@ -36,6 +40,7 @@ public class CollisionJudge : MonoBehaviour
     Vector3 prevGrip;//過去位置
     Vector3 prevHead;
 
+    Ray ray;
     RaycastHit hit;
 
     public AudioClip sound;//効果音を指定
@@ -46,8 +51,10 @@ public class CollisionJudge : MonoBehaviour
 
     void Start()
     {
+        radius = this.transform.lossyScale.x * 0.5f;
         audioSource = GetComponent<AudioSource>();
-
+        //ballCollider = GetComponent<SphereCollider>();
+        //Debug.Log("ballCollider" + ballCollider.radius);
         batRad = 0.0355f;//バットのColliderから参照
         ballDia = 0.0723f;// 0.07165 = バット半径＋ボール半径
         collisonDist = batRad + ballDia / 2 * 25f; //collisonDist = batRad + ballDia / 2 * 25;
@@ -134,7 +141,7 @@ public class CollisionJudge : MonoBehaviour
         Vector3 weidth = spd * Time.fixedDeltaTime;//距離（底辺）*/
         Vector3 weidth = BatController.batHead - prevHead;//h0 - h1までのベクトル（長さ）
         //Vector3 height = 
-        Ray ray = new Ray(ballPos0, ballRelLine1);//rayの設定
+        ray = new Ray(ballPos0, ballRelLine1);//rayの設定
 
         //Debug.DrawRay(ray.origin, ray.direction, Color.red, 3f, false);
 
@@ -150,12 +157,7 @@ public class CollisionJudge : MonoBehaviour
         //スイングに対応した当たり判定
         /*****************************************************************************************************/
 
-        float dist = 0.0f;                                                             //ray.direction.magnitude;//ballRelLine1.magnitude;
-
-        if (g1.Raycast(ray, out dist))//作成した平面までの距離を返す
-        {
-            //Debug.Log(dist);
-        }
+        //ray.direction.magnitude;//ballRelLine1.magnitude;
 
         /*①*/
         if (g1.Raycast(ray, out dist))//作成した平面までの距離を返す
@@ -163,10 +165,22 @@ public class CollisionJudge : MonoBehaviour
             //Debug.Log(dist);
             if(dist < ballRelLine1.magnitude)//ボールが平面を横切るか？
             {
-                Debug.Log("Crossed");
+                Debug.Log("Crossed");//スイング時には消え、固定時には消えなかった
+                Destroy(ball);
             }
         }
-
+        
+        /*
+        if(Physics.SphereCast(ray, ballDia/2, out hit, ballRelLine1.magnitude))
+        {
+            Gizmos.DrawRay(ray);
+            Gizmos.DrawWireSphere(ballPos0, ballDia / 2);//ballCollider.radius
+            if (dist < ballRelLine1.magnitude)//ボールが平面を横切るか？
+            {
+                Debug.Log("Crossed");//スイング時には消え、固定時には消えなかった
+                Destroy(ball);
+            }
+        }*/
         /*****************************************************************************************************/
 
 
@@ -204,6 +218,28 @@ public class CollisionJudge : MonoBehaviour
         ballPos0 = ballPos1;
         batPos0 = batPos1;
     }
+    /*
+    void OnDrawGizmos()
+    {
+
+        if (Physics.SphereCast(ray, ballDia / 2, out hit, ballRelLine1.magnitude))//ballDia / 2
+        {
+            Gizmos.DrawRay(ray);
+            Gizmos.DrawWireSphere(ballPos0, ballDia / 2);//ballCollider.radius
+            //Debug.Log("Spherecast on");
+            if (dist < ballRelLine1.magnitude)//ボールが平面を横切るか？
+            {
+                Debug.Log("Crossed");//スイング時には消え、固定時には消えなかった
+                Destroy(ball);
+            }
+        }
+        else
+        {
+            //Gizmos.DrawRay(ray);
+            //Gizmos.DrawWireSphere(ballPos0, ballDia / 2);//ballCollider.radius
+        }
+    }*/
+
 }
 /*private void OnCollisionEnter(Collision other)
 {

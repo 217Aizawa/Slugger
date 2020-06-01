@@ -34,7 +34,7 @@ public class BatController : MonoBehaviour
     public static Vector3 batDir;
     public static Vector3 swingSpeed;
 
-    bool swing = false;
+    //bool swing = false;
 
     void Start()
     {
