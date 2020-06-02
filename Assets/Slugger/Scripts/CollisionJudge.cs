@@ -89,9 +89,9 @@ public class CollisionJudge : MonoBehaviour
         
         //ballRelLine = ballLine - batLine;
         ballRelLine1 = ballLine + batLine;
-
+        //Debug.Log("ballrelLine1" + ballRelLine1.magnitude);
         Vector3 s = ballPos0 + Vector3.Cross(BatController.batDir, ballRelLine1);//S（外積）
-        Plane p = new Plane(ballPos0, ballPos1 - batLine, s);//三つの点から面を作成
+        Plane p = new Plane(ballPos0, ballPos1 - batLine, s);//三つの点から平面を作成
         Vector3 n = p.normal;//面の法線
         float t = Vector3.Dot(ballPos0 - BatController.batGrip, n) / Vector3.Dot(BatController.batDir, n);
         Vector3 q = BatController.batGrip + t * BatController.batDir;//球の平面に対し、バットが一番近くなる点
@@ -141,7 +141,10 @@ public class CollisionJudge : MonoBehaviour
         Vector3 weidth = spd * Time.fixedDeltaTime;//距離（底辺）*/
         Vector3 weidth = BatController.batHead - prevHead;//h0 - h1までのベクトル（長さ）
         //Vector3 height = 
-        ray = new Ray(ballPos0, ballRelLine1);//rayの設定
+
+
+        //ray = new Ray(ballPos0, ballRelLine1);//変更前
+        ray = new Ray(ballPos0 + ballRelLine1, transform.TransformDirection(ballRelLine1));//rayの設定ballRelLine1
 
         //Debug.DrawRay(ray.origin, ray.direction, Color.red, 3f, false);
 
@@ -162,25 +165,29 @@ public class CollisionJudge : MonoBehaviour
         /*①*/
         if (g1.Raycast(ray, out dist))//作成した平面までの距離を返す
         {
+            //Debug.Log("dist" + dist);
             //Debug.Log(dist);
             if(dist < ballRelLine1.magnitude)//ボールが平面を横切るか？
             {
                 Debug.Log("Crossed");//スイング時には消え、固定時には消えなかった
-                Destroy(ball);
+                //Destroy(ball);
             }
         }
         
-        /*
-        if(Physics.SphereCast(ray, ballDia/2, out hit, ballRelLine1.magnitude))
+        
+        if(Physics.SphereCast(ray, radius, out hit, ballRelLine1.magnitude))//ballDia / 2
         {
-            Gizmos.DrawRay(ray);
-            Gizmos.DrawWireSphere(ballPos0, ballDia / 2);//ballCollider.radius
-            if (dist < ballRelLine1.magnitude)//ボールが平面を横切るか？
+            Debug.Log("true");
+            Debug.Log(hit.transform.name);
+            if (hit.collider.tag == "Bat")
             {
-                Debug.Log("Crossed");//スイング時には消え、固定時には消えなかった
-                Destroy(ball);
+                Debug.Log("detect Bat");
             }
-        }*/
+        }
+        else
+        {
+            Debug.Log("false");
+        }
         /*****************************************************************************************************/
 
 
@@ -218,28 +225,30 @@ public class CollisionJudge : MonoBehaviour
         ballPos0 = ballPos1;
         batPos0 = batPos1;
     }
-    /*
+    
     void OnDrawGizmos()
     {
-
-        if (Physics.SphereCast(ray, ballDia / 2, out hit, ballRelLine1.magnitude))//ballDia / 2
+        Gizmos.DrawRay(ballPos1, transform.TransformDirection(ballRelLine1));
+        //Gizmos.DrawRay(ballPos0, ballRelLine1);
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(ballPos0 + ballRelLine1, radius);
+        /*
+        if (Physics.SphereCast(ray, radius, out hit, ballRelLine1.magnitude))
         {
-            Gizmos.DrawRay(ray);
-            Gizmos.DrawWireSphere(ballPos0, ballDia / 2);//ballCollider.radius
-            //Debug.Log("Spherecast on");
-            if (dist < ballRelLine1.magnitude)//ボールが平面を横切るか？
+            Debug.Log("true");
+            Debug.Log(hit.transform.name);
+            if (hit.collider.tag == "Bat")
             {
-                Debug.Log("Crossed");//スイング時には消え、固定時には消えなかった
-                Destroy(ball);
+                Debug.Log(hit.transform.name);
             }
         }
         else
         {
-            //Gizmos.DrawRay(ray);
-            //Gizmos.DrawWireSphere(ballPos0, ballDia / 2);//ballCollider.radius
-        }
-    }*/
-
+            Gizmos.DrawRay(ballPos0, ballRelLine1 * 100);
+            Debug.Log("false");
+        }*/
+    }
+   
 }
 /*private void OnCollisionEnter(Collision other)
 {
