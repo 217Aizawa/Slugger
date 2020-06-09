@@ -144,7 +144,8 @@ public class CollisionJudge : MonoBehaviour
 
 
         //ray = new Ray(ballPos0, ballRelLine1);//変更前
-        ray = new Ray(ballPos0 + ballRelLine1, transform.TransformDirection(ballRelLine1));//rayの設定ballRelLine1
+        ray = new Ray(ballPos0,ballRelLine1);//ray(原点、方向)
+
 
         //Debug.DrawRay(ray.origin, ray.direction, Color.red, 3f, false);
 
@@ -175,19 +176,16 @@ public class CollisionJudge : MonoBehaviour
         }
         
         
-        if(Physics.SphereCast(ray, radius, out hit, ballRelLine1.magnitude))//ballDia / 2
+        if(Physics.SphereCast(ray, radius, out hit, ballRelLine1.magnitude))
         {
             Debug.Log("true");
             Debug.Log(hit.transform.name);
-            if (hit.collider.tag == "Bat")
-            {
-                Debug.Log("detect Bat");
-            }
         }
         else
         {
             Debug.Log("false");
         }
+
         /*****************************************************************************************************/
 
 
@@ -228,25 +226,9 @@ public class CollisionJudge : MonoBehaviour
     
     void OnDrawGizmos()
     {
-        Gizmos.DrawRay(ballPos1, transform.TransformDirection(ballRelLine1));
-        //Gizmos.DrawRay(ballPos0, ballRelLine1);
+        Gizmos.DrawRay(ballPos0, ballRelLine1);
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(ballPos0 + ballRelLine1, radius);
-        /*
-        if (Physics.SphereCast(ray, radius, out hit, ballRelLine1.magnitude))
-        {
-            Debug.Log("true");
-            Debug.Log(hit.transform.name);
-            if (hit.collider.tag == "Bat")
-            {
-                Debug.Log(hit.transform.name);
-            }
-        }
-        else
-        {
-            Gizmos.DrawRay(ballPos0, ballRelLine1 * 100);
-            Debug.Log("false");
-        }*/
     }
    
 }
