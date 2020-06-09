@@ -178,12 +178,18 @@ public class CollisionJudge : MonoBehaviour
         
         if(Physics.SphereCast(ray, radius, out hit, ballRelLine1.magnitude))
         {
-            Debug.Log("true");
+            Debug.Log("true");  
             Debug.Log(hit.transform.name);
         }
         else
         {
             Debug.Log("false");
+        }
+
+
+        if (Physics.CheckSphere(ballPos0, radius))
+        {
+            Debug.Log("Check" + hit.transform.name);
         }
 
         /*****************************************************************************************************/
