@@ -2788,6 +2788,11 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1082903122960192587, guid: 069f49ccf9e966e40a64214368c6c881,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 666463893, guid: 069f49ccf9e966e40a64214368c6c881, type: 3}
       propertyPath: m_Materials.Array.size
       value: 2
@@ -6549,7 +6554,7 @@ GameObject:
   - component: {fileID: 1428365322}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Cube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6620,7 +6625,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1428365321}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.02, y: 0.96, z: 17.95}
+  m_LocalPosition: {x: -0.02, y: 0.96, z: 17.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

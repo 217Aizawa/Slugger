@@ -42,7 +42,9 @@ public class CollisionJudge : MonoBehaviour
 
     Ray ray;
     RaycastHit hit;
-    RaycastHit[] hitsArray;//SpherecastAll用配列
+
+    RaycastHit[] hitsSphere;//SpherecastAll用配列
+    Collider[] hitsOverlap;//OverlapSphere用配列
 
     public AudioClip sound;//効果音を指定
     AudioSource audioSource;
@@ -192,21 +194,39 @@ public class CollisionJudge : MonoBehaviour
         {
             Debug.Log("false");
         }
-
-                                        //(ray, radius, distance || origin, radius, direction, maxDistance)
-        hitsArray = Physics.SphereCastAll(ray, radius, ballRelLine1.magnitude);//ray,ballRelLine1.magnitude
-        foreach (var obj in hitsArray)
+        
+        //(ray, radius, distance || origin, radius, direction, maxDistance)
+        hitsSphere = Physics.SphereCastAll(ray, radius, ballRelLine1.magnitude);//ray,ballRelLine1.magnitude
+        foreach (var obj in hitsSphere)
         {
             switch (obj.collider.tag)
             {
                 case "Bat":
                     Debug.Log("got bat collider");
                     break;
+                case "Cube":
+                    Debug.Log("got cube collider");
+                    break;
                 default:
                     break;
             }
         }
 
+        hitsOverlap = Physics.OverlapSphere(ballPos0, radius);
+        foreach(var cldr in hitsOverlap)
+        {
+            switch(cldr.tag)
+            {
+                case "Bat":
+                    Debug.Log("Overlap Bat");
+                    break;
+                case "Cube":
+                    Debug.Log("got cube collider");
+                    break;
+                default:
+                    break;
+            }
+        }
         /*//オブジェクトがヒットするか
         if (Physics.CheckSphere(ballPos0, radius))
         {
