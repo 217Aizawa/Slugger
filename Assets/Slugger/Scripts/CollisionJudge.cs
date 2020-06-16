@@ -28,7 +28,7 @@ public class CollisionJudge : MonoBehaviour
 
     //Vector3 ballRelLine;//バットがbatPos0の時のボールの相対運動
     Vector3 ballRelLine1;//バットがbatPos1の時のボールの相対運動
-    Vector3 forExhibition = new Vector3(0,15,-80);//展示用
+    //Vector3 forExhibition = new Vector3(0,15,-80);//展示用
 
     Vector3 nearBallPoint;
     Vector3 nearBatPoint;
@@ -42,10 +42,12 @@ public class CollisionJudge : MonoBehaviour
 
     Ray ray;
     RaycastHit hit;
+    RaycastHit[] hitsArray;//SpherecastAll用配列
 
     public AudioClip sound;//効果音を指定
     AudioSource audioSource;
 
+    bool isCollider;
     //[SerializeField] bool isHit = false;//二度打ちを防ぐためのbool
     Rigidbody rb;
 
@@ -78,7 +80,6 @@ public class CollisionJudge : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("Bat"))
         {
             bat = GameObject.FindGameObjectWithTag("Bat");
-            //ball = this.gameObject;
         }
 
         batPos1 = bat.transform.position;//現在位置
@@ -100,7 +101,8 @@ public class CollisionJudge : MonoBehaviour
         Vector3 perpendicularFootPoint = Vector3.Project(q - ballPos0, ballRelLine1);//qからballRelLine1に下した
         float flag = Vector3.Dot(ballRelLine1, perpendicularFootPoint);//-なら通過 +なら先にある
 
-        if (flag < 0)//ballの最近点を求める
+        //ballの最近点を求める
+        if (flag < 0)
         {
             nearBallPoint = ballPos0;
         }
@@ -113,7 +115,8 @@ public class CollisionJudge : MonoBehaviour
             nearBallPoint = ballPos0 + perpendicularFootPoint;
         }
 
-        if (t < 0)//batの最近点を求める
+        //batの最近点を求める
+        if (t < 0)
         {
             nearBatPoint = BatController.batGrip;
         }
@@ -173,6 +176,10 @@ public class CollisionJudge : MonoBehaviour
                 Debug.Log("Crossed");//スイング時には消え、固定時には消えなかった
                 //Destroy(ball);
             }
+            else
+            {
+                //GetComponent<SphereCollider>().enabled = false;//collider off
+            }
         }
         
         
@@ -186,11 +193,25 @@ public class CollisionJudge : MonoBehaviour
             Debug.Log("false");
         }
 
+                                        //(ray, radius, distance || origin, radius, direction, maxDistance)
+        hitsArray = Physics.SphereCastAll(ray, radius, ballRelLine1.magnitude);//ray,ballRelLine1.magnitude
+        foreach (var obj in hitsArray)
+        {
+            switch (obj.collider.tag)
+            {
+                case "Bat":
+                    Debug.Log("got bat collider");
+                    break;
+                default:
+                    break;
+            }
+        }
 
+        /*//オブジェクトがヒットするか
         if (Physics.CheckSphere(ballPos0, radius))
         {
             Debug.Log("Check" + hit.transform.name);
-        }
+        }*/
 
         /*****************************************************************************************************/
 
@@ -216,9 +237,6 @@ public class CollisionJudge : MonoBehaviour
 
 
                     audioSource.PlayOneShot(sound);//一度再生する
-                    //Debug.Log("hitPoint:" + hit.point + "P:" + P);
-                    //Debug.Log("batSpeed magnitude " + BatController.swingSpeed.magnitude);
-                    //Debug.Log("batSpeed magnitude " + CorrectPhysics.batSpeed.magnitude);
                 }
             }
         }
@@ -238,6 +256,7 @@ public class CollisionJudge : MonoBehaviour
     }
    
 }
+//ボールの速度が速いので、判定が追い付かない
 /*private void OnCollisionEnter(Collision other)
 {
     if(other.gameObject.tag == "Bat")
