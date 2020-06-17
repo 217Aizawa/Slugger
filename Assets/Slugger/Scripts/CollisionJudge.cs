@@ -185,7 +185,7 @@ public class CollisionJudge : MonoBehaviour
         }
         
         
-        if(Physics.SphereCast(ray, radius, out hit, ballRelLine1.magnitude))
+        if(Physics.SphereCast(ray, radius, out hit, ballRelLine1.magnitude * 10))
         {
             Debug.Log("true");  
             Debug.Log(hit.transform.name);
@@ -196,7 +196,7 @@ public class CollisionJudge : MonoBehaviour
         }
         
         //(ray, radius, distance || origin, radius, direction, maxDistance)
-        hitsSphere = Physics.SphereCastAll(ray, radius, ballRelLine1.magnitude);//ray,ballRelLine1.magnitude
+        hitsSphere = Physics.SphereCastAll(ray, radius, ballRelLine1.magnitude * 10);//ray,ballRelLine1.magnitude
         foreach (var obj in hitsSphere)
         {
             switch (obj.collider.tag)

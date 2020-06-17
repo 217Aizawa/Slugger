@@ -31,7 +31,7 @@ public class ThrowController : MonoBehaviour
         //angle = Mathf.Asin(9.81f * 18.44f / speed / speed) / 2;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         //Debug.Log("angle" + angle);
         //Debug.Log("ballSpeed" + ballSpeed + "km");

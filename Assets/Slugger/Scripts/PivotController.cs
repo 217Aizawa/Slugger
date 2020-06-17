@@ -37,7 +37,7 @@ public class PivotController : MonoBehaviour
         swingTiming = roopTime + (toMound - releasePoint) /ballspeed * timeSec - swingTime;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         TmCounter();
         curretRotate = this.transform.rotation.y;
