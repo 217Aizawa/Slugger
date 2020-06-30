@@ -73,7 +73,7 @@ public class CollisionJudge : MonoBehaviour
     void FixedUpdate()//FixedUpdate
     {
         //本番用
-        /*if (Input.GetKey(KeyCode.C))//要修正
+        /*if (Input.GetKey(KeyCode.C))//コントローラーでも可能にする
         {
             bat = GameObject.FindGameObjectWithTag("Bat");
             //ball = this.gameObject;
@@ -196,7 +196,7 @@ public class CollisionJudge : MonoBehaviour
         }
         
         //(ray, radius, distance || origin, radius, direction, maxDistance)
-        hitsSphere = Physics.SphereCastAll(ray, radius, ballRelLine1.magnitude * 10);//ray,ballRelLine1.magnitude
+        hitsSphere = Physics.SphereCastAll(ray, radius, ballRelLine1.magnitude * 100);//ray,ballRelLine1.magnitude
         foreach (var obj in hitsSphere)
         {
             switch (obj.collider.tag)
@@ -227,11 +227,14 @@ public class CollisionJudge : MonoBehaviour
                     break;
             }
         }
+        //Debug.Log("Distance" + ballRelLine1.magnitude);
         /*//オブジェクトがヒットするか
         if (Physics.CheckSphere(ballPos0, radius))
         {
             Debug.Log("Check" + hit.transform.name);
         }*/
+
+        //var target = ray.origin + ray.direction * hit.distance;//バットと衝突した座標位置を取得する 
 
         /*****************************************************************************************************/
 
@@ -270,7 +273,7 @@ public class CollisionJudge : MonoBehaviour
     
     void OnDrawGizmos()
     {
-        Gizmos.DrawRay(ballPos0, ballRelLine1);
+        Gizmos.DrawRay(ballPos0, ballRelLine1 * 100);
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(ballPos0 + ballRelLine1, radius);
     }
