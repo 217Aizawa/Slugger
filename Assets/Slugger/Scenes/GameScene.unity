@@ -4973,7 +4973,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &1139559139
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9383,6 +9383,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Radius
       value: 0.0716931
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285800939326085648, guid: d98ce2a6414efa149b53c890d57989c9,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d98ce2a6414efa149b53c890d57989c9, type: 3}

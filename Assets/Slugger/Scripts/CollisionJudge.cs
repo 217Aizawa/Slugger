@@ -184,7 +184,9 @@ public class CollisionJudge : MonoBehaviour
             }
         }
         
-        
+        /*
+         * スイングとボールの速度が速く処理が追い付かないのでほかの方法を探る
+         * 
         if(Physics.SphereCast(ray, radius, out hit, ballRelLine1.magnitude * 10))
         {
             Debug.Log("true");  
@@ -226,7 +228,9 @@ public class CollisionJudge : MonoBehaviour
                 default:
                     break;
             }
-        }
+        }*/
+
+
         //Debug.Log("Distance" + ballRelLine1.magnitude);
         /*//オブジェクトがヒットするか
         if (Physics.CheckSphere(ballPos0, radius))
