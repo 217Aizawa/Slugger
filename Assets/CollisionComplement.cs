@@ -12,14 +12,11 @@ public class CollisionComplement : MonoBehaviour
     public Transform endPosition;
     public Transform endPosition2;
 
-    //　メッシュ
     private Mesh mesh;
     //　頂点リスト
     public List<Vector3> verticesLists = new List<Vector3>();
     //　三角形のリスト
     public List<int> tempTriangles = new List<int>();
-    //　軌跡の表示のオン・オフフラグ
-    private bool isSwordCollider = false;
     //　前フレームのグリップの位置
     private Vector3 oldStartPos;
     //　前フレームのヘッドの位置
@@ -27,10 +24,11 @@ public class CollisionComplement : MonoBehaviour
 
     private MeshCollider meshCollider;
     private MeshFilter meshFilter;
-
     float speed;
     Vector3 prevPos;
 
+    //　軌跡の表示のオン・オフフラグ
+    private bool isSwordCollider = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,12 +54,11 @@ public class CollisionComplement : MonoBehaviour
 
         prevPos = transform.position;
     }
-
+    //本当なら全面作らなければいけないがCovexにチェックを入れると勝手に作ってくれる
     //バットの軌跡作成メソッド
     void CreateMesh()
     {
-        //mesh.Clear();
-
+        mesh.Clear();
         //　頂点以外のリストのクリア
         verticesLists.Clear();
         tempTriangles.Clear();
@@ -72,7 +69,7 @@ public class CollisionComplement : MonoBehaviour
         startPosition2.position, endPosition2.position
     });
 
-        //　本当なら全面作らなければいけないがCovexにチェックを入れると勝手に作ってくれる
+        //　　頂点を結ぶ順番
         tempTriangles.AddRange(new int[]{
         0, 1, 2,
         2, 1, 3,

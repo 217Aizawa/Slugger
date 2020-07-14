@@ -9504,10 +9504,15 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 0.0716931
       objectReference: {fileID: 0}
+    - target: {fileID: 3285800940737425977, guid: d98ce2a6414efa149b53c890d57989c9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3285800939326085648, guid: d98ce2a6414efa149b53c890d57989c9,
         type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d98ce2a6414efa149b53c890d57989c9, type: 3}
