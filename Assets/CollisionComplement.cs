@@ -46,7 +46,7 @@ public class CollisionComplement : MonoBehaviour
     void FixedUpdate()
     {
         speed = ((transform.position - prevPos) / Time.deltaTime).magnitude;
-
+        Debug.Log("speed" + speed);
         if(2 < speed)
         {
             CreateMesh();
@@ -54,12 +54,12 @@ public class CollisionComplement : MonoBehaviour
 
         prevPos = transform.position;
     }
-    //本当なら全面作らなければいけないがCovexにチェックを入れると勝手に作ってくれる
+
     //バットの軌跡作成メソッド
     void CreateMesh()
     {
         mesh.Clear();
-        //　頂点以外のリストのクリア
+        //　リストのクリア
         verticesLists.Clear();
         tempTriangles.Clear();
 
@@ -69,7 +69,7 @@ public class CollisionComplement : MonoBehaviour
         startPosition2.position, endPosition2.position
     });
 
-        //　　頂点を結ぶ順番
+        //　本当なら全面作らなければいけないがCovexにチェックを入れると勝手に作ってくれる　頂点を結ぶ順番
         tempTriangles.AddRange(new int[]{
         0, 1, 2,
         2, 1, 3,
@@ -80,10 +80,10 @@ public class CollisionComplement : MonoBehaviour
 		5, 1, 3
 		*/
 	});
-
+        
         mesh.vertices = verticesLists.ToArray();
         mesh.triangles = tempTriangles.ToArray();
-
+        //領域、法線の再計算
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
 
