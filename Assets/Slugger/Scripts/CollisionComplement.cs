@@ -42,10 +42,11 @@ public class CollisionComplement : MonoBehaviour
         meshCollider.sharedMesh = mesh;
     }
 
-    // Update is called once per frame
+    // Update is called once per frame prevPos != Vector3.zero
     void FixedUpdate()
     {
         speed = ((transform.position - prevPos) / Time.deltaTime).magnitude;
+        Debug.Log("prevPos" + prevPos);
         //Debug.Log("speed" + speed);
         if(2 < speed && speed < 1000)
         {
@@ -59,12 +60,14 @@ public class CollisionComplement : MonoBehaviour
     //バットの軌跡作成メソッド
     void CreateMesh()
     {
-        mesh.Clear();
+        //mesh.Clear();//問題の根本ではない
+        //自作メッシュのクリア
+        meshCollider.sharedMesh.Clear();
         //　リストのクリア
-        verticesLists.Clear();
+        verticesLists.Clear();//バットの座標系に影響している
         tempTriangles.Clear();
         
-        verticesLists.AddRange(new Vector3[] {
+        verticesLists.AddRange(new Vector3[] {//頂点リストはこの順番で良いのか？
         oldGripPos, oldheadPos,
         gripPosition.position, headPosition.position,
         gripPosition2.position, headPosition2.position
