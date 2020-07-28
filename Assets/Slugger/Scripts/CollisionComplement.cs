@@ -42,13 +42,13 @@ public class CollisionComplement : MonoBehaviour
         meshCollider.sharedMesh = mesh;
     }
 
-    // Update is called once per frame prevPos != Vector3.zero
+    // Update is called once per frame
     void FixedUpdate()
     {
         speed = ((transform.position - prevPos) / Time.deltaTime).magnitude;
         Debug.Log("prevPos" + prevPos);
         //Debug.Log("speed" + speed);
-        if(2 < speed && speed < 1000)
+        if(2 < speed && prevPos != Vector3.zero)
         {
             Debug.Log("create mesh called");
             CreateMesh();
