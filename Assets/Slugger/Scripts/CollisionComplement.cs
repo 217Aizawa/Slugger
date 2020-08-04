@@ -13,6 +13,7 @@ public class CollisionComplement : MonoBehaviour
     public Transform headPosition2;
 
     private Mesh mesh;
+    private Mesh planeMesh;
     //　頂点リスト
     public List<Vector3> verticesLists = new List<Vector3>();
     //　三角形のリスト
@@ -98,9 +99,16 @@ public class CollisionComplement : MonoBehaviour
         
         mesh.vertices = verticesLists.ToArray();
         mesh.triangles = tempTriangles.ToArray();
+
         //領域、法線の再計算
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
+        /*
+        planeMesh.vertices = verticesLists.ToArray();
+        planeMesh.triangles = tempTriangles.ToArray();
+
+        planeMesh.RecalculateBounds();
+        planeMesh.RecalculateNormals();*/
 
         //　メッシュコライダの再有効化
         meshCollider.enabled = false;
