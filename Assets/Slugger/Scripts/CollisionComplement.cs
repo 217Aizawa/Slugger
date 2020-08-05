@@ -34,7 +34,8 @@ public class CollisionComplement : MonoBehaviour
     void Start()
     {
         mesh = GetComponent<MeshFilter>().mesh;
-        //planeMesh = GetComponent<Mesh>();
+        //衝突判定用メッシュの作成
+        planeMesh = new Mesh();
         meshCollider = GetComponent<MeshCollider>();
         //　他の凸コライダと衝突有効にする
         //meshCollider.convex = true;
@@ -49,7 +50,7 @@ public class CollisionComplement : MonoBehaviour
     {
         speed = ((transform.position - prevPos) / Time.deltaTime).magnitude;
         //Debug.Log("prevPos" + prevPos);
-        //Debug.Log("speed" + speed);
+        Debug.Log("speed" + speed);
         //start時はprevPosが未定義なので0になるので、ガードをかける
         if(2 < speed && prevPos != Vector3.zero)
         {
