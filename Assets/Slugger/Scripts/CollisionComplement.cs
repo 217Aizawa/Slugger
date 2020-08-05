@@ -49,15 +49,15 @@ public class CollisionComplement : MonoBehaviour
     void FixedUpdate()
     {
         speed = ((transform.position - prevPos) / Time.deltaTime).magnitude;
-        //Debug.Log("prevPos" + prevPos);
-        Debug.Log("speed" + speed);
+        Debug.Log("prevPos" + prevPos);
+        //Debug.Log("speed" + speed);
         //start時はprevPosが未定義なので0になるので、ガードをかける
         if(2 < speed && prevPos != Vector3.zero)
         {
             Debug.Log("create mesh called");
             CreateMesh();
         }
-
+        /*
         if (planeMesh)
             Debug.Log("planeMesh true");
         else
@@ -114,14 +114,13 @@ public class CollisionComplement : MonoBehaviour
         mesh.vertices = verticesLists.ToArray();
         mesh.triangles = tempTriangles.ToArray();
 
-        //領域、法線の再計算
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();*/
         
         //衝突判定用のプレーンを作成
         planeMesh.vertices = verticesLists.ToArray();
         planeMesh.triangles = tempTriangles.ToArray();
-
+        //領域、法線の再計算
         planeMesh.RecalculateBounds();
         planeMesh.RecalculateNormals();
 
