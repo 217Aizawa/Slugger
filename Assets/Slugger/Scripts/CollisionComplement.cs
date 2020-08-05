@@ -34,6 +34,7 @@ public class CollisionComplement : MonoBehaviour
     void Start()
     {
         mesh = GetComponent<MeshFilter>().mesh;
+        //planeMesh = GetComponent<Mesh>();
         meshCollider = GetComponent<MeshCollider>();
         //　他の凸コライダと衝突有効にする
         //meshCollider.convex = true;
@@ -47,28 +48,43 @@ public class CollisionComplement : MonoBehaviour
     void FixedUpdate()
     {
         speed = ((transform.position - prevPos) / Time.deltaTime).magnitude;
-        Debug.Log("prevPos" + prevPos);
+        //Debug.Log("prevPos" + prevPos);
         //Debug.Log("speed" + speed);
+        //start時はprevPosが未定義なので0になるので、ガードをかける
         if(2 < speed && prevPos != Vector3.zero)
         {
             Debug.Log("create mesh called");
             CreateMesh();
         }
 
+        if (planeMesh)
+            Debug.Log("planeMesh true");
+        else
+            Debug.Log("planeMesh false");
+
         prevPos = transform.position;
     }
+
+    /*void LateUpdate()
+    {
+        if (2 < speed && prevPos != Vector3.zero)
+        {
+            Debug.Log("create mesh called");
+            CreateMesh();
+        }
+    }*/
 
     //バットの軌跡作成メソッド
     void CreateMesh()
     {
         //mesh.Clear();//問題の根本ではない
-        //自作メッシュのクリア
-        meshCollider.sharedMesh.Clear();
+        planeMesh.Clear();
+        //meshCollider.sharedMesh.Clear();
         //　リストのクリア
         verticesLists.Clear();//バットの座標系に影響している
         tempTriangles.Clear();
         
-        verticesLists.AddRange(new Vector3[] {//頂点リストはこの順番で良いのか？
+        verticesLists.AddRange(new Vector3[] {                  //頂点リストはこの順番で良いのか？
         oldGripPos, oldheadPos,
         gripPosition.position, headPosition.position,
         gripPosition2.position, headPosition2.position
@@ -86,9 +102,6 @@ public class CollisionComplement : MonoBehaviour
         0, 2, 4,
         5, 1, 3,
 		/*//足りない分を追加する　convexは使わない
-        2,3,4//側面
-        4,3,5//側面2
-
         2,3,1
         4,5,1
         
@@ -96,19 +109,20 @@ public class CollisionComplement : MonoBehaviour
 		5, 1, 3*///新旧head
 		
 	});
-        
+        /*
         mesh.vertices = verticesLists.ToArray();
         mesh.triangles = tempTriangles.ToArray();
 
         //領域、法線の再計算
         mesh.RecalculateBounds();
-        mesh.RecalculateNormals();
-        /*
+        mesh.RecalculateNormals();*/
+        
+        //衝突判定用のプレーンを作成
         planeMesh.vertices = verticesLists.ToArray();
         planeMesh.triangles = tempTriangles.ToArray();
 
         planeMesh.RecalculateBounds();
-        planeMesh.RecalculateNormals();*/
+        planeMesh.RecalculateNormals();
 
         //　メッシュコライダの再有効化
         meshCollider.enabled = false;
