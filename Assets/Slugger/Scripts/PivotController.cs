@@ -24,8 +24,9 @@ public class PivotController : MonoBehaviour
     float roopTime =7.0f;
     bool isCount;
     bool firstSwing = true;//初球用のbool
-    public bool isSwing = true;//スイングのオンオフ
+    bool isSwing = false;//スイングのオンオフ
     public bool isDebug = false;
+
     /****Gizmo表示用******/
     public bool isGizmo;
     public float gizmoSize = 0.3f;
@@ -38,6 +39,7 @@ public class PivotController : MonoBehaviour
         batOffset = this.transform.eulerAngles;//角度取得
         //Debug.Log("SwingTime" + swingTiming);
         swingTiming = roopTime + (toMound - releasePoint) /ballspeed * timeSec - swingTime;
+
     }
 
     void FixedUpdate()
@@ -51,30 +53,34 @@ public class PivotController : MonoBehaviour
             isCount = true;
         }
         
-        if(swingTiming <= tm && firstSwing)
+        if (isDebug)//自動スイングのオンオフ
         {
-            tm = 0;
-            isSwing = true;
-            firstSwing = false;
-            rb.angularVelocity = new Vector3(angleX, angleY, 0);//(15,180,0)
-        }
-
-        if(roopTime <= tm && !firstSwing)
-        {
-            tm = 0;
-            isSwing = true;
-            rb.angularVelocity = new Vector3(angleX, angleY, 0);//(15,180,0)
-        }
-
-        if (isSwing)//回転制限＆リセット
-        {
-            if (curretRotate <= maxAngle)//maxAngle =-0.9f
+            if (swingTiming <= tm && firstSwing)
             {
-                Debug.Log("angle over");
-                rb.angularVelocity = Vector3.zero;
-                this.transform.eulerAngles = batOffset;
-                isSwing = false;
+                tm = 0;
+                isSwing = true;
+                firstSwing = false;
+                rb.angularVelocity = new Vector3(angleX, angleY, 0);//(15,180,0)
             }
+
+            if (roopTime <= tm && !firstSwing)
+            {
+                tm = 0;
+                isSwing = true;
+                rb.angularVelocity = new Vector3(angleX, angleY, 0);//(15,180,0)
+            }
+
+            if (isSwing)//回転制限＆リセット
+            {
+                if (curretRotate <= maxAngle)//maxAngle =-0.9f
+                {
+                    Debug.Log("angle over");
+                    rb.angularVelocity = Vector3.zero;
+                    this.transform.eulerAngles = batOffset;
+                    isSwing = false;
+                }
+            }
+
         }
         /*
         //時間経過でisSwingのオンオフを制御
