@@ -6,6 +6,7 @@ public class CorrectPhysics : MonoBehaviour
 {
     //自前の投球物理演算
     //Unityの物理エンジンでは、移動時の前進差分があるため自前で投球の物理演算を制御する
+
     GameObject bat;
 
     private Rigidbody rb;

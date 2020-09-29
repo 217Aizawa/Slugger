@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GameLoop : MonoBehaviour
 {
+    //全体の進行管理用プログラム
+
     public enum GameState { free, play, throwing, batting};
 
     public GameState gameState = GameState.free;

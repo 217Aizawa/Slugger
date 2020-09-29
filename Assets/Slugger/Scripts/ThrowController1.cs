@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ThrowController1 : MonoBehaviour
 {
+    //Laval Virtual応募ビデオ用プログラム
+
     Vector3 throwPos;//投球位置
 
     float ballSpeed;

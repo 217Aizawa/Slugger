@@ -4,6 +4,8 @@ using UnityEngine;[RequireComponent(typeof(Rigidbody))]
 
 public class AnimController : MonoBehaviour
 {
+    //投球アニメーション制御プログラム
+
     public static readonly string throwTmp = "Throw";// トリガー名
     //public static readonly string idleTmp = "Idle";
     private static int thrTrigger = Animator.StringToHash(throwTmp);

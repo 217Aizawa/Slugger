@@ -80,7 +80,6 @@ public class PivotController : MonoBehaviour
                     isSwing = false;
                 }
             }
-
         }
         /*
         //時間経過でisSwingのオンオフを制御
