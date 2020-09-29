@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TestSpherecast : MonoBehaviour
 {
+    //Spherecastでどこまで衝突検知をしているかを確認する
+
     float radius;
 
     RaycastHit hit;

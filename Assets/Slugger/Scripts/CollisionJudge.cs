@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class CollisionJudge : MonoBehaviour
 {
+    //衝突判定用プログラム
+    //ボール、バットのスイングスピードが速いため、自前で衝突判定をしなければならない
+    //バットの過去の１フレートと現在の１フレームから平面を作成し、その平面をボールが通過した場合衝突したものとする
+    //その交点から仮想のバットを作成し、衝突した際に発生する撃力をボールに与える
+    //ただし、このプログラムでは衝突判定が実装しきれていないので、"CollisionComplement.cs"で補完する
+
     //public BatController batController;
 
     GameObject bat;

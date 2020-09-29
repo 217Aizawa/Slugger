@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PivotController : MonoBehaviour
 {
+    //衝突判定デバッグ用プログラム
+    //コントローラーを振って衝突判定のデバッグが手間なので自動スイングをさせる
+
     Rigidbody rb;
     Vector3 batOffset;
     float curretRotate;
@@ -21,8 +24,8 @@ public class PivotController : MonoBehaviour
     float roopTime =7.0f;
     bool isCount;
     bool firstSwing = true;//初球用のbool
-    public bool isSwing = false;//スイングのオンオフ
-
+    public bool isSwing = true;//スイングのオンオフ
+    public bool isDebug = false;
     /****Gizmo表示用******/
     public bool isGizmo;
     public float gizmoSize = 0.3f;

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BatController : MonoBehaviour
 {
+    //バット（コントローラー）の座標、移動速度を取得する
+
+    
     /*Vector3 latestPos;//過去位置
     Vector3 speed;*/
     public GameObject emptyBat;
@@ -35,7 +38,15 @@ public class BatController : MonoBehaviour
     public static Vector3 swingSpeed;
 
     //bool swing = false;
+    /*
+    public GameObject rightController;
+    public GameObject leftController;
 
+    void Update()
+    {
+        Vector3 rightPosition = rightController.transform.position;
+        Vector3 leftPosition = leftController.transform.position;
+    }*/
     void Start()
     {
         pos = this.gameObject.transform.position;

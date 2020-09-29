@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ThrowController : MonoBehaviour
 {
+    //投球制御用プログラム
+    //一定の時間間隔、速度で投球を行う
+
+
     Vector3 throwPos;//投球位置
 
     float ballSpeed;

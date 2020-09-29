@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CollisionComplement : MonoBehaviour
 {
+    //衝突判定補完用プログラム
+    //バットの過去の１フレートと現在の１フレームから三角形の平面メッシュを作成し、その平面をボールが通過した場合衝突したものとする
+    //その交点から仮想のバットを作成し、衝突した際に発生する撃力をボールに与える
 
     //グリップ位置
     public Transform gripPosition;
@@ -52,7 +55,7 @@ public class CollisionComplement : MonoBehaviour
         Debug.Log("prevPos" + prevPos);
         //Debug.Log("speed" + speed);
         //start時はprevPosが未定義なので0になるので、ガードをかける
-        if(2 < speed && prevPos != Vector3.zero)
+        if (2 < speed && prevPos != Vector3.zero)
         {
             Debug.Log("create mesh called");
             CreateMesh();
@@ -75,24 +78,24 @@ public class CollisionComplement : MonoBehaviour
         }
     }*/
 
-    //バットの軌跡作成メソッド
-    void CreateMesh()
-    {
-        //mesh.Clear();//問題の根本ではない
-        planeMesh.Clear();
-        //meshCollider.sharedMesh.Clear();
-        //　リストのクリア
-        verticesLists.Clear();//バットの座標系に影響している
-        tempTriangles.Clear();
-        
-        verticesLists.AddRange(new Vector3[] {                  //頂点リストはこの順番で良いのか？
+        //バットの軌跡作成メソッド
+        void CreateMesh()
+        {
+            //mesh.Clear();//問題の根本ではない
+            planeMesh.Clear();
+            //meshCollider.sharedMesh.Clear();
+            //　リストのクリア
+            verticesLists.Clear();//バットの座標系に影響している
+            tempTriangles.Clear();
+
+            verticesLists.AddRange(new Vector3[] {                  //頂点リストはこの順番で良いのか？
         oldGripPos, oldheadPos,
         gripPosition.position, headPosition.position,
         gripPosition2.position, headPosition2.position
     });
-        
-        //　頂点を結ぶ順番
-        tempTriangles.AddRange(new int[]{
+
+            //　頂点を結ぶ順番
+            tempTriangles.AddRange(new int[]{
         0, 1, 2,
         2, 1, 3,
         2, 3, 4,
@@ -110,26 +113,27 @@ public class CollisionComplement : MonoBehaviour
 		5, 1, 3*///新旧head
 		
 	});
-        /*
-        mesh.vertices = verticesLists.ToArray();
-        mesh.triangles = tempTriangles.ToArray();
+            /*
+            mesh.vertices = verticesLists.ToArray();
+            mesh.triangles = tempTriangles.ToArray();
 
-        mesh.RecalculateBounds();
-        mesh.RecalculateNormals();*/
-        
-        //衝突判定用のプレーンを作成
-        planeMesh.vertices = verticesLists.ToArray();
-        planeMesh.triangles = tempTriangles.ToArray();
-        //領域、法線の再計算
-        planeMesh.RecalculateBounds();
-        planeMesh.RecalculateNormals();
+            mesh.RecalculateBounds();
+            mesh.RecalculateNormals();*/
 
-        //　メッシュコライダの再有効化
-        meshCollider.enabled = false;
-        meshCollider.enabled = true;
+            //衝突判定用のプレーンを作成
+            planeMesh.vertices = verticesLists.ToArray();
+            planeMesh.triangles = tempTriangles.ToArray();
+            //領域、法線の再計算
+            planeMesh.RecalculateBounds();
+            planeMesh.RecalculateNormals();
 
-        oldGripPos = gripPosition.position;
-        oldheadPos = headPosition.position;
+            //　メッシュコライダの再有効化
+            meshCollider.enabled = false;
+            meshCollider.enabled = true;
 
+            oldGripPos = gripPosition.position;
+            oldheadPos = headPosition.position;
+
+        }
     }
 }
