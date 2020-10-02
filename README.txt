@@ -1,6 +1,6 @@
 アプリ概要：ホームラン体験システム
 使用機器：Oculus RiftS、Oculus Touch(Right)、バットデバイス
-
+a
 
 操作方法
 SPACEキー：投球（ボール射出）開始
