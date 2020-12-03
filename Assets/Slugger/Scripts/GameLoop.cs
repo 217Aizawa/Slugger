@@ -16,7 +16,7 @@ public class GameLoop : MonoBehaviour
     public BatController batController;
     public CameraController camereController;
     public ThrowController throwController;
-    public PhsController phsController;
+    //public PhsController phsController;使用しない
     public bool vrMode;//VRモードの切り替え
     public bool leftBatter;
 

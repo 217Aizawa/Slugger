@@ -12,7 +12,7 @@ public class ThrowController : MonoBehaviour
 
     float ballSpeed;
     float time = 0;
-    float angle;//打ち出し角度
+    float angle;//投げ出し角度
 
     int speed = 22;//22m/s = 79.2km/h
 
@@ -20,19 +20,15 @@ public class ThrowController : MonoBehaviour
 
     public GameObject ball;//Sceneにあるボール
     public GameObject ballPrefab;//設計図としてのボール（オリジナル）
-    //public GameObject point;//重力加速度の差分を示すキューブ
 
     void Start()
     {
         Rigidbody rigid = ball.GetComponent<Rigidbody>();
         throwPos = ball.transform.position;
         BallReset();
-        //Mathf.Asin(g * 1d / v / v) / 2
-        //      Mathf.Asin(重力加速度 * 割合 * 距離 /　ベクトル / ベクトル) / 2;
-        angle = Mathf.Asin(9.81f * 0.6f * 18.44f / speed / speed) / 2;
-
-        //      Mathf.Asin(重力加速度 * 距離 /　ベクトル / ベクトル) / 2;
-        //angle = Mathf.Asin(9.81f * 18.44f / speed / speed) / 2;
+        //      Mathf.Asin(重力加速度 * 割合(0.6) * 距離 /　ベクトル / ベクトル) / 2;
+        angle = Mathf.Asin(9.81f * 0.68f * 18.44f / speed / speed) / 2;//
+        Debug.Log("throw angle" + angle);
     }
 
     void FixedUpdate()
@@ -40,13 +36,16 @@ public class ThrowController : MonoBehaviour
         //Debug.Log("angle" + angle);
         //Debug.Log("ballSpeed" + ballSpeed + "km");
         TimeCounter();
-        if (Input.GetKey(KeyCode.Space))//条件文をGameStateで書く
+
+        //投球開始
+        if (Input.GetKey(KeyCode.Space))
         {
             timeCheck = true;
             Throw();
         }
 
-        if(7.0f <= time)//投球間隔
+        //投球ループ
+        if (7.0f <= time)
         {
             time = 0;
             timeCheck = true;
@@ -58,7 +57,7 @@ public class ThrowController : MonoBehaviour
         }
     }
 
-    void TimeCounter()
+    void TimeCounter()//時間計測
     {
         if (timeCheck)
             time += Time.deltaTime;
@@ -86,20 +85,4 @@ public class ThrowController : MonoBehaviour
         rig.isKinematic = true;
         rig.velocity = Vector3.zero;
     }
-
-    /*void Update()
-    {
-        TimeCounter();
-        if (Input.GetKey(KeyCode.Space))                                        //条件文をGameStateで書く
-        {
-            timeCheck = true;
-            Throw();
-        }
-        if (3.0f <= time)
-        {
-            timeCheck = !timeCheck;
-            BallReset();
-        }
-        
-    }*/
 }
