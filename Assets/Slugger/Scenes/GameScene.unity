@@ -5145,7 +5145,6 @@ MonoBehaviour:
   batController: {fileID: 0}
   camereController: {fileID: 0}
   throwController: {fileID: 0}
-  phsController: {fileID: 0}
   vrMode: 1
   leftBatter: 0
 --- !u!1 &1169011275
@@ -7242,7 +7241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 147966, guid: 9045a2da25a670d46b4878f27e0d41c6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 147966, guid: 9045a2da25a670d46b4878f27e0d41c6, type: 3}
       propertyPath: m_TagString
