@@ -4,6 +4,8 @@ using UnityEngine;[RequireComponent(typeof(Rigidbody))]
 
 public class AnimController : MonoBehaviour
 {
+    //Eathanオブジェクトに添付済み
+
     //投球アニメーション制御プログラム
 
     public static readonly string throwTmp = "Throw";// トリガー名
@@ -18,7 +20,8 @@ public class AnimController : MonoBehaviour
     Vector3 offsetPos; //new Vector3(-0.1f, -0.13f, 0.954f);
 
     float time;
-    float playTiming = 7.0f - 53.0f / 30.0f; //53.0f（投球間 - フレーム / フレームレート）投球に合わせたアニメーションの再生タイミング
+    float playTiming = 7.0f - 56.0f / 30.0f; //53.0f（投球間 - フレーム53.0f / フレームレート）投球に合わせたアニメーションの再生タイミング
+    //5.2333
     float roopTime = 7.0f;//アニメーションのループ間隔
     bool timeCount;//カウントフラグ
     bool firstBall = true;//初球のフラグ
@@ -68,7 +71,7 @@ public class AnimController : MonoBehaviour
         }
             
         //初球以降の再生タイミング
-        if (roopTime <= time && !firstBall)
+        if (roopTime <= time && !firstBall)//10回でループを抜ける
         {
             time = 0;
             animator.SetTrigger(thrTrigger);
@@ -124,10 +127,6 @@ public class AnimController : MonoBehaviour
         if (timeCount)
         {
             time += Time.deltaTime;
-        }
-        else
-        {
-            time = 0;
         }
     }
 

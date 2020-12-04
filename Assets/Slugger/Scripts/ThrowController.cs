@@ -5,6 +5,7 @@ using UnityEngine;
 public class ThrowController : MonoBehaviour
 {
     //ThrowControllerオブジェクトに添付済み
+
     //Unityの物理演算を使用投球制御用プログラム 
     //CorrectPhysicsでは自前の物理演算を実装している
     //一定の時間間隔、速度で投球を行う
@@ -46,7 +47,7 @@ public class ThrowController : MonoBehaviour
         }
 
         //投球ループ
-        if (7.0f <= time)
+        if (7.0f <= time)//10球でループを抜けるようにする
         {
             time = 0;
             timeCheck = true;
