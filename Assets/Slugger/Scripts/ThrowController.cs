@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class ThrowController : MonoBehaviour
 {
-    //投球制御用プログラム
+    //ThrowControllerオブジェクトに添付済み
+    //Unityの物理演算を使用投球制御用プログラム 
+    //CorrectPhysicsでは自前の物理演算を実装している
     //一定の時間間隔、速度で投球を行う
-
 
     Vector3 throwPos;//投球位置
 
@@ -30,7 +31,7 @@ public class ThrowController : MonoBehaviour
         angle = Mathf.Asin(9.81f * 0.68f * 18.44f / speed / speed) / 2;//
         Debug.Log("throw angle" + angle);
     }
-
+ 
     void FixedUpdate()
     {
         //Debug.Log("angle" + angle);

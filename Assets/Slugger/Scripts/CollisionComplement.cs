@@ -16,7 +16,7 @@ public class CollisionComplement : MonoBehaviour
     public Transform headPosition2;
 
     private Mesh mesh;
-    private Mesh planeMesh;
+    private Mesh planeMesh;//衝突判定用メッシュ
     //　頂点リスト
     public List<Vector3> verticesLists = new List<Vector3>();
     //　三角形のリスト

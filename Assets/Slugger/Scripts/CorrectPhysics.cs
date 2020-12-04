@@ -29,7 +29,6 @@ public class CorrectPhysics : MonoBehaviour
         bat = GameObject.FindGameObjectWithTag("Bat");
         //bat = BatController.bat;
         batRb = bat.GetComponent<Rigidbody>();
-        //batRb = bat.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
